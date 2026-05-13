@@ -1,9 +1,9 @@
 {
   "rewrites": [
-    { "source": "/download", "destination": "/download.html" },
-    { "source": "/about", "destination": "/about.html" },
-    { "source": "/sidebar", "destination": "/sidebar.html" },
+    { "source": "/download", "destination": "/html-pages/download.html" },
+    { "source": "/about", "destination": "/html-pages/about.html" },
+    { "source": "/sidebar", "destination": "/html-pages/sidebar.html" },
     { "source": "/planning", "destination": "/planning.html" },
-    { "source": "/review", "destination": "/review.html" }
+    { "source": "/review", "destination": "/html-pages/review.html" }
   ]
 }

@@ -8,11 +8,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: 'index.html',
-        download: 'download.html',
-        about: 'about.html',
-        sidebar: 'sidebar.html',
+        download: 'html-pages/download.html',
+        about: 'html-pages/about.html',
+        sidebar: 'html-pages/sidebar.html',
         planning: 'planning.html',
-        review: 'review.html',
+        review: 'html-pages/review.html',
       },
     },
   },
