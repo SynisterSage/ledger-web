@@ -1,4 +1,11 @@
 {
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
   "rewrites": [
     { "source": "/download", "destination": "/html-pages/download.html" },
     { "source": "/about", "destination": "/html-pages/about.html" },

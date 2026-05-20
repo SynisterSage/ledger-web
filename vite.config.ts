@@ -13,6 +13,7 @@ export default defineConfig({
         sidebar: 'html-pages/sidebar.html',
         planning: 'planning.html',
         review: 'html-pages/review.html',
+        joined: 'html-pages/joined.html',
       },
     },
   },
