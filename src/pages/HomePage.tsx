@@ -1,3 +1,6 @@
+import { LockedSplash } from '../components/sections/LockedSplash'
+import { isSiteLocked } from '../lib/siteLock'
+
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { HeroSection } from '../components/sections/HeroSection'
 import { FeatureShowcaseOne } from '../components/sections/FeatureShowcaseOne'
@@ -8,6 +11,10 @@ import { FinalCTASection } from '../components/sections/FinalCTASection'
 import { SiteFooter } from '../components/sections/SiteFooter'
 
 export function HomePage() {
+  if (isSiteLocked()) {
+    return <LockedSplash />
+  }
+
   return (
     <div className="min-h-screen">
       <SiteHeader currentPath="/" />

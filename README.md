@@ -71,3 +71,11 @@ export default defineConfig([
   },
 ])
 ```
+
+## Site Lock Toggle
+
+The public site is locked by default and shows only the centered logo splash.
+
+Set `VITE_LEDGER_SITE_LOCKED=false` in your local `.env` file to bring the original pages back.
+
+To re-lock the site later, remove that line or set it back to `true`.

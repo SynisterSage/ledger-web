@@ -1,6 +1,13 @@
+import { LockedSplash } from '../components/sections/LockedSplash'
+import { isSiteLocked } from '../lib/siteLock'
+
 import { SiteHeader } from '../components/layout/SiteHeader'
 
 export function SidebarPage() {
+  if (isSiteLocked()) {
+    return <LockedSplash />
+  }
+
   return (
     <div className="min-h-screen">
       <SiteHeader currentPath="/" />
