@@ -26,7 +26,7 @@ export function HeroSection() {
           <p className="hero-enter hero-enter-copy mt-2 text-[18px] leading-[1.15] text-ledger-text">Daily Accountability and Planning.</p>
           <a
             href="/download"
-            className="hero-enter hero-enter-cta mt-6 inline-flex h-12 min-w-39 items-center justify-center rounded-full bg-ledger-accent px-7 pt-px text-[16px] font-semibold leading-none text-white! transition hover:bg-ledger-accent-hover"
+            className="hero-enter hero-enter-cta mt-6 inline-flex h-12 min-w-39 items-center justify-center rounded-full bg-ledger-accent px-7 text-[16px] font-semibold leading-none text-white! transition hover:bg-ledger-accent-hover"
           >
             Download
           </a>

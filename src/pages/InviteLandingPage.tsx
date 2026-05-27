@@ -261,9 +261,10 @@ export function InviteLandingPage() {
                 <button
                   type="button"
                   onClick={openLedger}
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
+                  disabled={state === 'opening'}
+                  className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover disabled:cursor-default disabled:opacity-80"
                 >
-                  {state === 'opening' ? 'Opening Ledger…' : 'Continue in Ledger'}
+                  {state === 'opening' ? 'Waiting for Ledger…' : 'Continue in Ledger'}
                 </button>
                 <a
                   href={DOWNLOAD_URL}
@@ -276,13 +277,7 @@ export function InviteLandingPage() {
               <p className="mt-4 text-xs leading-5 text-ledger-text-muted">
                 If Ledger is already installed, the button will open the app and bring this invite
                 in automatically. If not, download Ledger first and sign in there.
-              </p>
-              {state === 'opening' && (
-                <p className="mt-2 text-xs leading-5 text-ledger-text-muted">
-                  Waiting for Ledger to confirm the workspace join.
-                </p>
-              )}
-            </>
+              </p>            </>
           )}
         </section>
       </div>
