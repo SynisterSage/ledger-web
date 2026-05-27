@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from 'react'
 type InvitePayload = {
   status?: string
   invitation?: {
+    id?: string | null
+    workspace_id?: string | null
     workspace_name?: string | null
     role?: string | null
     expires_at?: string | null
@@ -13,6 +15,8 @@ type InvitePayload = {
     } | null
   }
 }
+
+type ViewState = 'loading' | 'ready' | 'opening' | 'joined' | 'error'
 
 const API_BASE = import.meta.env.VITE_API_URL?.trim() || 'https://api.ledgerworkspace.com'
 const DOWNLOAD_URL = '/download'
@@ -34,11 +38,21 @@ const formatExpiry = (value?: string | null) => {
   })
 }
 
+const LedgerMark = ({ className = '' }: { className?: string }) => (
+  <img
+    src="/assets/logos/logo.svg"
+    alt=""
+    aria-hidden="true"
+    className={`h-7 w-7 shrink-0 ${className}`}
+  />
+)
+
 export function InviteLandingPage() {
   const token = useMemo(() => getInviteToken(), [])
-  const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [state, setState] = useState<ViewState>('loading')
   const [invite, setInvite] = useState<InvitePayload['invitation'] | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [openRequested, setOpenRequested] = useState(false)
 
   useEffect(() => {
     if (!token) {
@@ -49,9 +63,11 @@ export function InviteLandingPage() {
 
     let cancelled = false
 
-    const loadInvite = async () => {
+    const loadInvite = async ({ silent = false }: { silent?: boolean } = {}) => {
       try {
-        setState('loading')
+        if (!silent) {
+          setState((current) => (current === 'opening' || current === 'joined' ? current : 'loading'))
+        }
         setErrorMessage(null)
 
         const response = await fetch(`${API_BASE}/api/invitations/${encodeURIComponent(token)}`)
@@ -59,14 +75,35 @@ export function InviteLandingPage() {
 
         if (cancelled) return
 
-        if (!response.ok) {
-          setState('error')
-          setErrorMessage('This invite is invalid or expired.')
+        if (response.ok) {
+          const nextInvite = payload.invitation ?? null
+          setInvite(nextInvite)
+
+          if (payload.status === 'accepted') {
+            setState('joined')
+            setOpenRequested(false)
+            return
+          }
+
+          if (payload.status === 'expired') {
+            setState('error')
+            setErrorMessage('This invite is invalid or expired.')
+            return
+          }
+
+          setState((current) => (current === 'opening' ? 'opening' : 'ready'))
           return
         }
 
-        setInvite(payload.invitation ?? null)
-        setState('ready')
+        if (payload.status === 'accepted' && payload.invitation) {
+          setInvite(payload.invitation)
+          setState('joined')
+          setOpenRequested(false)
+          return
+        }
+
+        setState('error')
+        setErrorMessage('This invite is invalid or expired.')
       } catch {
         if (cancelled) return
         setState('error')
@@ -81,12 +118,56 @@ export function InviteLandingPage() {
     }
   }, [token])
 
+  useEffect(() => {
+    if (!token || !openRequested || state === 'joined' || state === 'error') return
+
+    let cancelled = false
+    const poll = async () => {
+      if (cancelled) return
+      try {
+        const response = await fetch(`${API_BASE}/api/invitations/${encodeURIComponent(token)}`)
+        const payload = (await response.json().catch(() => ({}))) as InvitePayload
+
+        if (cancelled) return
+
+        if (response.ok && payload.invitation) {
+          setInvite(payload.invitation)
+          if (payload.status === 'accepted') {
+            setState('joined')
+            setOpenRequested(false)
+            return
+          }
+        }
+
+        if (!response.ok || payload.status === 'expired') {
+          setState('error')
+          setErrorMessage('This invite is invalid or expired.')
+        }
+      } catch {
+        if (cancelled) return
+      }
+    }
+
+    void poll()
+    const intervalId = window.setInterval(poll, 2000)
+    return () => {
+      cancelled = true
+      window.clearInterval(intervalId)
+    }
+  }, [openRequested, state, token])
+
   const workspaceName = invite?.workspace_name?.trim() || 'this workspace'
   const inviterName =
     invite?.invited_by?.full_name?.trim() ||
     invite?.invited_by?.email?.trim() ||
     'your team'
   const expiryLabel = formatExpiry(invite?.expires_at)
+
+  const openLedger = () => {
+    setOpenRequested(true)
+    setState('opening')
+    window.location.assign(`ledger://invite/${encodeURIComponent(token)}`)
+  }
 
   return (
     <main className="min-h-screen bg-ledger-bg px-5 py-8 text-ledger-text sm:px-8">
@@ -95,7 +176,7 @@ export function InviteLandingPage() {
           {state === 'loading' && (
             <>
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ledger-text-muted">
-                Invite
+                Invitation
               </p>
               <div className="mt-4 h-9 w-4/5 rounded-2xl bg-ledger-border/40" />
               <div className="mt-3 h-5 w-3/5 rounded-2xl bg-ledger-border/30" />
@@ -134,26 +215,56 @@ export function InviteLandingPage() {
             </>
           )}
 
-          {state === 'ready' && invite && (
-            <>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ledger-text-muted">
-                Invitation
+          {state === 'joined' && (
+            <div className="flex flex-col items-center text-center">
+              <div className="flex h-14 w-14 items-center justify-center rounded-[18px] border border-ledger-border bg-ledger-bg">
+                <LedgerMark className="h-8 w-8" />
+              </div>
+              <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-ledger-text-muted">
+                Joined
               </p>
-              <h1 className="mt-4 text-[30px] font-semibold leading-tight tracking-tight text-ledger-text">
-                You&apos;ve been invited to join {workspaceName}
+              <h1 className="mt-3 text-[32px] font-semibold leading-tight tracking-tight text-ledger-text">
+                {workspaceName}
               </h1>
+              <p className="mt-3 text-sm leading-6 text-ledger-text-muted">
+                You&apos;re in. Open Ledger to continue.
+              </p>
+              <a
+                href={`ledger://invite/${encodeURIComponent(token)}`}
+                className="mt-8 inline-flex h-11 items-center justify-center rounded-2xl bg-ledger-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
+              >
+                Open Ledger
+              </a>
+            </div>
+          )}
+
+          {(state === 'ready' || state === 'opening') && invite && (
+            <>
+              <div className="flex items-center gap-3">
+                <LedgerMark className="h-8 w-8" />
+                <div className="min-w-0">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ledger-text-muted">
+                    Invitation
+                  </p>
+                  <h1 className="mt-2 text-[30px] font-semibold leading-tight tracking-tight text-ledger-text">
+                    You&apos;ve been invited to join {workspaceName}
+                  </h1>
+                </div>
+              </div>
+
               <p className="mt-3 text-sm leading-6 text-ledger-text-muted">
                 Invited by {inviterName}
                 {expiryLabel ? ` · Expires ${expiryLabel}` : ''}
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={`ledger://invite/${encodeURIComponent(token)}`}
+                <button
+                  type="button"
+                  onClick={openLedger}
                   className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
                 >
-                  Continue in Ledger
-                </a>
+                  {state === 'opening' ? 'Opening Ledger…' : 'Continue in Ledger'}
+                </button>
                 <a
                   href={DOWNLOAD_URL}
                   className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl border border-ledger-border bg-ledger-surface px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-bg"
@@ -166,6 +277,11 @@ export function InviteLandingPage() {
                 If Ledger is already installed, the button will open the app and bring this invite
                 in automatically. If not, download Ledger first and sign in there.
               </p>
+              {state === 'opening' && (
+                <p className="mt-2 text-xs leading-5 text-ledger-text-muted">
+                  Waiting for Ledger to confirm the workspace join.
+                </p>
+              )}
             </>
           )}
         </section>
