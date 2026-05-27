@@ -11,6 +11,7 @@
     { "source": "/about", "destination": "/html-pages/about.html" },
     { "source": "/sidebar", "destination": "/html-pages/sidebar.html" },
     { "source": "/planning", "destination": "/planning.html" },
-    { "source": "/review", "destination": "/html-pages/review.html" }
+    { "source": "/review", "destination": "/html-pages/review.html" },
+    { "source": "/invite/(.*)", "destination": "/html-pages/invite.html" }
   ]
 }

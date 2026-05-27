@@ -14,6 +14,7 @@ export default defineConfig({
         planning: 'planning.html',
         review: 'html-pages/review.html',
         joined: 'html-pages/joined.html',
+        invite: 'html-pages/invite.html',
       },
     },
   },
