@@ -18,7 +18,7 @@ type LegalPageProps = {
 
 export function LegalPage({ title, intro, updatedAt, sections }: LegalPageProps) {
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,var(--ledger-surface)_0%,#fffefb_100%)] text-ledger-text">
+    <div className="min-h-screen bg-[linear-gradient(180deg,var(--ledger-surface)_0%,var(--ledger-bg)_100%)] text-ledger-text">
       <SiteHeader />
 
       <main className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 sm:py-12 lg:py-14">

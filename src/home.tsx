@@ -6,6 +6,7 @@ import { DownloadPage } from './pages/DownloadPage'
 import { HomePage } from './pages/HomePage'
 import { InviteLandingPage } from './pages/InviteLandingPage'
 import { InviteSuccessPage } from './pages/InviteSuccessPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { PlanningPage } from './pages/PlanningPage'
 import { PrivacyPage } from './pages/PrivacyPage'
 import { ReviewPage } from './pages/ReviewPage'
@@ -38,8 +39,9 @@ function AppRouter() {
     case '/terms':
       return <TermsPage />
     case '/':
-    default:
       return <HomePage />
+    default:
+      return <NotFoundPage />
   }
 }
 
