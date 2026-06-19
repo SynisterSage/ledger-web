@@ -3,9 +3,11 @@ export function NotFoundPage() {
     <main className="min-h-screen bg-ledger-bg text-ledger-text">
       <div className="flex min-h-screen flex-col">
         <div className="flex items-start px-4 py-4 sm:px-6">
-          <a href="/" className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 leading-none">
-            <img src="/assets/logos/logo.svg" alt="Ledger" className="h-7 w-7" />
-            <span className="text-[15px] font-semibold tracking-[-0.02em] text-ledger-text">Ledger</span>
+          <a href="/" className="group inline-flex items-center gap-2 rounded-full px-1.5 py-1 leading-none">
+            <img src="/assets/logos/logo.svg" alt="Ledger" className="h-[28px] w-auto" />
+            <span className="relative top-[2px] text-[19px] font-medium tracking-[-0.02em] text-ledger-text transition-colors duration-200 group-hover:text-ledger-accent group-hover:font-semibold">
+              Ledger
+            </span>
           </a>
         </div>
 

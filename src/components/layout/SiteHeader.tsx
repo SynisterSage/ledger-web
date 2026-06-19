@@ -101,14 +101,16 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
   }, [])
 
   return (
-    <header className={`site-nav site-header-enter px-6 sm:px-8 ${isScrolled ? 'site-nav--scrolled' : ''}`}>
+    <header
+      className={`site-nav site-header-enter px-6 sm:px-8 ${isScrolled ? 'site-nav--scrolled' : ''} ${isMenuOpen ? 'site-nav--menu-open' : ''}`}
+    >
       <div aria-hidden="true" className="site-nav__underline" />
 
-      <div className="site-nav__shell mx-auto w-full max-w-7xl">
+      <div className="site-nav__shell mx-auto w-full">
         <div className="site-nav__inner flex items-center gap-4">
           <a href="/" className="site-nav__brand group inline-flex min-w-max items-center gap-2 rounded-full leading-none">
             <img src="/assets/logos/logo.svg" alt="" className="h-[28px] w-auto sm:h-[29px]" />
-            <span className="relative top-[2px] text-[19px] font-medium tracking-[-0.02em] text-[var(--ledger-text)] transition-colors duration-200 group-hover:text-ledger-accent">
+            <span className="relative top-[2px] text-[19px] font-medium tracking-[-0.02em] text-[var(--ledger-text)] transition-colors duration-200 group-hover:text-ledger-accent group-hover:font-semibold">
               Ledger
             </span>
           </a>

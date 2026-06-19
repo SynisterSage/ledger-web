@@ -92,8 +92,7 @@ function HeroTypewriter() {
 
   return (
     <span
-      className="hero-typewriter relative top-[-0.12em] inline-block align-middle leading-none"
-      style={{ minWidth: '15ch', minHeight: '1em' }}
+      className="hero-typewriter relative top-[-0.12em] mx-auto inline-grid min-h-[1em] w-fit align-middle leading-none sm:min-w-[15ch]"
     >
       <span aria-hidden="true" className="invisible select-none">
         freelance work
@@ -123,10 +122,10 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-12 pt-20 sm:px-7 sm:pb-16 sm:pt-30 lg:pb-20 lg:pt-40">
+    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-12 pt-16 sm:px-7 sm:pb-16 sm:pt-26 lg:pb-20 lg:pt-34">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[26rem] bg-gradient-to-b from-transparent via-[#86807a14] via-28% to-[#b2aca54d] sm:h-[34rem] lg:h-[40rem]"
+        className="hero-bottom-glow pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[26rem] sm:h-[34rem] lg:h-[40rem]"
       />
       <div
         aria-hidden="true"
@@ -145,10 +144,10 @@ export function HeroSection() {
             <br />
             <HeroTypewriter />
           </h1>
-          <p className="hero-enter hero-enter-copy mx-auto mt-1.5 max-w-2xl text-[18px] leading-[1.24] text-ledger-text sm:mt-0 sm:pt-0 sm:text-[20px]">
+          <p className="hero-enter hero-enter-copy mx-auto mt-0.5 max-w-2xl text-[18px] leading-[1.24] text-ledger-text sm:mt-0 sm:pt-0 sm:text-[20px]">
             Capture notes, tasks, and plans beside the apps you already use, without pulling yourself out of flow.
           </p>
-          <div className="hero-enter hero-enter-cta mt-4 flex flex-col items-center justify-center gap-2.5 sm:mt-5 sm:flex-row sm:gap-3">
+          <div className="hero-enter hero-enter-cta mt-3.5 flex flex-col items-center justify-center gap-2.5 sm:mt-4 sm:flex-row sm:gap-3">
             <a
               href="/download"
               className="inline-flex h-12 min-w-39 items-center justify-center rounded-full bg-ledger-accent px-7 text-[16px] font-semibold leading-none text-white transition hover:bg-ledger-accent-hover"
@@ -165,13 +164,23 @@ export function HeroSection() {
         </div>
 
         <div className="hero-enter hero-enter-video relative mx-auto mt-8 w-full max-w-6xl sm:mt-10">
-          <div
-            aria-hidden="true"
-            className="hero-grain -inset-5 rounded-[28px] bg-linear-to-b from-[rgba(20,20,18,0.08)] via-[rgba(20,20,18,0.02)] via-42% to-[rgba(20,20,18,0.08)]"
-          />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-20 hidden md:block">
+            <div className="hero-ornament hero-ornament--left absolute left-[-4.25rem] top-[63%] w-[clamp(2.1rem,2.8vw,3rem)] rotate-[-16deg] opacity-80 lg:left-[-5.5rem] lg:top-[66%] lg:w-[clamp(2.4rem,3.2vw,3.6rem)]">
+              <img src="/assets/images/hero-left.svg" alt="" className="block h-full w-full" />
+            </div>
+            <div className="hero-ornament hero-ornament--right absolute right-[-4.25rem] top-[11%] w-[clamp(2.2rem,3vw,3.1rem)] rotate-[10deg] opacity-80 lg:right-[-5.5rem] lg:top-[8%] lg:w-[clamp(2.5rem,3.4vw,3.8rem)]">
+              <img src="/assets/images/hero-right.svg" alt="" className="block h-full w-full" />
+            </div>
+            <div className="hero-ornament hero-ornament--frame10 absolute left-[-5.75rem] top-[22%] w-[clamp(2rem,2.7vw,2.7rem)] rotate-[-8deg] opacity-78 lg:left-[-7.25rem] lg:top-[19%] lg:w-[clamp(2.4rem,3.2vw,3.4rem)]">
+              <img src="/assets/images/Frame 10.svg" alt="" className="block h-full w-full" />
+            </div>
+            <div className="hero-ornament hero-ornament--frame11 absolute right-[-5.75rem] top-[82%] w-[clamp(2.1rem,2.8vw,3rem)] rotate-[14deg] opacity-78 lg:right-[-7.25rem] lg:top-[84%] lg:w-[clamp(2.5rem,3.3vw,3.6rem)]">
+              <img src="/assets/images/Frame 11.svg" alt="" className="block h-full w-full" />
+            </div>
+          </div>
           <video
             ref={videoRef}
-            className="relative z-10 mx-auto aspect-video w-full rounded-[20px] shadow-(--ledger-shadow-soft)"
+            className="relative z-10 mx-auto aspect-video w-full rounded-[20px] shadow-[0_18px_60px_rgba(0,0,0,0.24)]"
             src="/assets/videos/herovideo.mp4"
             autoPlay
             loop
