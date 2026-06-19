@@ -1,4 +1,110 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+const rotatingWords = [
+  'life',
+  'work',
+  'day',
+  'projects',
+  'notes',
+  'tasks',
+  'calendar',
+  'workspace',
+  'ideas',
+  'focus',
+  'plans',
+  'schedule',
+  'reminders',
+  'school',
+  'internship',
+  'job',
+  'business',
+  'clients',
+  'team',
+  'classes',
+  'meetings',
+  'deadlines',
+  'brain',
+  'workflow',
+  'routine',
+  'week',
+  'goals',
+  'side projects',
+  'creative work',
+  'freelance work',
+]
+type TypewriterPhase = 'typing' | 'holding' | 'deleting' | 'advancing'
+
+function HeroTypewriter() {
+  const [wordIndex, setWordIndex] = useState(0)
+  const [text, setText] = useState(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return rotatingWords[0]
+    }
+
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? rotatingWords[0] : ''
+  })
+  const [phase, setPhase] = useState<TypewriterPhase>('typing')
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      return
+    }
+
+    const currentWord = rotatingWords[wordIndex]
+
+    const timer = window.setTimeout(() => {
+      if (phase === 'typing') {
+        const nextText = currentWord.slice(0, text.length + 1)
+        setText(nextText)
+        if (nextText === currentWord) {
+          setPhase('holding')
+        }
+        return
+      }
+
+      if (phase === 'holding') {
+        setPhase('deleting')
+        return
+      }
+
+      if (phase === 'deleting') {
+        const nextText = currentWord.slice(0, Math.max(0, text.length - 1))
+        setText(nextText)
+        if (nextText.length === 0) {
+          setPhase('advancing')
+        }
+        return
+      }
+
+      if (phase === 'advancing') {
+        setWordIndex((value) => (value + 1) % rotatingWords.length)
+        setPhase('typing')
+      }
+    }, phase === 'holding' ? 2200 : phase === 'advancing' ? 280 : phase === 'deleting' ? 90 : 120)
+
+    return () => window.clearTimeout(timer)
+  }, [phase, text, wordIndex])
+
+  return (
+    <span
+      className="hero-typewriter relative top-[-0.12em] inline-block align-middle leading-none"
+      style={{ minWidth: '15ch', minHeight: '1em' }}
+    >
+      <span aria-hidden="true" className="invisible select-none">
+        freelance work
+      </span>
+      <span className="absolute inset-0 inline-flex items-center justify-center whitespace-nowrap text-ledger-accent">
+        <span>{text}</span>
+        <span aria-hidden="true" className="hero-typewriter-cursor ml-1" />
+      </span>
+    </span>
+  )
+}
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -17,25 +123,55 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative overflow-hidden border-b border-ledger-border/80 px-5 pb-12 pt-16 sm:px-7 sm:pb-16 sm:pt-24 lg:pb-20 lg:pt-32">
-      <div className="relative mx-auto w-full max-w-260">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="hero-enter hero-enter-title text-[42px] font-medium leading-[1.08] tracking-[-0.03em] text-ledger-text sm:text-[52px]">
-            Live a little <span className="text-ledger-accent">simpler</span>
+    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-12 pt-20 sm:px-7 sm:pb-16 sm:pt-30 lg:pb-20 lg:pt-40">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[26rem] bg-gradient-to-b from-transparent via-[#86807a14] via-28% to-[#b2aca54d] sm:h-[34rem] lg:h-[40rem]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-16 z-0 flex w-screen -translate-x-1/2 justify-center sm:top-20 lg:top-24"
+      >
+        <img
+          src="/assets/logos/outline-hero.svg"
+          alt=""
+          className="hero-outline-float h-auto w-[min(132vw,1620px)] max-w-none opacity-6"
+        />
+      </div>
+      <div className="relative z-10 mx-auto w-full max-w-7xl">
+        <div className="mx-auto max-w-5xl text-center">
+          <h1 className="hero-enter hero-enter-title text-[58px] font-medium leading-[0.92] tracking-[-0.055em] text-ledger-text sm:text-[84px] lg:text-[108px] xl:text-[124px]">
+            A sidebar for your
+            <br />
+            <HeroTypewriter />
           </h1>
-          <p className="hero-enter hero-enter-copy mt-2 text-[18px] leading-[1.15] text-ledger-text">Daily Accountability and Planning.</p>
-          <a
-            href="/download"
-            className="hero-enter hero-enter-cta mt-6 inline-flex h-12 min-w-39 items-center justify-center rounded-full bg-ledger-accent px-7 text-[16px] font-semibold leading-none text-white! transition hover:bg-ledger-accent-hover"
-          >
-            Download
-          </a>
+          <p className="hero-enter hero-enter-copy mx-auto mt-1.5 max-w-2xl text-[18px] leading-[1.24] text-ledger-text sm:mt-0 sm:pt-0 sm:text-[20px]">
+            Capture notes, tasks, and plans beside the apps you already use, without pulling yourself out of flow.
+          </p>
+          <div className="hero-enter hero-enter-cta mt-4 flex flex-col items-center justify-center gap-2.5 sm:mt-5 sm:flex-row sm:gap-3">
+            <a
+              href="/download"
+              className="inline-flex h-12 min-w-39 items-center justify-center rounded-full bg-ledger-accent px-7 text-[16px] font-semibold leading-none text-white transition hover:bg-ledger-accent-hover"
+            >
+              Download
+            </a>
+            <a
+              href="/about"
+              className="inline-flex h-12 min-w-39 items-center justify-center rounded-full border border-ledger-border bg-[var(--ledger-surface-card)] px-7 text-[16px] font-semibold leading-none text-ledger-text transition hover:bg-ledger-surface-muted"
+            >
+              See features
+            </a>
+          </div>
         </div>
 
-        <div className="hero-enter hero-enter-video relative mx-auto mt-12 w-full max-w-245 sm:mt-16">
+        <div className="hero-enter hero-enter-video relative mx-auto mt-8 w-full max-w-6xl sm:mt-10">
+          <div
+            aria-hidden="true"
+            className="hero-grain -inset-5 rounded-[28px] bg-linear-to-b from-[rgba(20,20,18,0.08)] via-[rgba(20,20,18,0.02)] via-42% to-[rgba(20,20,18,0.08)]"
+          />
           <video
             ref={videoRef}
-            className="mx-auto w-full rounded-[20px] shadow-[0_20px_32px_rgba(17,24,39,0.2)] aspect-video"
+            className="relative z-10 mx-auto aspect-video w-full rounded-[20px] shadow-(--ledger-shadow-soft)"
             src="/assets/videos/herovideo.mp4"
             autoPlay
             loop
@@ -45,15 +181,18 @@ export function HeroSection() {
           />
           <button
             onClick={togglePlay}
-            className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/30 backdrop-blur-sm transition hover:bg-white/40 sm:bottom-8 sm:top-auto"
+            className="absolute top-4 left-4 z-20 flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-sm transition sm:bottom-8 sm:top-auto"
+            style={{
+              backgroundColor: 'color-mix(in srgb, var(--ledger-surface-card) 32%, transparent)',
+            }}
             aria-label={isPlaying ? 'Pause video' : 'Play video'}
           >
             {isPlaying ? (
-              <svg className="h-6 w-6 fill-white" viewBox="0 0 24 24">
+              <svg className="h-6 w-6 fill-(--ledger-text-primary)" viewBox="0 0 24 24">
                 <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
               </svg>
             ) : (
-              <svg className="h-6 w-6 fill-white" viewBox="0 0 24 24">
+              <svg className="h-6 w-6 fill-(--ledger-text-primary)" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" />
               </svg>
             )}

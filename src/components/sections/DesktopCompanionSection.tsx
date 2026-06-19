@@ -38,21 +38,21 @@ export function DesktopCompanionSection() {
   ]
 
   return (
-    <section ref={sectionRef} className="bg-white px-6 py-16 sm:px-8 sm:py-20">
-      <div className="mx-auto w-full max-w-275">
+    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-16 sm:px-8 sm:py-20">
+      <div className="mx-auto w-full max-w-7xl">
         <div className="grid gap-12 md:grid-cols-[1fr_1.2fr]">
           <div
             data-reveal-desktop
             className="feature-reveal reveal-left"
             style={{ transitionDelay: '80ms' }}
           >
-            <div className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+            <div className="text-[12px] font-medium text-[var(--ledger-text-muted)]">
               Desktop-first
             </div>
-            <h2 className="mt-4 text-[32px] font-medium leading-[1.1] tracking-[-0.02em] text-gray-900 sm:text-[42px]">
+            <h2 className="mt-4 text-[32px] font-medium leading-[1.1] tracking-[-0.02em] text-[var(--ledger-text-primary)] sm:text-[42px]">
               Not another tab to manage.
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-gray-600">
+            <p className="mt-6 text-sm leading-relaxed text-[var(--ledger-text-secondary)]">
               Ledger lives on your desktop so your notes, tasks, projects, and daily check-ins stay close without pulling you into another crowded workspace.
             </p>
           </div>
@@ -62,15 +62,15 @@ export function DesktopCompanionSection() {
               <div
                 key={index}
                 data-reveal-desktop
-                className="feature-reveal reveal-right flex gap-4 rounded-lg border border-gray-200 bg-white p-4"
+                className="feature-reveal reveal-right flex gap-4 rounded-lg border border-[color:var(--ledger-border-subtle)] bg-[var(--ledger-surface-card)] p-4"
                 style={{ transitionDelay: `${180 + index * 90}ms` }}
               >
                 <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-ledger-accent" />
                 <div className="min-w-0">
-                  <h3 className="text-sm font-semibold text-gray-900">
+                  <h3 className="text-sm font-semibold text-[var(--ledger-text-primary)]">
                     {benefit.title}
                   </h3>
-                  <p className="mt-1 text-xs text-gray-600">
+                  <p className="mt-1 text-xs text-[var(--ledger-text-secondary)]">
                     {benefit.description}
                   </p>
                 </div>

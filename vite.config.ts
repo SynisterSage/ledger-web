@@ -10,6 +10,8 @@ export default defineConfig({
         main: 'index.html',
         download: 'html-pages/download.html',
         about: 'html-pages/about.html',
+        privacy: 'html-pages/privacy.html',
+        terms: 'html-pages/terms.html',
         sidebar: 'html-pages/sidebar.html',
         planning: 'planning.html',
         review: 'html-pages/review.html',

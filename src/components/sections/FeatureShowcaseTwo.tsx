@@ -26,9 +26,9 @@ export function FeatureShowcaseTwo() {
     <section
       ref={sectionRef}
       aria-label="Feature showcase: Planning"
-      className="relative bg-white px-6 pb-18 pt-20 sm:px-8 sm:pt-22"
+      className="relative bg-[var(--ledger-surface)] px-6 pb-18 pt-20 sm:px-8 sm:pt-22"
     >
-      <div className="mx-auto w-full max-w-275">
+      <div className="mx-auto w-full max-w-7xl">
         <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-start">
           <h2
             data-reveal-two

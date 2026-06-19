@@ -26,9 +26,9 @@ export function FeatureShowcaseThree() {
     <section
       ref={sectionRef}
       aria-label="Feature showcase: Review"
-      className="relative bg-white px-6 pb-24 pt-16 sm:px-8 sm:pt-18"
+      className="relative bg-[var(--ledger-surface)] px-6 pb-24 pt-16 sm:px-8 sm:pt-18"
     >
-      <div className="mx-auto w-full max-w-275">
+      <div className="mx-auto w-full max-w-7xl">
         <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-start">
           <h2
             data-reveal-three

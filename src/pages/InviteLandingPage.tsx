@@ -172,10 +172,10 @@ export function InviteLandingPage() {
   return (
     <main className="min-h-screen bg-ledger-bg px-5 py-8 text-ledger-text sm:px-8">
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-xl items-center justify-center">
-        <section className="w-full rounded-[28px] border border-ledger-border bg-ledger-surface px-6 py-7 shadow-[0_16px_48px_rgba(17,24,39,0.08)] sm:px-8 sm:py-8">
+        <section className="w-full rounded-[28px] border border-ledger-border bg-ledger-surface px-6 py-7 shadow-[var(--ledger-shadow-soft)] sm:px-8 sm:py-8">
           {state === 'loading' && (
             <>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ledger-text-muted">
+              <p className="text-[12px] font-medium text-ledger-text-muted">
                 Invitation
               </p>
               <div className="mt-4 h-9 w-4/5 rounded-2xl bg-ledger-border/40" />
@@ -189,7 +189,7 @@ export function InviteLandingPage() {
 
           {state === 'error' && (
             <>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ledger-text-muted">
+              <p className="text-[12px] font-medium text-ledger-text-muted">
                 Invite unavailable
               </p>
               <h1 className="mt-4 text-[30px] font-semibold leading-tight tracking-tight text-ledger-text">
@@ -220,7 +220,7 @@ export function InviteLandingPage() {
               <div className="flex h-14 w-14 items-center justify-center rounded-[18px] border border-ledger-border bg-ledger-bg">
                 <LedgerMark className="h-8 w-8" />
               </div>
-              <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-ledger-text-muted">
+              <p className="mt-6 text-[12px] font-medium text-ledger-text-muted">
                 Joined
               </p>
               <h1 className="mt-3 text-[32px] font-semibold leading-tight tracking-tight text-ledger-text">
@@ -243,7 +243,7 @@ export function InviteLandingPage() {
               <div className="flex items-center gap-3">
                 <LedgerMark className="h-8 w-8" />
                 <div className="min-w-0">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-ledger-text-muted">
+                  <p className="text-[12px] font-medium text-ledger-text-muted">
                     Invitation
                   </p>
                   <h1 className="mt-2 text-[30px] font-semibold leading-tight tracking-tight text-ledger-text">

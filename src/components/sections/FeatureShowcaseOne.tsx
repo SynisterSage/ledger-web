@@ -26,9 +26,9 @@ export function FeatureShowcaseOne() {
     <section
       ref={sectionRef}
       aria-label="Feature showcase: Sidebar"
-      className="relative z-10 -mt-24 bg-white px-6 pb-14 pt-26 sm:px-8"
+      className="relative z-10 -mt-20 bg-[var(--ledger-surface)] px-6 pb-14 pt-30 sm:-mt-24 sm:px-8 sm:pt-32"
     >
-      <div className="mx-auto w-full max-w-275">
+      <div className="mx-auto w-full max-w-7xl">
         <div className="grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-start">
           <h2
             data-reveal

@@ -2,19 +2,20 @@
 @import "tailwindcss";
 
 :root {
-  --ledger-bg: #f5f5f7;
-  --ledger-surface: #ffffff;
-  --ledger-text: #111827;
-  --ledger-text-muted: #4b5563;
-  --ledger-border: #e5e7eb;
+  color-scheme: light;
+  --ledger-bg: #f7f4ef;
+  --ledger-surface: #fffcf7;
+  --ledger-text: #171512;
+  --ledger-text-muted: #766f65;
+  --ledger-border: #ded6cb;
   --ledger-accent: #ff5f40;
-  --ledger-accent-hover: #ea5336;
+  --ledger-accent-hover: #e95235;
 
-  --ledger-radius-sm: 10px;
+  --ledger-radius-sm: 12px;
   --ledger-radius-md: 16px;
   --ledger-radius-lg: 24px;
 
-  --ledger-shadow-soft: 0 12px 32px rgba(17, 24, 39, 0.08);
+  --ledger-shadow-soft: 0 14px 42px rgba(20, 20, 18, 0.075);
 }
 
 @theme inline {
@@ -38,7 +39,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--ledger-text);
-  background: radial-gradient(circle at top, #ffffff 0%, var(--ledger-bg) 58%);
+  background: radial-gradient(circle at top, var(--ledger-surface) 0%, var(--ledger-bg) 58%);
 }
 
 body {
@@ -107,6 +108,52 @@ img {
   animation-delay: 560ms;
 }
 
+@keyframes heroOutlineFloat {
+  0% {
+    transform: translate3d(-1.2%, -4%, 0) scale(1.18);
+  }
+  50% {
+    transform: translate3d(1.6%, -5.5%, 0) scale(1.22);
+  }
+  100% {
+    transform: translate3d(-1.2%, -4%, 0) scale(1.18);
+  }
+}
+
+.hero-outline-float {
+  will-change: transform, opacity;
+  animation: heroOutlineFloat 24s ease-in-out infinite;
+  filter: sepia(1) saturate(3.4) hue-rotate(-10deg) brightness(1.05);
+}
+
+.hero-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.26'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  background-repeat: repeat;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+}
+
+@keyframes typewriterBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.hero-typewriter-cursor {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.82em;
+  border-radius: 999px;
+  background: var(--ledger-accent);
+  animation: typewriterBlink 1s steps(1, end) infinite;
+}
+
 .feature-reveal {
   opacity: 0;
   transition:
@@ -135,10 +182,15 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .site-header-enter,
   .hero-enter,
-  .feature-reveal {
+  .feature-reveal,
+  .hero-outline-float {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  .hero-typewriter-cursor {
+    animation: none !important;
   }
 }
