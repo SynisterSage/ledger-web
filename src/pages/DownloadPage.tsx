@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { LockedSplash } from '../components/sections/LockedSplash'
 import { SiteFooter } from '../components/sections/SiteFooter'
@@ -87,15 +87,11 @@ function DownloadRow({
 }
 
 export function DownloadPage() {
+  const [downloadLabel] = useState<'macOS' | 'Windows'>(() => getPlatformDownloadLabel())
+
   if (isSiteLocked()) {
     return <LockedSplash />
   }
-
-  const [downloadLabel, setDownloadLabel] = useState<'macOS' | 'Windows'>(() => getPlatformDownloadLabel())
-
-  useEffect(() => {
-    setDownloadLabel(getPlatformDownloadLabel())
-  }, [])
 
   return (
     <div className="min-h-screen bg-[var(--ledger-bg)] text-[var(--ledger-text-primary)]">
