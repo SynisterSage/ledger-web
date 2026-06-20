@@ -7,7 +7,7 @@ type SiteHeaderProps = {
 const primaryLinks = [
   { href: '/about', label: 'Product' },
   { href: '/sidebar', label: 'Mobile' },
-  { href: 'mailto:ledgerworkspace@gmail.com', label: 'Contact' },
+  { href: '/help', label: 'Help' },
 ]
 
 const secondaryLinks = [

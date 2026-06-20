@@ -31,6 +31,7 @@ export default defineConfig({
         helpBrowserExtension: 'help/browser-extension/index.html',
         helpSiriShortcuts: 'help/siri-shortcuts/index.html',
         helpSessionsAccount: 'help/sessions-account/index.html',
+        helpContactSupport: 'help/contact-support/index.html',
         helpTroubleshooting: 'help/troubleshooting/index.html',
         privacy: 'privacy/index.html',
         terms: 'terms/index.html',

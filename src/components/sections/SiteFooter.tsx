@@ -3,7 +3,7 @@ const footerColumns = [
     title: 'Product',
     links: [
       { label: 'Features', href: '/about' },
-      { label: 'Guide', href: '/about' },
+      { label: 'Help', href: '/help' },
       { label: 'Download', href: '/download' },
       { label: 'Changelog', href: '/about' },
     ],
@@ -13,7 +13,7 @@ const footerColumns = [
     links: [
       { label: 'Getting Started', href: '/about' },
       { label: 'Shortcuts', href: '/about' },
-      { label: 'Contact', href: '/about' },
+      { label: 'Contact', href: '/help/contact-support' },
     ],
   },
   {

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 
 type DocCard = {
   title: string
@@ -123,6 +123,12 @@ const homeSections: Array<{ title: string; cards: DocCard[] }> = [
         icon: 'guide',
       },
       {
+        title: 'Contact support',
+        description: 'Send a simple message to Ledger support.',
+        href: '/help/contact-support',
+        icon: 'projects',
+      },
+      {
         title: 'Troubleshooting',
         description: 'Invite links, auth, notifications, search, and more.',
         href: '/help/troubleshooting',
@@ -165,6 +171,7 @@ const sidebarGroups = [
     links: [
       { label: 'Siri shortcuts', href: '/help/siri-shortcuts' },
       { label: 'Sessions and account', href: '/help/sessions-account' },
+      { label: 'Contact support', href: '/help/contact-support' },
       { label: 'Troubleshooting', href: '/help/troubleshooting' },
     ],
   },
@@ -665,6 +672,20 @@ const articleMap: Record<string, DocArticle> = {
       },
     ],
   },
+  'contact-support': {
+    title: 'Contact support',
+    intro: 'Send Ledger a simple support request and we will point you in the right direction.',
+    sections: [
+      {
+        id: 'contact-form',
+        title: 'Contact form',
+        content: [
+          'Use the form on this page to send a short message with your name, email, subject, and what you need help with.',
+          'Keep it brief and specific so support can get you to the next step faster.',
+        ],
+      },
+    ],
+  },
   troubleshooting: {
     title: 'Troubleshooting',
     intro: 'Troubleshooting covers the common places where a user can get stuck and what to check first.',
@@ -848,7 +869,7 @@ function DocsHeader({
   return (
     <header className="sticky top-0 z-40 grid h-16 w-full border-b border-[color:var(--ledger-border-subtle)] bg-[var(--ledger-bg)] lg:grid-cols-[260px_minmax(0,1fr)]">
       <div className="flex items-center justify-between px-4 sm:px-6 lg:border-r lg:border-[color:var(--ledger-border-subtle)]">
-        <a href="/help" className="inline-flex items-center gap-2 rounded-full leading-none">
+        <a href="/" className="inline-flex items-center gap-2 rounded-full leading-none">
           <img src="/assets/logos/logo.svg" alt="" className="h-[28px] w-auto" aria-hidden="true" />
           <span className="relative top-[2px] text-[19px] font-medium tracking-[-0.02em] text-ledger-text">
             Help
@@ -856,7 +877,7 @@ function DocsHeader({
         </a>
         <DocsSearchButton onSearchOpen={onSearchOpen} />
       </div>
-      <div className="hidden items-center justify-end px-6 text-[14px] text-ledger-text-muted lg:flex">
+      <div className="hidden items-center justify-start px-6 text-[14px] text-ledger-text-muted lg:flex">
         {breadcrumbSegments ? <DocsBreadcrumbs segments={breadcrumbSegments} /> : null}
       </div>
     </header>
@@ -1245,6 +1266,113 @@ function DocsArticlePage({ pathname, onSearchOpen }: { pathname: string; onSearc
   )
 }
 
+function ContactSupportPage({ onSearchOpen }: { onSearchOpen: () => void }) {
+  const breadcrumbSegments = ['Account and support', 'Contact support']
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const name = String(formData.get('name') ?? '').trim()
+    const email = String(formData.get('email') ?? '').trim()
+    const subject = String(formData.get('subject') ?? '').trim()
+    const message = String(formData.get('message') ?? '').trim()
+
+    const body = [
+      `Name: ${name || 'Not provided'}`,
+      `Email: ${email || 'Not provided'}`,
+      '',
+      message || 'No message provided.',
+    ].join('\n')
+
+    const mailto = new URL('mailto:ledgerworkspace@gmail.com')
+    mailto.searchParams.set('subject', subject || 'Ledger support request')
+    mailto.searchParams.set('body', body)
+
+    window.location.href = mailto.toString()
+  }
+
+  return (
+    <div className="min-h-screen bg-[var(--ledger-bg)] text-ledger-text">
+      <DocsHeader onSearchOpen={onSearchOpen} breadcrumbSegments={breadcrumbSegments} />
+
+      <div className="grid w-full lg:grid-cols-[260px_minmax(0,1fr)]">
+        <div className="hidden lg:block">
+          <DocsSidebar pathname="/help/contact-support" />
+        </div>
+
+        <main className="min-w-0 w-full justify-self-center px-5 py-10 sm:px-8 lg:max-w-[1320px] lg:px-12 lg:py-10">
+          <div className="mx-auto w-full max-w-2xl">
+            <p className="text-[13px] font-medium text-ledger-text-muted">Help</p>
+            <h1 className="mt-3 text-[44px] font-medium tracking-[-0.055em] text-ledger-text sm:text-[58px] lg:text-[64px]">
+              Contact support
+            </h1>
+            <p className="mt-4 max-w-2xl text-[18px] leading-7 text-ledger-text-muted sm:text-[19px]">
+              Send a short message and we will get you to the right place.
+            </p>
+
+            <form onSubmit={onSubmit} className="mt-10 space-y-4 rounded-[24px] border border-[color:var(--ledger-border-subtle)] bg-[rgba(247,242,234,0.03)] p-5 sm:p-6">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="grid gap-2">
+                  <span className="text-[13px] font-medium text-ledger-text-muted">Name</span>
+                  <input
+                    name="name"
+                    type="text"
+                    className="h-11 rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-[color:var(--ledger-header-border)]"
+                    placeholder="Your name"
+                  />
+                </label>
+                <label className="grid gap-2">
+                  <span className="text-[13px] font-medium text-ledger-text-muted">Email</span>
+                  <input
+                    name="email"
+                    type="email"
+                    className="h-11 rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-[color:var(--ledger-header-border)]"
+                    placeholder="you@example.com"
+                  />
+                </label>
+              </div>
+
+              <label className="grid gap-2">
+                <span className="text-[13px] font-medium text-ledger-text-muted">Subject</span>
+                <input
+                  name="subject"
+                  type="text"
+                  className="h-11 rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-[color:var(--ledger-header-border)]"
+                  placeholder="What do you need help with?"
+                />
+              </label>
+
+              <label className="grid gap-2">
+                <span className="text-[13px] font-medium text-ledger-text-muted">Message</span>
+                <textarea
+                  name="message"
+                  rows={7}
+                  className="rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] px-3 py-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-[color:var(--ledger-header-border)]"
+                  placeholder="Add a few details about the issue."
+                />
+              </label>
+
+              <div className="flex items-center justify-between gap-3 pt-2">
+                <p className="text-[13px] leading-5 text-ledger-text-muted">
+                  Messages open your email client to send to <span className="text-ledger-text">ledgerworkspace@gmail.com</span>.
+                </p>
+                <button
+                  type="submit"
+                  className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--ledger-accent)] px-5 text-[14px] font-medium text-white transition-colors hover:bg-[var(--ledger-accent-hover)]"
+                >
+                  Send message
+                </button>
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    </div>
+  )
+}
+
 export function DocsPage() {
   const pathname =
     typeof window !== 'undefined' ? window.location.pathname.replace(/\/$/, '') || '/' : '/help'
@@ -1274,6 +1402,20 @@ export function DocsPage() {
   }
 
   if (pathname.startsWith('/help/') || pathname.startsWith('/docs/')) {
+    if (pathname === '/help/contact-support' || pathname === '/docs/contact-support') {
+      return (
+        <>
+          <ContactSupportPage onSearchOpen={onSearchOpen} />
+          <SearchModal
+            open={isSearchOpen}
+            query={searchQuery}
+            onQueryChange={setSearchQuery}
+            onClose={onSearchClose}
+          />
+        </>
+      )
+    }
+
     return (
       <>
         <DocsArticlePage pathname={pathname.replace(/^\/docs/, '/help')} onSearchOpen={onSearchOpen} />
