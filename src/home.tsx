@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage'
 import { InviteLandingPage } from './pages/InviteLandingPage'
 import { InviteSuccessPage } from './pages/InviteSuccessPage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { DocsPage } from './pages/DocsPage'
 import { PlanningPage } from './pages/PlanningPage'
 import { PrivacyPage } from './pages/PrivacyPage'
 import { ReviewPage } from './pages/ReviewPage'
@@ -38,9 +39,15 @@ function AppRouter() {
       return <PrivacyPage />
     case '/terms':
       return <TermsPage />
+    case '/help':
+    case '/docs':
+      return <DocsPage />
     case '/':
       return <HomePage />
     default:
+      if (pathname.startsWith('/help/') || pathname.startsWith('/docs/')) {
+        return <DocsPage />
+      }
       return <NotFoundPage />
   }
 }
