@@ -122,7 +122,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-12 pt-16 sm:px-7 sm:pb-16 sm:pt-26 lg:pb-20 lg:pt-34">
+    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-12 pt-10 sm:px-7 sm:pb-16 sm:pt-18 lg:pb-20 lg:pt-24">
       <div
         aria-hidden="true"
         className="hero-bottom-glow pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[26rem] sm:h-[34rem] lg:h-[40rem]"
@@ -144,10 +144,10 @@ export function HeroSection() {
             <br />
             <HeroTypewriter />
           </h1>
-          <p className="hero-enter hero-enter-copy mx-auto mt-0.5 max-w-2xl text-[18px] leading-[1.24] text-ledger-text sm:mt-0 sm:pt-0 sm:text-[20px]">
+          <p className="hero-enter hero-enter-copy mx-auto mt-0 max-w-2xl text-[18px] leading-[1.24] text-ledger-text sm:text-[20px]">
             Capture notes, tasks, and plans beside the apps you already use, without pulling yourself out of flow.
           </p>
-          <div className="hero-enter hero-enter-cta mt-3.5 flex flex-col items-center justify-center gap-2.5 sm:mt-4 sm:flex-row sm:gap-3">
+          <div className="hero-enter hero-enter-cta mt-2.5 flex flex-col items-center justify-center gap-2.5 sm:mt-3 sm:flex-row sm:gap-3">
             <a
               href="/download"
               className="inline-flex h-12 min-w-39 items-center justify-center rounded-full bg-ledger-accent px-7 text-[16px] font-semibold leading-none text-white transition hover:bg-ledger-accent-hover"
@@ -163,18 +163,18 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="hero-enter hero-enter-video relative mx-auto mt-8 w-full max-w-6xl sm:mt-10">
+        <div className="hero-enter hero-enter-video relative mx-auto mt-7 w-full max-w-6xl sm:mt-8">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-20 hidden md:block">
-            <div className="hero-ornament hero-ornament--left absolute left-[-4.25rem] top-[63%] w-[clamp(2.1rem,2.8vw,3rem)] rotate-[-16deg] opacity-80 lg:left-[-5.5rem] lg:top-[66%] lg:w-[clamp(2.4rem,3.2vw,3.6rem)]">
+            <div className="hero-ornament hero-ornament--left pointer-events-auto absolute left-[-4.75rem] top-[60%] w-[clamp(3.3rem,4.4vw,4.75rem)] rotate-[-16deg] opacity-80 lg:left-[-6.25rem] lg:top-[63%] lg:w-[clamp(3.8rem,5.1vw,5.6rem)]">
               <img src="/assets/images/hero-left.svg" alt="" className="block h-full w-full" />
             </div>
-            <div className="hero-ornament hero-ornament--right absolute right-[-4.25rem] top-[11%] w-[clamp(2.2rem,3vw,3.1rem)] rotate-[10deg] opacity-80 lg:right-[-5.5rem] lg:top-[8%] lg:w-[clamp(2.5rem,3.4vw,3.8rem)]">
+            <div className="hero-ornament hero-ornament--right pointer-events-auto absolute right-[-4.75rem] top-[8%] w-[clamp(3.3rem,4.4vw,4.75rem)] rotate-[10deg] opacity-80 lg:right-[-6.25rem] lg:top-[5%] lg:w-[clamp(3.8rem,5.1vw,5.6rem)]">
               <img src="/assets/images/hero-right.svg" alt="" className="block h-full w-full" />
             </div>
-            <div className="hero-ornament hero-ornament--frame10 absolute left-[-5.75rem] top-[22%] w-[clamp(2rem,2.7vw,2.7rem)] rotate-[-8deg] opacity-78 lg:left-[-7.25rem] lg:top-[19%] lg:w-[clamp(2.4rem,3.2vw,3.4rem)]">
+            <div className="hero-ornament hero-ornament--frame10 pointer-events-auto absolute left-[-6.15rem] top-[24%] w-[clamp(3rem,4.05vw,4.4rem)] rotate-[-10deg] opacity-78 lg:left-[-7.75rem] lg:top-[21%] lg:w-[clamp(3.55rem,4.75vw,5.2rem)]">
               <img src="/assets/images/Frame 10.svg" alt="" className="block h-full w-full" />
             </div>
-            <div className="hero-ornament hero-ornament--frame11 absolute right-[-5.75rem] top-[82%] w-[clamp(2.1rem,2.8vw,3rem)] rotate-[14deg] opacity-78 lg:right-[-7.25rem] lg:top-[84%] lg:w-[clamp(2.5rem,3.3vw,3.6rem)]">
+            <div className="hero-ornament hero-ornament--frame11 pointer-events-auto absolute right-[-6.15rem] top-[79%] w-[clamp(3.05rem,4.1vw,4.45rem)] rotate-[14deg] opacity-78 lg:right-[-7.75rem] lg:top-[81%] lg:w-[clamp(3.6rem,4.85vw,5.25rem)]">
               <img src="/assets/images/Frame 11.svg" alt="" className="block h-full w-full" />
             </div>
           </div>

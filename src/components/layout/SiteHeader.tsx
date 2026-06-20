@@ -7,7 +7,6 @@ type SiteHeaderProps = {
 const primaryLinks = [
   { href: '/about', label: 'Product' },
   { href: '/sidebar', label: 'Mobile' },
-  { href: '/download', label: 'Download' },
   { href: 'mailto:ledgerworkspace@gmail.com', label: 'Contact' },
 ]
 
@@ -24,7 +23,9 @@ const actions = [
 
 const navLinkClass = (isActive: boolean) =>
   `site-nav__link inline-flex items-center rounded-full px-3 py-2 text-[13px] font-medium leading-none tracking-[-0.01em] transition-colors duration-200 sm:px-3.5 sm:text-sm ${
-    isActive ? 'bg-[rgba(247,242,234,0.08)] text-[var(--ledger-text)]' : 'text-[var(--ledger-text-muted)] hover:bg-[rgba(247,242,234,0.08)] hover:text-[var(--ledger-text)]'
+    isActive
+      ? 'bg-[color:var(--ledger-header-pill-active)] text-[color:var(--ledger-header-text)]'
+      : 'text-[color:var(--ledger-header-text-muted)] hover:bg-[color:var(--ledger-header-pill)] hover:text-[color:var(--ledger-header-text)]'
   }`
 
 export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
@@ -108,9 +109,9 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
 
       <div className="site-nav__shell mx-auto w-full">
         <div className="site-nav__inner flex items-center gap-4">
-          <a href="/" className="site-nav__brand group inline-flex min-w-max items-center gap-2 rounded-full leading-none">
+          <a href="/" className="site-nav__brand inline-flex min-w-max items-center gap-2 rounded-full leading-none">
             <img src="/assets/logos/logo.svg" alt="" className="h-[28px] w-auto sm:h-[29px]" />
-            <span className="relative top-[2px] text-[19px] font-medium tracking-[-0.02em] text-[var(--ledger-text)] transition-colors duration-200 group-hover:text-ledger-accent group-hover:font-semibold">
+            <span className="relative top-[2px] text-[19px] font-medium tracking-[-0.02em] text-[color:var(--ledger-header-text)]">
               Ledger
             </span>
           </a>
@@ -135,7 +136,7 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
                   <a
                     key={action.label}
                     href={action.href}
-                    className="inline-flex h-10 items-center justify-center rounded-full bg-ledger-accent px-5 text-[13px] font-semibold leading-none text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
+                    className="inline-flex h-9 items-center justify-center rounded-full bg-ledger-accent px-4.5 text-[13px] font-semibold leading-none text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
                   >
                     Download
                   </a>
@@ -143,7 +144,7 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
                   <a
                     key={action.label}
                     href={action.href}
-                    className="inline-flex h-9 items-center justify-center rounded-full px-3 text-[13px] font-medium leading-none text-[var(--ledger-text-muted)] transition-colors duration-200 hover:bg-[rgba(247,242,234,0.08)] hover:text-[var(--ledger-text)]"
+                    className="inline-flex h-9 items-center justify-center rounded-full px-3 text-[13px] font-medium leading-none text-[color:var(--ledger-header-text-muted)] transition-colors duration-200 hover:bg-[color:var(--ledger-header-pill)] hover:text-[color:var(--ledger-header-text)]"
                   >
                     {action.label}
                   </a>
@@ -151,22 +152,12 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
               )}
             </div>
 
-            {isMenuOpen ? (
-              <a
-                href="/download"
-                onClick={() => setIsMenuOpen(false)}
-                className="inline-flex h-10 items-center justify-center rounded-full bg-ledger-accent px-4.5 text-[13px] font-semibold leading-none text-white transition-colors duration-200 hover:bg-ledger-accent-hover lg:hidden"
-              >
-                Download
-              </a>
-            ) : null}
-
             <button
               ref={menuButtonRef}
               type="button"
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
-              className="site-nav__menu-button inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(247,242,234,0.12)] bg-[rgba(247,242,234,0.04)] text-[var(--ledger-text)] transition-colors duration-200 hover:bg-[rgba(247,242,234,0.1)] lg:hidden"
+              className="site-nav__menu-button inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--ledger-header-border)] bg-[color:var(--ledger-header-pill)] text-[color:var(--ledger-header-text)] transition-colors duration-200 hover:bg-[color:var(--ledger-header-pill-active)] lg:hidden"
               onClick={() => setIsMenuOpen((current) => !current)}
             >
               <span className="sr-only">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>

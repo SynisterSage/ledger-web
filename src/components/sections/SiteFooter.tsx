@@ -53,8 +53,8 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 flex justify-center border-t border-[color:var(--ledger-border-subtle)] pt-4 md:justify-end">
-          <p className="text-xs text-[var(--ledger-text-secondary)]">Ledger 2026.</p>
+        <div className="mt-10 flex justify-start border-t border-[color:var(--ledger-border-subtle)] pt-4 md:justify-end">
+          <p className="text-left text-xs text-[var(--ledger-text-secondary)] md:text-right">Ledger 2026.</p>
         </div>
       </div>
     </footer>
