@@ -984,14 +984,14 @@ function DocsHeader({
   breadcrumbSegments?: string[]
 }) {
   return (
-    <header className="sticky top-0 z-40 grid h-16 w-full border-b border-[color:var(--ledger-border-subtle)] bg-[var(--ledger-bg)] lg:grid-cols-[260px_minmax(0,1fr)]">
-      <div className="flex items-center justify-between px-4 sm:px-6 lg:border-r lg:border-[color:var(--ledger-border-subtle)]">
+    <header className="sticky top-0 z-40 grid h-16 w-full border-b border-(--ledger-border-subtle) bg-ledger-bg lg:grid-cols-[260px_minmax(0,1fr)]">
+      <div className="flex items-center justify-between px-4 sm:px-6 lg:border-r lg:border-(--ledger-border-subtle)">
         <div className="flex items-center gap-3">
           <a href="/" className="inline-flex items-center rounded-full leading-none">
-          <img src="/assets/logos/logo.svg" alt="" className="h-[28px] w-auto" aria-hidden="true" />
+          <img src="/assets/logos/logo.svg" alt="" className="h-7 w-auto" aria-hidden="true" />
           </a>
-          <span aria-hidden="true" className="h-5 w-px bg-[color:var(--ledger-border-subtle)]" />
-          <a href="/help" className="relative top-[1px] text-[19px] font-medium tracking-[-0.02em] text-ledger-text">
+          <span aria-hidden="true" className="h-5 w-px bg-(--ledger-border-subtle)" />
+          <a href="/help" className="relative top-px text-[19px] font-medium tracking-[-0.02em] text-ledger-text">
             Help
           </a>
         </div>
@@ -1002,7 +1002,7 @@ function DocsHeader({
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
             onClick={onMenuToggle}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--ledger-border-subtle)] bg-[rgba(247,242,234,0.04)] text-ledger-text-muted transition-colors duration-200 hover:bg-[color:var(--ledger-header-pill)] hover:text-ledger-text lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] text-ledger-text-muted transition-colors duration-200 hover:bg-(--ledger-header-pill) hover:text-ledger-text lg:hidden"
           >
             <span className="sr-only">{isMenuOpen ? 'Close menu' : 'Open menu'}</span>
             {isMenuOpen ? (
@@ -1043,7 +1043,7 @@ function DocsBreadcrumbs({ segments }: { segments: string[] }) {
 
 function DocsSidebar({ pathname }: { pathname: string }) {
   return (
-    <aside className="sticky top-16 flex h-[calc(100vh-4rem)] flex-col border-r border-[color:var(--ledger-border-subtle)] bg-[rgba(255,255,255,0.01)]">
+    <aside className="sticky top-16 flex h-[calc(100vh-4rem)] flex-col border-r border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.01)]">
       <div className="flex min-h-0 flex-1 flex-col">
         <div className="min-h-0 flex-1 overflow-y-auto px-4 pt-10 pb-5">
           <nav className="space-y-6">
@@ -1060,9 +1060,9 @@ function DocsSidebar({ pathname }: { pathname: string }) {
                         key={link.label}
                         href={link.href}
                         className={`flex items-center justify-between rounded-lg px-2 py-2 text-[14px] transition-colors ${
-                          isActive
-                            ? 'bg-[color:var(--ledger-header-pill-active)] text-ledger-text'
-                            : 'text-ledger-text-muted hover:bg-[color:var(--ledger-header-pill)] hover:text-ledger-text'
+                        isActive
+                            ? 'bg-(--ledger-header-pill-active) text-ledger-text'
+                            : 'text-ledger-text-muted hover:bg-(--ledger-header-pill) hover:text-ledger-text'
                         }`}
                       >
                         <span>{link.label}</span>
@@ -1075,7 +1075,7 @@ function DocsSidebar({ pathname }: { pathname: string }) {
             ))}
           </nav>
         </div>
-        <div className="shrink-0 border-t border-[color:var(--ledger-border-subtle)] px-4 py-4">
+        <div className="shrink-0 border-t border-(--ledger-border-subtle) px-4 py-4">
           <div className="space-y-3">
             {sidebarGroups.slice(-1).map((group) => (
               <div key={group.title}>
@@ -1090,9 +1090,9 @@ function DocsSidebar({ pathname }: { pathname: string }) {
                         key={link.label}
                         href={link.href}
                         className={`flex items-center justify-between rounded-lg px-2 py-2 text-[14px] transition-colors ${
-                          isActive
-                            ? 'bg-[color:var(--ledger-header-pill-active)] text-ledger-text'
-                            : 'text-ledger-text-muted hover:bg-[color:var(--ledger-header-pill)] hover:text-ledger-text'
+                        isActive
+                            ? 'bg-(--ledger-header-pill-active) text-ledger-text'
+                            : 'text-ledger-text-muted hover:bg-(--ledger-header-pill) hover:text-ledger-text'
                         }`}
                       >
                         <span>{link.label}</span>
@@ -1143,14 +1143,10 @@ function DocsMobileMenu({
 
   return (
     <>
-      <div
-        aria-hidden="true"
-        className={`site-nav__mobile-backdrop lg:hidden is-open`}
-        onClick={onClose}
-      />
+      <div aria-hidden="true" className="site-nav__mobile-backdrop lg:hidden is-open" onClick={onClose} />
 
-      <div className="site-nav__mobile-sheet is-open !pt-0 lg:hidden">
-        <div className="min-h-0 flex-1 overflow-y-auto pr-4 [scrollbar-gutter:stable]">
+      <div className="site-nav__mobile-sheet is-open pt-0! lg:hidden">
+        <div className="min-h-0 flex-1 overflow-y-auto pr-4 scrollbar-gutter-stable">
           <nav className="space-y-6">
             {sidebarGroups.map((group) => (
               <div key={group.title}>
@@ -1167,8 +1163,8 @@ function DocsMobileMenu({
                         onClick={onClose}
                         className={`flex items-center justify-between rounded-lg px-2 py-2 text-[15px] transition-colors ${
                           isActive
-                            ? 'bg-[color:var(--ledger-header-pill-active)] text-ledger-text'
-                            : 'text-ledger-text-muted hover:bg-[color:var(--ledger-header-pill)] hover:text-ledger-text'
+                            ? 'bg-(--ledger-header-pill-active) text-ledger-text'
+                            : 'text-ledger-text-muted hover:bg-(--ledger-header-pill) hover:text-ledger-text'
                         }`}
                       >
                         <span>{link.label}</span>
@@ -1182,15 +1178,15 @@ function DocsMobileMenu({
           </nav>
         </div>
 
-        <div className="mt-4 border-t border-[color:var(--ledger-border-subtle)] pt-4">
+        <div className="mt-4 border-t border-(--ledger-border-subtle) pt-4">
           <div className="grid gap-2">
             <a
               href="/help"
               onClick={onClose}
               className={`rounded-xl px-3 py-2 text-[14px] transition-colors ${
                 pathname === '/help'
-                  ? 'bg-[color:var(--ledger-header-pill-active)] text-ledger-text'
-                  : 'text-ledger-text-muted hover:bg-[color:var(--ledger-header-pill)] hover:text-ledger-text'
+                  ? 'bg-(--ledger-header-pill-active) text-ledger-text'
+                  : 'text-ledger-text-muted hover:bg-(--ledger-header-pill) hover:text-ledger-text'
               }`}
             >
               Help home
@@ -1200,8 +1196,8 @@ function DocsMobileMenu({
               onClick={onClose}
               className={`rounded-xl px-3 py-2 text-[14px] transition-colors ${
                 pathname === '/help/contact-support'
-                  ? 'bg-[color:var(--ledger-header-pill-active)] text-ledger-text'
-                  : 'text-ledger-text-muted hover:bg-[color:var(--ledger-header-pill)] hover:text-ledger-text'
+                  ? 'bg-(--ledger-header-pill-active) text-ledger-text'
+                  : 'text-ledger-text-muted hover:bg-(--ledger-header-pill) hover:text-ledger-text'
               }`}
             >
               Contact support
@@ -1217,9 +1213,9 @@ function DocsCard({ card }: { card: DocCard }) {
   return (
     <a
       href={card.href}
-      className="group block rounded-2xl border border-[color:var(--ledger-border-subtle)] bg-[rgba(247,242,234,0.04)] p-5 transition-transform duration-200 hover:-translate-y-0.5 hover:border-[color:var(--ledger-header-border)]"
+      className="group block rounded-2xl border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] p-5 transition-transform duration-200 hover:-translate-y-0.5 hover:border-(--ledger-header-border)"
     >
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[rgba(247,242,234,0.03)] text-ledger-text">
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.03)] text-ledger-text">
         <DocsGlyph icon={card.icon} />
       </div>
       <h3 className="mt-10 text-[18px] font-semibold tracking-[-0.03em] text-ledger-text">{card.title}</h3>
@@ -1233,7 +1229,7 @@ function DocsSearchButton({ onSearchOpen }: { onSearchOpen: () => void }) {
     <button
       type="button"
       onClick={onSearchOpen}
-      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--ledger-border-subtle)] bg-[rgba(247,242,234,0.04)] text-ledger-text-muted transition-colors hover:bg-[color:var(--ledger-header-pill)] hover:text-ledger-text"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] text-ledger-text-muted transition-colors hover:bg-(--ledger-header-pill) hover:text-ledger-text"
       aria-label="Search help"
     >
       <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" aria-hidden="true">
@@ -1309,13 +1305,13 @@ function SearchModal({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-[rgba(14,13,11,0.72)] px-3 py-3 backdrop-blur-[2px] sm:items-center sm:px-6 sm:py-8" onMouseDown={onClose}>
       <div
-        className={`mx-auto mt-2 flex max-h-[calc(100vh-1.5rem)] w-full flex-col overflow-hidden rounded-[24px] border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] shadow-[0_24px_80px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out sm:mt-0 sm:max-h-[min(80vh,760px)] ${
-          hasQuery ? 'max-w-[760px]' : 'max-w-[560px]'
+        className={`mx-auto mt-2 flex max-h-[calc(100vh-1.5rem)] w-full flex-col overflow-hidden rounded-3xl border border-(--ledger-border-subtle) bg-ledger-bg shadow-[0_24px_80px_rgba(0,0,0,0.35)] transition-all duration-200 ease-out sm:mt-0 sm:max-h-[min(80vh,760px)] ${
+          hasQuery ? 'max-w-190' : 'max-w-140'
         }`}
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <div className="flex items-center gap-3 border-b border-[color:var(--ledger-border-subtle)] px-4 py-4 sm:px-5">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--ledger-border-subtle)] bg-[rgba(247,242,234,0.04)] text-ledger-text-muted">
+        <div className="flex items-center gap-3 border-b border-(--ledger-border-subtle) px-4 py-4 sm:px-5">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] text-ledger-text-muted">
             <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" aria-hidden="true">
               <circle cx="11" cy="11" r="5.5" stroke="currentColor" strokeWidth="1.7" />
               <path d="M15.25 15.25L19 19" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
@@ -1331,7 +1327,7 @@ function SearchModal({
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--ledger-border-subtle)] bg-[rgba(247,242,234,0.04)] text-ledger-text-muted transition-colors hover:bg-[color:var(--ledger-header-pill)] hover:text-ledger-text"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] text-ledger-text-muted transition-colors hover:bg-(--ledger-header-pill) hover:text-ledger-text"
             aria-label="Close search"
           >
             <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none" aria-hidden="true">
@@ -1348,14 +1344,14 @@ function SearchModal({
                   <a
                     key={`${result.href}-${result.title}`}
                     href={result.href}
-                    className="block rounded-[18px] px-3 py-3 transition-colors hover:bg-[color:var(--ledger-header-pill)] sm:px-4"
+                    className="block rounded-[18px] px-3 py-3 transition-colors hover:bg-(--ledger-header-pill) sm:px-4"
                   >
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-[17px] font-medium tracking-[-0.03em] text-ledger-text">
                           {result.title}
                         </span>
-                        <span className="rounded-full border border-[color:var(--ledger-border-subtle)] px-2 py-0.5 text-[11px] text-ledger-text-muted">
+                        <span className="rounded-full border border-(--ledger-border-subtle) px-2 py-0.5 text-[11px] text-ledger-text-muted">
                           {result.label}
                         </span>
                     </div>
@@ -1402,7 +1398,7 @@ function DocsHomePage({
 }) {
   return (
     <div
-      className="min-h-screen bg-[var(--ledger-bg)] text-ledger-text"
+      className="min-h-screen bg-ledger-bg text-ledger-text"
       style={{ '--site-nav-menu-offset': '64px' } as CSSProperties}
     >
       <DocsHeader onSearchOpen={onSearchOpen} isMenuOpen={isMenuOpen} onMenuToggle={onMenuToggle} />
@@ -1413,7 +1409,7 @@ function DocsHomePage({
           <DocsSidebar pathname={pathname} />
         </div>
 
-        <main className="min-w-0 w-full justify-self-center px-5 py-10 sm:px-8 lg:max-w-[1320px] lg:px-12 lg:py-12">
+        <main className="min-w-0 w-full justify-self-center px-5 py-10 sm:px-8 lg:max-w-330 lg:px-12 lg:py-12">
           <div className="mx-auto w-full max-w-4xl">
             <div className="flex items-center justify-between gap-4">
               <div>
@@ -1471,16 +1467,6 @@ function DocsArticlePage({
   const [outlineMarker, setOutlineMarker] = useState({ top: 0, height: 0 })
   const breadcrumbGroup =
     sidebarGroups.find((group) => group.links.some((link) => link.href === `/help/${slug}`))?.title ?? 'Help'
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setActiveSectionId(sectionIds[0] ?? '')
-    })
-
-    return () => {
-      window.cancelAnimationFrame(frame)
-    }
-  }, [sectionIds])
 
   useEffect(() => {
     if (sectionIds.length === 0 || typeof window === 'undefined') {
@@ -1567,7 +1553,7 @@ function DocsArticlePage({
 
   return (
     <div
-      className="min-h-screen bg-[var(--ledger-bg)] text-ledger-text"
+      className="min-h-screen bg-ledger-bg text-ledger-text"
       style={{ '--site-nav-menu-offset': '64px' } as CSSProperties}
     >
       <DocsHeader
@@ -1583,7 +1569,7 @@ function DocsArticlePage({
           <DocsSidebar pathname={`/docs/${slug}`} />
         </div>
 
-        <main className="min-w-0 w-full justify-self-center px-5 py-10 sm:px-8 lg:max-w-[1320px] lg:px-12 lg:py-10">
+        <main className="min-w-0 w-full justify-self-center px-5 py-10 sm:px-8 lg:max-w-330 lg:px-12 lg:py-10">
           <div className="grid gap-10 xl:grid-cols-[minmax(0,1fr)_220px] xl:gap-12">
             <article className="min-w-0 mx-auto w-full max-w-3xl">
               <p className="text-[13px] font-medium text-ledger-text-muted">Help</p>
@@ -1596,7 +1582,7 @@ function DocsArticlePage({
 
               <div className="mt-10 space-y-12">
                 {article.sections.map((section) => (
-                  <section key={section.id} id={section.id} className="border-t border-[color:var(--ledger-border-subtle)] pt-8">
+                  <section key={section.id} id={section.id} className="border-t border-(--ledger-border-subtle) pt-8">
                     <h2 className="text-[26px] font-semibold tracking-[-0.04em] text-ledger-text sm:text-[30px]">
                       {section.title}
                     </h2>
@@ -1611,10 +1597,10 @@ function DocsArticlePage({
             </article>
 
             <aside className="hidden xl:block">
-              <div ref={outlineRailRef} className="sticky top-8 relative border-l border-[color:var(--ledger-border-subtle)] pl-4">
+              <div ref={outlineRailRef} className="sticky top-8 border-l border-(--ledger-border-subtle) pl-4">
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-0 top-0 w-px rounded-full bg-[color:var(--ledger-text)] transition-[transform,height,opacity] duration-200 ease-out"
+                  className="pointer-events-none absolute left-0 top-0 w-px rounded-full bg-ledger-text transition-[transform,height,opacity] duration-200 ease-out"
                   style={{
                     opacity: activeSectionId ? 1 : 0,
                     transform: `translateY(${outlineMarker.top}px)`,
@@ -1693,7 +1679,7 @@ function ContactSupportPage({
 
   return (
     <div
-      className="min-h-screen bg-[var(--ledger-bg)] text-ledger-text"
+      className="min-h-screen bg-ledger-bg text-ledger-text"
       style={{ '--site-nav-menu-offset': '64px' } as CSSProperties}
     >
       <DocsHeader
@@ -1709,7 +1695,7 @@ function ContactSupportPage({
           <DocsSidebar pathname="/help/contact-support" />
         </div>
 
-        <main className="min-w-0 w-full justify-self-center px-5 py-10 sm:px-8 lg:max-w-[1320px] lg:px-12 lg:py-10">
+        <main className="min-w-0 w-full justify-self-center px-5 py-10 sm:px-8 lg:max-w-330 lg:px-12 lg:py-10">
           <div className="mx-auto w-full max-w-2xl">
             <p className="text-[13px] font-medium text-ledger-text-muted">Help</p>
             <h1 className="mt-3 text-[44px] font-medium tracking-[-0.055em] text-ledger-text sm:text-[58px] lg:text-[64px]">
@@ -1719,14 +1705,14 @@ function ContactSupportPage({
               Send a short message and we will get you to the right place.
             </p>
 
-            <form onSubmit={onSubmit} className="mt-10 space-y-4 rounded-[24px] border border-[color:var(--ledger-border-subtle)] bg-[rgba(247,242,234,0.03)] p-5 sm:p-6">
+            <form onSubmit={onSubmit} className="mt-10 space-y-4 rounded-3xl border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.03)] p-5 sm:p-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2">
                   <span className="text-[13px] font-medium text-ledger-text-muted">Name</span>
                   <input
                     name="name"
                     type="text"
-                    className="h-11 rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-[color:var(--ledger-header-border)]"
+                    className="h-11 rounded-xl border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
                     placeholder="Your name"
                   />
                 </label>
@@ -1735,7 +1721,7 @@ function ContactSupportPage({
                   <input
                     name="email"
                     type="email"
-                    className="h-11 rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-[color:var(--ledger-header-border)]"
+                    className="h-11 rounded-xl border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
                     placeholder="you@example.com"
                   />
                 </label>
@@ -1746,7 +1732,7 @@ function ContactSupportPage({
                 <input
                   name="subject"
                   type="text"
-                  className="h-11 rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-[color:var(--ledger-header-border)]"
+                  className="h-11 rounded-xl border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
                   placeholder="What do you need help with?"
                 />
               </label>
@@ -1756,7 +1742,7 @@ function ContactSupportPage({
                 <textarea
                   name="message"
                   rows={7}
-                  className="rounded-xl border border-[color:var(--ledger-border-subtle)] bg-[color:var(--ledger-bg)] px-3 py-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-[color:var(--ledger-header-border)]"
+                  className="rounded-xl border border-(--ledger-border-subtle) bg-ledger-bg px-3 py-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
                   placeholder="Add a few details about the issue."
                 />
               </label>
@@ -1767,7 +1753,7 @@ function ContactSupportPage({
                 </p>
                 <button
                   type="submit"
-                  className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--ledger-accent)] px-5 text-[14px] font-medium text-white transition-colors hover:bg-[var(--ledger-accent-hover)]"
+                  className="inline-flex h-11 items-center justify-center rounded-full bg-ledger-accent px-5 text-[14px] font-medium text-white transition-colors hover:bg-ledger-accent-hover"
                 >
                   Send message
                 </button>
@@ -1780,9 +1766,7 @@ function ContactSupportPage({
   )
 }
 
-export function DocsPage() {
-  const pathname =
-    typeof window !== 'undefined' ? window.location.pathname.replace(/\/$/, '') || '/' : '/help'
+function DocsPageShell({ pathname }: { pathname: string }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -1824,17 +1808,6 @@ export function DocsPage() {
 
   const onSearchOpen = () => setIsSearchOpen(true)
   const onSearchClose = () => setIsSearchOpen(false)
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => {
-      setIsSearchOpen(false)
-      setSearchQuery('')
-    })
-
-    return () => {
-      window.cancelAnimationFrame(frame)
-    }
-  }, [pathname])
 
   if (pathname === '/help' || pathname === '/help/index' || pathname === '/docs' || pathname === '/docs/index') {
     return (
@@ -1908,4 +1881,11 @@ export function DocsPage() {
       />
     </>
   )
+}
+
+export function DocsPage() {
+  const pathname =
+    typeof window !== 'undefined' ? window.location.pathname.replace(/\/$/, '') || '/' : '/help'
+
+  return <DocsPageShell key={pathname} pathname={pathname} />
 }

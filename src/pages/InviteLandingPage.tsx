@@ -49,15 +49,15 @@ const LedgerMark = ({ className = '' }: { className?: string }) => (
 
 export function InviteLandingPage() {
   const token = useMemo(() => getInviteToken(), [])
-  const [state, setState] = useState<ViewState>('loading')
+  const [state, setState] = useState<ViewState>(() => (token ? 'loading' : 'error'))
   const [invite, setInvite] = useState<InvitePayload['invitation'] | null>(null)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | null>(() =>
+    token ? null : 'This invite is invalid or expired.',
+  )
   const [openRequested, setOpenRequested] = useState(false)
 
   useEffect(() => {
     if (!token) {
-      setState('error')
-      setErrorMessage('This invite is invalid or expired.')
       return
     }
 
@@ -172,7 +172,7 @@ export function InviteLandingPage() {
   return (
     <main className="min-h-screen bg-ledger-bg px-5 py-8 text-ledger-text sm:px-8">
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-xl items-center justify-center">
-        <section className="w-full rounded-[28px] border border-ledger-border bg-ledger-surface px-6 py-7 shadow-[var(--ledger-shadow-soft)] sm:px-8 sm:py-8">
+        <section className="w-full rounded-3xl border border-ledger-border bg-ledger-surface px-6 py-7 shadow-(--ledger-shadow-soft) sm:px-8 sm:py-8">
           {state === 'loading' && (
             <>
               <p className="text-[12px] font-medium text-ledger-text-muted">

@@ -3,6 +3,7 @@ import { isSiteLocked } from '../lib/siteLock'
 
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { HeroSection } from '../components/sections/HeroSection'
+import { HomepageWorkflowSection } from '../components/sections/HomepageWorkflowSection'
 import { FeatureShowcaseOne } from '../components/sections/FeatureShowcaseOne'
 import { FeatureShowcaseTwo } from '../components/sections/FeatureShowcaseTwo'
 import { FeatureShowcaseThree } from '../components/sections/FeatureShowcaseThree'
@@ -20,6 +21,7 @@ export function HomePage() {
       <SiteHeader currentPath="/" />
       <main>
         <HeroSection />
+        <HomepageWorkflowSection />
         <FeatureShowcaseOne />
         <FeatureShowcaseTwo />
         <FeatureShowcaseThree />

@@ -49,10 +49,10 @@ export function DesktopCompanionSection() {
             <div className="text-[12px] font-medium text-[var(--ledger-text-muted)]">
               Desktop-first
             </div>
-            <h2 className="mt-4 text-[32px] font-medium leading-[1.1] tracking-[-0.02em] text-[var(--ledger-text-primary)] sm:text-[42px]">
+            <h2 className="mt-4 text-[32px] font-medium leading-[1.1] tracking-[-0.02em] text-(--ledger-text-primary) sm:text-[42px]">
               Not another tab to manage.
             </h2>
-            <p className="mt-6 text-sm leading-relaxed text-[var(--ledger-text-secondary)]">
+            <p className="mt-6 text-sm leading-relaxed text-(--ledger-text-secondary)">
               Ledger lives on your desktop so your notes, tasks, projects, and daily check-ins stay close without pulling you into another crowded workspace.
             </p>
           </div>
@@ -62,15 +62,15 @@ export function DesktopCompanionSection() {
               <div
                 key={index}
                 data-reveal-desktop
-                className="feature-reveal reveal-right flex gap-4 rounded-lg border border-[color:var(--ledger-border-subtle)] bg-[var(--ledger-surface-card)] p-4"
+                className="feature-reveal reveal-right flex gap-4 rounded-lg border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4"
                 style={{ transitionDelay: `${180 + index * 90}ms` }}
               >
                 <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-ledger-accent" />
                 <div className="min-w-0">
-                  <h3 className="text-sm font-semibold text-[var(--ledger-text-primary)]">
+                  <h3 className="text-sm font-semibold text-(--ledger-text-primary)">
                     {benefit.title}
                   </h3>
-                  <p className="mt-1 text-xs text-[var(--ledger-text-secondary)]">
+                  <p className="mt-1 text-xs text-(--ledger-text-secondary)">
                     {benefit.description}
                   </p>
                 </div>

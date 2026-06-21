@@ -4,8 +4,8 @@ export function NotFoundPage() {
       <div className="flex min-h-screen flex-col">
         <div className="flex items-start px-4 py-4 sm:px-6">
           <a href="/" className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 leading-none">
-            <img src="/assets/logos/logo.svg" alt="Ledger" className="h-[28px] w-auto" />
-            <span className="relative top-[2px] text-[19px] font-medium tracking-[-0.02em] text-ledger-text">
+            <img src="/assets/logos/logo.svg" alt="Ledger" className="h-7 w-auto" />
+            <span className="relative top-0.5 text-[19px] font-medium tracking-[-0.02em] text-ledger-text">
               Ledger
             </span>
           </a>

@@ -125,7 +125,7 @@ export function HeroSection() {
     <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-12 pt-10 sm:px-7 sm:pb-16 sm:pt-18 lg:pb-20 lg:pt-24">
       <div
         aria-hidden="true"
-        className="hero-bottom-glow pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[26rem] sm:h-[34rem] lg:h-[40rem]"
+        className="hero-bottom-glow pointer-events-none absolute inset-x-0 bottom-0 z-0 h-104 sm:h-136 lg:h-160"
       />
       <div
         aria-hidden="true"
@@ -156,7 +156,7 @@ export function HeroSection() {
             </a>
             <a
               href="/about"
-              className="inline-flex h-12 min-w-39 items-center justify-center rounded-full border border-ledger-border bg-[var(--ledger-surface-card)] px-7 text-[16px] font-semibold leading-none text-ledger-text transition hover:bg-ledger-surface-muted"
+              className="inline-flex h-12 min-w-39 items-center justify-center rounded-full border border-ledger-border bg-(--ledger-surface-card) px-7 text-[16px] font-semibold leading-none text-ledger-text transition hover:bg-ledger-surface-muted"
             >
               See features
             </a>
@@ -165,16 +165,16 @@ export function HeroSection() {
 
         <div className="hero-enter hero-enter-video relative mx-auto mt-7 w-full max-w-6xl sm:mt-8">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-20 hidden md:block">
-            <div className="hero-ornament hero-ornament--left pointer-events-auto absolute left-[-4.75rem] top-[60%] w-[clamp(3.3rem,4.4vw,4.75rem)] rotate-[-16deg] opacity-80 lg:left-[-6.25rem] lg:top-[63%] lg:w-[clamp(3.8rem,5.1vw,5.6rem)]">
+            <div className="hero-ornament hero-ornament--left pointer-events-auto absolute -left-19 top-[60%] w-[clamp(3.3rem,4.4vw,4.75rem)] rotate-[-16deg] opacity-80 lg:-left-25 lg:top-[63%] lg:w-[clamp(3.8rem,5.1vw,5.6rem)]">
               <img src="/assets/images/hero-left.svg" alt="" className="block h-full w-full" />
             </div>
-            <div className="hero-ornament hero-ornament--right pointer-events-auto absolute right-[-4.75rem] top-[8%] w-[clamp(3.3rem,4.4vw,4.75rem)] rotate-[10deg] opacity-80 lg:right-[-6.25rem] lg:top-[5%] lg:w-[clamp(3.8rem,5.1vw,5.6rem)]">
+            <div className="hero-ornament hero-ornament--right pointer-events-auto absolute -right-19 top-[8%] w-[clamp(3.3rem,4.4vw,4.75rem)] rotate-10 opacity-80 lg:-right-25 lg:top-[5%] lg:w-[clamp(3.8rem,5.1vw,5.6rem)]">
               <img src="/assets/images/hero-right.svg" alt="" className="block h-full w-full" />
             </div>
-            <div className="hero-ornament hero-ornament--frame10 pointer-events-auto absolute left-[-6.15rem] top-[24%] w-[clamp(3rem,4.05vw,4.4rem)] rotate-[-10deg] opacity-78 lg:left-[-7.75rem] lg:top-[21%] lg:w-[clamp(3.55rem,4.75vw,5.2rem)]">
+            <div className="hero-ornament hero-ornament--frame10 pointer-events-auto absolute -left-25 top-[24%] w-[clamp(3rem,4.05vw,4.4rem)] -rotate-10 opacity-78 lg:-left-31 lg:top-[21%] lg:w-[clamp(3.55rem,4.75vw,5.2rem)]">
               <img src="/assets/images/Frame 10.svg" alt="" className="block h-full w-full" />
             </div>
-            <div className="hero-ornament hero-ornament--frame11 pointer-events-auto absolute right-[-6.15rem] top-[79%] w-[clamp(3.05rem,4.1vw,4.45rem)] rotate-[14deg] opacity-78 lg:right-[-7.75rem] lg:top-[81%] lg:w-[clamp(3.6rem,4.85vw,5.25rem)]">
+            <div className="hero-ornament hero-ornament--frame11 pointer-events-auto absolute -right-25 top-[79%] w-[clamp(3.05rem,4.1vw,4.45rem)] rotate-14 opacity-78 lg:-right-31 lg:top-[81%] lg:w-[clamp(3.6rem,4.85vw,5.25rem)]">
               <img src="/assets/images/Frame 11.svg" alt="" className="block h-full w-full" />
             </div>
           </div>
