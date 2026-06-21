@@ -5,7 +5,7 @@ const applyDesktopTheme = () => {
     return
   }
 
-  applyDesktopCssVars(document.documentElement, 'dark')
+  applyDesktopCssVars(document.documentElement, 'light')
 }
 
 applyDesktopTheme()

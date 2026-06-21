@@ -63,6 +63,50 @@ body {
   background: radial-gradient(circle at top, var(--ledger-background-muted) 0%, var(--ledger-background) 58%);
 }
 
+@media (prefers-color-scheme: light) {
+  .homepage-workflow .workflow-panel-enter {
+    background: linear-gradient(180deg, var(--ledger-surface) 0%, var(--ledger-surface-card) 100%);
+    box-shadow: 0 14px 42px rgba(23, 21, 18, 0.06);
+  }
+
+  .homepage-workflow .workflow-main-card {
+    background: var(--ledger-surface-card);
+    box-shadow: 0 18px 50px rgba(23, 21, 18, 0.08);
+  }
+
+  .homepage-workflow [class*="bg-[rgba(255,255,255,0.02)]"] {
+    background-color: var(--ledger-surface);
+  }
+
+  .homepage-workflow [class*="bg-[rgba(255,255,255,0.03)]"],
+  .homepage-workflow [class*="bg-[rgba(255,255,255,0.04)]"],
+  .homepage-workflow [class*="bg-[rgba(247,242,234,0.03)]"],
+  .homepage-workflow [class*="bg-[rgba(247,242,234,0.04)]"] {
+    background-color: var(--ledger-surface-card);
+  }
+
+  .homepage-workflow [class*="bg-[rgba(255,255,255,0.05)]"] {
+    background-color: var(--ledger-surface-hover);
+  }
+
+  .homepage-workflow [class*="bg-[rgba(255,255,255,0.06)]"],
+  .homepage-workflow [class*="bg-[rgba(255,255,255,0.07)]"] {
+    background-color: var(--ledger-surface-selected);
+  }
+
+  .homepage-workflow [class*="hover:bg-[rgba(255,255,255,0.04)]"]:hover {
+    background-color: var(--ledger-surface-hover);
+  }
+
+  .homepage-workflow [class*="hover:bg-[rgba(255,255,255,0.05)]"]:hover {
+    background-color: var(--ledger-surface-hover);
+  }
+
+  .homepage-workflow [class*="group-hover:bg-[rgba(255,255,255,0.06)]"] {
+    background-color: var(--ledger-surface-selected);
+  }
+}
+
 ::selection {
   background: var(--ledger-accent);
   color: white;

@@ -134,7 +134,8 @@ export function HeroSection() {
         <img
           src="/assets/logos/outline-hero.svg"
           alt=""
-          className="hero-outline-float h-auto w-[min(132vw,1620px)] max-w-none opacity-6"
+          className="hero-outline-float h-auto w-[min(128vw,1560px)] max-w-none opacity-[0.08]"
+          style={{ transformOrigin: 'center center', backfaceVisibility: 'hidden' }}
         />
       </div>
       <div className="relative z-10 mx-auto w-full max-w-7xl">

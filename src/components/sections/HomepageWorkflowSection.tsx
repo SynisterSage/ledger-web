@@ -220,21 +220,23 @@ function WorkflowFeatureButton({
       type="button"
       onClick={() => onSelect(feature.id)}
       aria-pressed={active}
-      className={`group flex w-full items-start gap-3 rounded-[18px] border px-4 py-3 text-left transition-[background-color,border-color,box-shadow,transform] duration-200 ease-out ${
+      className={`group flex w-full items-start gap-3 rounded-[18px] border px-3 py-2.5 text-left transition-[background-color,border-color] duration-200 ease-out sm:px-4 sm:py-3 ${
         active
-          ? 'border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.07)] shadow-[0_6px_18px_rgba(0,0,0,0.08)]'
-          : 'border-transparent bg-transparent hover:border-(--ledger-border-subtle) hover:bg-[rgba(255,255,255,0.04)] hover:shadow-[0_6px_18px_rgba(0,0,0,0.06)]'
+          ? 'border-(--ledger-border-subtle) bg-(--ledger-surface-card)'
+          : 'border-transparent bg-transparent hover:border-(--ledger-border-subtle) hover:bg-(--ledger-surface-hover)'
       }`}
     >
       <span
         aria-hidden="true"
         className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full transition-colors duration-200 ${
-          active ? 'bg-ledger-accent' : 'bg-(--ledger-border-subtle)'
+          active
+            ? 'bg-[var(--ledger-accent)]'
+            : 'bg-(--ledger-text-muted) group-hover:bg-ledger-text'
         }`}
       />
       <div className="min-w-0 flex-1">
-        <div className="text-[15px] font-semibold tracking-[-0.03em] text-ledger-text">{feature.label}</div>
-        <p className="mt-0.5 text-[12px] leading-5 text-ledger-text-muted">{feature.subtitle}</p>
+        <div className="text-[14px] font-semibold tracking-[-0.03em] text-ledger-text sm:text-[15px]">{feature.label}</div>
+        <p className="mt-0.5 text-[11px] leading-5 text-ledger-text-muted sm:text-[12px]">{feature.subtitle}</p>
       </div>
     </button>
   )
@@ -242,12 +244,11 @@ function WorkflowFeatureButton({
 
 function WorkflowPreview() {
   return (
-    <div className="rounded-3xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4">
-      <p className="text-[12px] font-medium tracking-[0.08em] text-ledger-text-muted/90">Ledger workflow</p>
-      <h3 className="mt-1.5 text-[20px] font-semibold tracking-[-0.04em] text-ledger-text sm:text-[22px]">
+    <div className="rounded-3xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-3 sm:p-4">
+      <h3 className="mt-1.5 text-[18px] font-semibold tracking-[-0.04em] text-ledger-text sm:text-[20px]">
         Your workspace, always within reach.
       </h3>
-      <p className="mt-1.5 max-w-xl text-[13px] leading-6 text-ledger-text-muted">
+      <p className="mt-1.5 max-w-xl text-[12px] leading-6 text-ledger-text-muted sm:text-[13px]">
         Capture what matters, keep it tied to the right context, and come back when it needs attention.
       </p>
       <div className="mt-3">
@@ -274,13 +275,13 @@ function PanelShell({
   children: ReactNode
 }) {
   return (
-    <div className="workflow-panel-enter rounded-[30px] border border-(--ledger-border-subtle) bg-[linear-gradient(180deg,rgba(18,17,15,0.98)_0%,rgba(23,21,18,0.96)_100%)] p-4 shadow-[0_14px_42px_rgba(0,0,0,0.28)] sm:p-5">
+    <div className="workflow-panel-enter rounded-[30px] border border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-surface)_0%,var(--ledger-surface-card)_100%)] p-4 shadow-(--ledger-shadow-soft) sm:p-5">
       <p className="text-[12px] font-medium tracking-[0.08em] text-ledger-text-muted/90">{eyebrow}</p>
-      <h3 className="mt-1.5 text-[28px] font-semibold tracking-[-0.04em] text-ledger-text sm:text-[34px]">
+      <h3 className="mt-1.5 text-[24px] font-semibold tracking-[-0.04em] text-ledger-text sm:text-[34px]">
         {title}
       </h3>
-      <p className="mt-1.5 max-w-2xl text-[15px] leading-7 text-ledger-text-muted sm:text-[16px]">{description}</p>
-      <div className="mt-5">{children}</div>
+      <p className="mt-1.5 max-w-2xl text-[14px] leading-7 text-ledger-text-muted sm:text-[16px]">{description}</p>
+      <div className="mt-4 sm:mt-5">{children}</div>
     </div>
   )
 }
@@ -293,13 +294,13 @@ function CapturePanel() {
       description="Save a task, note, event, reminder, link, or project action from desktop, mobile, browser, or Siri."
     >
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(220px,0.92fr)]">
-        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.04)] p-4 transition-colors duration-200 ease-out hover:border-(--ledger-header-border) hover:bg-[rgba(255,255,255,0.05)]">
+        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-[13px] font-medium text-ledger-text">Ledger workspace</p>
               <p className="mt-1 text-[12px] text-ledger-text-muted">Living beside Figma</p>
             </div>
-            <span className="rounded-full bg-(--ledger-header-pill-active) px-2.5 py-1 text-[11px] font-medium text-ledger-text">
+            <span className="rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-2.5 py-1 text-[11px] font-medium text-ledger-text-muted">
               Summer 26
             </span>
           </div>
@@ -312,9 +313,9 @@ function CapturePanel() {
               { label: 'Reminder', icon: Bell },
               { label: 'Project action', icon: Workflow },
             ].map((item) => (
-              <div key={item.label} className="group flex items-center justify-between rounded-2xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] px-3 py-2.5 transition-colors duration-200 ease-out hover:border-(--ledger-header-border) hover:bg-[rgba(255,255,255,0.05)]">
+              <div key={item.label} className="group flex items-center justify-between rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-muted) px-3 py-2.5 transition-colors duration-200 ease-out hover:border-(--ledger-header-border) hover:bg-(--ledger-surface-hover)">
                 <div className="flex items-center gap-2">
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.04)] text-ledger-text-muted transition-colors duration-200 group-hover:border-(--ledger-header-border) group-hover:bg-[rgba(255,255,255,0.06)]">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text-muted transition-colors duration-200 group-hover:border-(--ledger-header-border) group-hover:bg-(--ledger-surface-muted)">
                     <item.icon className="h-3.5 w-3.5" strokeWidth={1.8} />
                   </span>
                   <span className="text-[14px] font-medium text-ledger-text">{item.label}</span>
@@ -325,7 +326,7 @@ function CapturePanel() {
           </div>
         </div>
 
-        <div className="flex min-h-full flex-col rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4 transition-colors duration-200 ease-out hover:border-(--ledger-header-border) hover:bg-[rgba(255,255,255,0.04)]">
+        <div className="flex min-h-full flex-col rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-[13px] font-medium text-ledger-text">Quick capture</p>
@@ -336,7 +337,7 @@ function CapturePanel() {
 
           <div className="mt-4 grid gap-2">
             {['Desktop', 'Mobile', 'Browser', 'Siri'].map((item, index) => (
-              <div key={item} className="group flex items-center justify-between rounded-2xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] px-3 py-2.5 transition-colors duration-200 ease-out hover:border-(--ledger-header-border) hover:bg-[rgba(255,255,255,0.05)]">
+              <div key={item} className="group flex items-center justify-between rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-muted) px-3 py-2.5 transition-colors duration-200 ease-out hover:border-(--ledger-header-border) hover:bg-(--ledger-surface-hover)">
                 <span className="text-[13px] font-medium text-ledger-text">{item}</span>
                 <span className="text-[12px] text-ledger-text-muted">
                   {index === 0 ? 'sidebar' : index === 1 ? 'sheet' : index === 2 ? 'extension' : 'shortcut'}
@@ -345,9 +346,9 @@ function CapturePanel() {
             ))}
           </div>
 
-          <div className="mt-4 flex-1 rounded-[22px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.02)] p-4 transition-colors duration-200 ease-out hover:bg-[rgba(255,255,255,0.035)]">
+          <div className="mt-4 flex-1 rounded-[22px] border border-(--ledger-border-subtle) bg-(--ledger-surface-muted) p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
             <p className="text-[12px] font-medium text-ledger-text-muted/80">Saving now</p>
-            <div className="mt-2 rounded-[18px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] px-3 py-3">
+            <div className="mt-2 rounded-[18px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-3 py-3">
               <p className="text-[14px] font-medium text-ledger-text">Submit hours</p>
               <p className="mt-0.5 text-[12px] text-ledger-text-muted">Captured from browser extension</p>
             </div>
@@ -370,7 +371,7 @@ function OrganizePanel() {
       description="Keep school, internships, client work, creative projects, and personal tasks separated without losing the full picture."
     >
       <div className="grid gap-4 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4">
+        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
           <div className="flex items-center justify-between">
             <p className="text-[13px] font-medium text-ledger-text">All workspaces</p>
             <Layers3 className="h-4.5 w-4.5 text-ledger-text-muted" strokeWidth={1.8} />
@@ -387,21 +388,21 @@ function OrganizePanel() {
                   aria-pressed={active}
                   className={`flex w-full items-center justify-between rounded-2xl border px-3 py-3 text-left transition-colors duration-200 ${
                     active
-                      ? 'border-(--ledger-header-border) bg-[rgba(255,255,255,0.06)]'
-                      : 'border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] hover:border-(--ledger-header-border) hover:bg-[rgba(255,255,255,0.04)]'
+                      ? 'border-(--ledger-border-subtle) bg-(--ledger-surface-card)'
+                      : 'border-(--ledger-border-subtle) bg-(--ledger-surface-muted) hover:border-(--ledger-header-border) hover:bg-(--ledger-surface-hover)'
                   }`}
                 >
                   <div>
                     <div className="flex items-center gap-2">
                       <span
                         aria-hidden="true"
-                        className={`h-2 w-2 rounded-full ${active ? 'bg-ledger-accent' : 'bg-(--ledger-border-subtle)'}`}
+                        className={`h-2 w-2 rounded-full ${active ? 'bg-[var(--ledger-accent)]' : 'bg-(--ledger-border-subtle)'}`}
                       />
                       <p className="text-[14px] font-medium text-ledger-text">{workspace.name}</p>
                     </div>
                     <p className="mt-1 text-[12px] text-ledger-text-muted">{workspace.meta}</p>
                   </div>
-                  <span className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${active ? 'bg-(--ledger-header-pill-active) text-ledger-text' : 'bg-(--ledger-header-pill) text-ledger-text-muted'}`}>
+                  <span className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${active ? 'bg-(--ledger-surface-muted) text-ledger-text' : 'bg-(--ledger-surface-muted) text-ledger-text-muted'}`}>
                     {active ? 'Selected' : 'Open'}
                   </span>
                 </button>
@@ -410,15 +411,15 @@ function OrganizePanel() {
           </div>
         </div>
 
-        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4">
+        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
           <p className="text-[13px] font-medium text-ledger-text">Inside {selectedWorkspace.name}</p>
-          <div className="mt-4 rounded-[22px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-3">
+          <div className="mt-4 rounded-[22px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-3">
             <p className="text-[12px] text-ledger-text-muted">Workspace context</p>
             <div className="mt-3 grid gap-3">
               {selectedWorkspace.sections.map((section, index) => (
                 <div key={section.label} className={`${index > 0 ? 'border-t border-(--ledger-border-subtle) pt-3' : ''}`}>
                   <p className="text-[12px] font-medium text-ledger-text-muted">{section.label}</p>
-                  <div className="mt-1 rounded-[18px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.025)] px-3 py-2.5">
+                  <div className="mt-1 rounded-[18px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-3 py-2.5">
                     <p className="text-[14px] font-medium text-ledger-text">{section.title}</p>
                     <p className="mt-0.5 text-[12px] text-ledger-text-muted">{section.meta}</p>
                   </div>
@@ -440,14 +441,14 @@ function ActPanel() {
       description="Upcoming events, due reminders, action items, focus, notifications, and captures come together in one calm daily view."
     >
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_240px]">
-        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4">
+        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
           <div className="grid gap-3">
-            <div className="rounded-2xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-3">
+            <div className="rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-muted) p-3">
               <p className="text-[12px] text-ledger-text-muted">Today</p>
               <div className="mt-2 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-[15px] font-medium text-ledger-text">Submit hours</span>
-                  <span className="rounded-full bg-(--ledger-header-pill-active) px-2.5 py-1 text-[11px] font-medium text-ledger-text">
+                  <span className="rounded-full bg-(--ledger-surface-muted) px-2.5 py-1 text-[11px] font-medium text-ledger-text-muted">
                     Focus
                   </span>
                 </div>
@@ -457,12 +458,12 @@ function ActPanel() {
                 </div>
               </div>
             </div>
-            <div className="rounded-2xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-3">
+            <div className="rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-muted) p-3">
               <p className="text-[12px] text-ledger-text-muted">Upcoming</p>
               <p className="mt-1 text-[15px] font-medium text-ledger-text">Remote internship</p>
               <p className="mt-1 text-[13px] text-ledger-text-muted">11:00 AM</p>
             </div>
-            <div className="rounded-2xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-3">
+            <div className="rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-muted) p-3">
               <p className="text-[12px] text-ledger-text-muted">Captures</p>
               <p className="mt-1 text-[15px] font-medium text-ledger-text">2 waiting</p>
             </div>
@@ -470,9 +471,9 @@ function ActPanel() {
         </div>
 
         <div className="grid gap-3">
-          <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4">
+          <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
             <p className="text-[12px] text-ledger-text-muted">Next up</p>
-            <div className="mt-3 flex items-center justify-between rounded-2xl border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] px-4 py-3">
+            <div className="mt-3 flex items-center justify-between rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-muted) px-4 py-3">
               <div>
                 <p className="text-[14px] font-medium text-ledger-text">Notifications</p>
                 <p className="mt-1 text-[12px] text-ledger-text-muted">6 waiting</p>
@@ -480,7 +481,7 @@ function ActPanel() {
               <Bell className="h-4.5 w-4.5 text-ledger-text-muted" strokeWidth={1.8} />
             </div>
           </div>
-          <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.04)] p-4">
+          <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
             <p className="text-[12px] text-ledger-text-muted">Focus</p>
             <p className="mt-2 text-[14px] font-medium text-ledger-text">Keep the important work in view.</p>
             <p className="mt-1 text-[13px] leading-6 text-ledger-text-muted">
@@ -504,7 +505,7 @@ function ReviewPanel() {
       description="Ledger brings captures, notifications, follow-ups, reminders, and unfinished work back into view so you can decide what happens next."
     >
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.98fr)]">
-        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4">
+        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
           <div className="flex items-center justify-between">
             <p className="text-[13px] font-medium text-ledger-text">Review queue</p>
             <NotebookPen className="h-4.5 w-4.5 text-ledger-text-muted" strokeWidth={1.8} />
@@ -521,13 +522,13 @@ function ReviewPanel() {
                   aria-pressed={active}
                   className={`flex w-full items-start gap-3 rounded-2xl border px-3 py-3 text-left transition-colors duration-200 ${
                     active
-                      ? 'border-(--ledger-header-border) bg-[rgba(255,255,255,0.06)]'
-                      : 'border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] hover:border-(--ledger-header-border) hover:bg-[rgba(255,255,255,0.04)]'
+                      ? 'border-(--ledger-border-subtle) bg-(--ledger-surface-card)'
+                      : 'border-(--ledger-border-subtle) bg-(--ledger-surface-muted) hover:border-(--ledger-header-border) hover:bg-(--ledger-surface-hover)'
                   }`}
                 >
                   <span
                     aria-hidden="true"
-                    className={`mt-1 h-2 w-2 shrink-0 rounded-full ${active ? 'bg-ledger-accent' : 'bg-(--ledger-border-subtle)'}`}
+                    className={`mt-1 h-2 w-2 shrink-0 rounded-full ${active ? 'bg-[var(--ledger-accent)]' : 'bg-(--ledger-border-subtle)'}`}
                   />
                   <div className="min-w-0 flex-1">
                     <p className="text-[14px] font-medium text-ledger-text">{item.label}</p>
@@ -539,9 +540,9 @@ function ReviewPanel() {
           </div>
         </div>
 
-        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4">
+        <div className="rounded-[26px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
           <p className="text-[13px] font-medium text-ledger-text">Selected item</p>
-          <div key={selectedItem.id} className="workflow-panel-enter mt-4 rounded-3xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4">
+          <div key={selectedItem.id} className="workflow-panel-enter mt-4 rounded-3xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-4">
             <p className="text-[12px] text-ledger-text-muted">Ledger · Review</p>
             <h3 className="mt-1.5 text-[24px] font-semibold tracking-[-0.04em] text-ledger-text">
               {selectedItem.title}
@@ -554,13 +555,13 @@ function ReviewPanel() {
                   key={action}
                   className={`flex items-center justify-between rounded-[18px] border px-3 py-2.5 ${
                     index === 0
-                      ? 'border-(--ledger-header-border) bg-[rgba(255,255,255,0.05)]'
-                      : 'border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.025)]'
+                      ? 'border-(--ledger-border-subtle) bg-(--ledger-surface-card)'
+                      : 'border-(--ledger-border-subtle) bg-(--ledger-surface-muted)'
                   }`}
                 >
                   <span className="text-[13px] font-medium text-ledger-text">{action}</span>
                   {index === 0 ? (
-                    <span className="h-2 w-2 rounded-full bg-ledger-accent" aria-hidden="true" />
+                    <span className="h-2 w-2 rounded-full bg-[var(--ledger-accent)]" aria-hidden="true" />
                   ) : null}
                 </div>
               ))}
@@ -611,7 +612,7 @@ export function HomepageWorkflowSection() {
     <section
       ref={sectionRef}
       aria-label="How Ledger works"
-      className="relative z-20 -mt-16 overflow-x-clip border-y border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,var(--ledger-bg)_100%)] px-6 py-20 sm:-mt-20 sm:px-8 sm:py-24 lg:-mt-26"
+      className="homepage-workflow relative z-20 overflow-x-clip border-y border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,var(--ledger-bg)_100%)] px-6 py-20 sm:px-8 sm:py-24 xl:-mt-26"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-workflow className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
@@ -636,13 +637,13 @@ export function HomepageWorkflowSection() {
             })
           }}
           onMouseLeave={() => setHoverPoint({ x: 50, y: 50 })}
-          className="workflow-main-card feature-reveal reveal-up mt-10 rounded-[34px] border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4 shadow-[0_18px_50px_rgba(0,0,0,0.18)] transition-[border-color,box-shadow,transform] duration-200 ease-out hover:border-(--ledger-header-border) hover:shadow-[0_20px_56px_rgba(0,0,0,0.2)] sm:p-5 lg:mt-12 lg:p-6"
+          className="workflow-main-card feature-reveal reveal-up mt-10 rounded-[34px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-3 shadow-(--ledger-shadow-soft) transition-[border-color,box-shadow] duration-200 ease-out hover:border-(--ledger-header-border) hover:shadow-(--ledger-shadow-soft) sm:mt-12 sm:p-4 xl:p-6"
           style={workflowCardStyle}
         >
-          <div className="grid gap-5 lg:grid-cols-[minmax(260px,0.84fr)_minmax(0,1.16fr)]">
-            <div className="flex h-full flex-col gap-4">
+          <div className="grid gap-4 xl:grid-cols-[minmax(260px,0.84fr)_minmax(0,1.16fr)] xl:gap-5">
+            <div className="flex h-full flex-col gap-3 sm:gap-4">
               <WorkflowPreview />
-              <div className="mt-auto grid gap-2">
+              <div className="mt-auto grid gap-1.5 sm:gap-2">
                 {workflowFeatures.map((feature) => (
                   <WorkflowFeatureButton
                     key={feature.id}
@@ -678,7 +679,7 @@ export function HomepageWorkflowSection() {
 
         <div
           data-reveal-workflow
-          className="feature-reveal reveal-up mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-5"
+          className="feature-reveal reveal-up mt-5 grid gap-3 sm:gap-3.5 xl:grid-cols-5"
           style={{ transitionDelay: '260ms' }}
         >
           {ecosystemCards.map((card, index) => {
@@ -688,14 +689,29 @@ export function HomepageWorkflowSection() {
               <a
                 key={card.title}
                 href={card.href}
-                className="group rounded-3xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.03)] p-4 transition-[transform,border-color,background-color] duration-200 ease-out hover:-translate-y-0.5 hover:border-(--ledger-header-border) hover:bg-[rgba(255,255,255,0.05)]"
+                className="group rounded-[22px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-3 transition-colors duration-200 ease-out hover:border-(--ledger-header-border) hover:bg-(--ledger-surface-hover) sm:p-3.5 xl:rounded-3xl xl:p-4"
                 style={{ transitionDelay: `${300 + index * 40}ms` }}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-[rgba(255,255,255,0.04)] text-ledger-text">
-                  <Icon className="h-4.5 w-4.5" strokeWidth={1.8} />
+                <div className="flex items-start gap-3 xl:hidden">
+                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text sm:h-10 sm:w-10">
+                    <Icon className="h-4 w-4 sm:h-4.5 sm:w-4.5" strokeWidth={1.8} />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="text-[15px] font-semibold tracking-[-0.03em] text-ledger-text sm:text-[16px] xl:text-[17px]">
+                      {card.title}
+                    </h3>
+                    <p className="mt-1 text-[12px] leading-5 text-ledger-text-muted sm:text-[13px] sm:leading-6 xl:text-[14px]">
+                      {card.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mt-4 text-[17px] font-semibold tracking-[-0.03em] text-ledger-text">{card.title}</h3>
-                <p className="mt-2 text-[14px] leading-6 text-ledger-text-muted">{card.description}</p>
+                <div className="hidden xl:block">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text">
+                    <Icon className="h-4.5 w-4.5" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="mt-4 text-[17px] font-semibold tracking-[-0.03em] text-ledger-text">{card.title}</h3>
+                  <p className="mt-2 text-[14px] leading-6 text-ledger-text-muted">{card.description}</p>
+                </div>
               </a>
             )
           })}

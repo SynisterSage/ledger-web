@@ -4,9 +4,7 @@ import { isSiteLocked } from '../lib/siteLock'
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { HeroSection } from '../components/sections/HeroSection'
 import { HomepageWorkflowSection } from '../components/sections/HomepageWorkflowSection'
-import { FeatureShowcaseOne } from '../components/sections/FeatureShowcaseOne'
-import { FeatureShowcaseTwo } from '../components/sections/FeatureShowcaseTwo'
-import { FeatureShowcaseThree } from '../components/sections/FeatureShowcaseThree'
+import { HomepageAssistantGridSection } from '../components/sections/HomepageAssistantGridSection'
 import { DesktopCompanionSection } from '../components/sections/DesktopCompanionSection'
 import { FinalCTASection } from '../components/sections/FinalCTASection'
 import { SiteFooter } from '../components/sections/SiteFooter'
@@ -22,9 +20,7 @@ export function HomePage() {
       <main>
         <HeroSection />
         <HomepageWorkflowSection />
-        <FeatureShowcaseOne />
-        <FeatureShowcaseTwo />
-        <FeatureShowcaseThree />
+        <HomepageAssistantGridSection />
         <DesktopCompanionSection />
         <FinalCTASection />
         <SiteFooter />
