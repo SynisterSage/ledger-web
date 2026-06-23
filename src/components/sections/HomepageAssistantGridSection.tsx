@@ -1,3 +1,29 @@
+function SharedWorkspaceMockup() {
+  return (
+    <div className="relative isolate h-full min-h-[340px] overflow-hidden rounded-[28px] border border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-4 sm:min-h-[420px] sm:p-5 lg:min-h-[480px]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(255,255,255,0.88),transparent_36%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.58),transparent_30%)] opacity-80" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(0,0,0,0.02),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.0)_36%,rgba(255,255,255,0.16)_100%)]" />
+
+      <div className="relative h-full">
+        <img
+          src="/assets/images/stack2.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute left-[8%] top-[37%] z-10 w-[46%] max-w-[430px] rotate-0 drop-shadow-[0_26px_44px_rgba(0,0,0,0.16)] sm:left-[8%] sm:top-[34%] sm:w-[40%] lg:left-[9%] lg:top-[33%] lg:w-[38%]"
+          draggable={false}
+        />
+        <img
+          src="/assets/images/stack3.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute right-[-4%] top-[4%] z-20 w-[78%] max-w-[730px] rotate-[0.15deg] drop-shadow-[0_30px_56px_rgba(0,0,0,0.17)] sm:right-[-3%] sm:w-[70%] lg:right-[-5%] lg:w-[66%]"
+          draggable={false}
+        />
+      </div>
+    </div>
+  )
+}
+
 export function HomepageAssistantGridSection() {
   return (
     <section className="bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,var(--ledger-bg)_100%)] px-6 py-16 text-ledger-text sm:px-8 sm:py-20">
@@ -20,6 +46,10 @@ export function HomepageAssistantGridSection() {
                   <h3 className="mt-3 text-[clamp(1rem,1.25vw,1.25rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-ledger-text">
                     Work together without mixing every context.
                   </h3>
+                  <p className="mt-3 text-[14px] leading-6 text-ledger-text-muted sm:text-[15px]">
+                    Create private spaces for yourself or shared spaces for projects, classes, clients, and teams.
+                    Notes, tasks, events, reminders, and captures stay tied to the workspace they belong to.
+                  </p>
                 </div>
 
                 <div className="mt-8 inline-flex h-11 w-11 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)]">
@@ -27,20 +57,8 @@ export function HomepageAssistantGridSection() {
                 </div>
               </div>
 
-              <div className="border-t border-(--ledger-border-subtle) bg-[linear-gradient(135deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)] p-4 lg:border-l lg:border-t-0 lg:p-5">
-                <div className="flex h-full min-h-[240px] items-center justify-center rounded-[26px] border border-white/10 bg-white/[0.04] p-4">
-                  <div className="w-full max-w-[380px] rounded-[24px] border border-white/10 bg-[#f7f2ea] p-4 shadow-[0_10px_28px_rgba(0,0,0,0.18)]">
-                    <div className="space-y-2.5">
-                      <div className="h-4 w-24 rounded-full bg-black/10" />
-                      <div className="h-3 w-4/5 rounded-full bg-black/8" />
-                      <div className="h-3 w-1/2 rounded-full bg-black/8" />
-                      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                        <div className="h-20 rounded-2xl border border-dashed border-black/10 bg-black/[0.03]" />
-                        <div className="h-20 rounded-2xl border border-dashed border-black/10 bg-black/[0.03]" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="border-t border-(--ledger-border-subtle) p-4 lg:border-l lg:border-t-0 lg:p-5">
+                <SharedWorkspaceMockup />
               </div>
             </div>
           </article>
