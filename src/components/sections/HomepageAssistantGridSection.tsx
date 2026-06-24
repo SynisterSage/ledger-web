@@ -11,7 +11,7 @@ function SharedWorkspaceMockup() {
           src="/assets/bentobox1/topbentopmobtab_4x.webp"
           alt=""
           aria-hidden="true"
-          className="h-full w-full rounded-[inherit] object-cover object-center"
+          className="h-full w-full rounded-[inherit] object-cover object-center max-[420px]:object-[8%_center]"
         />
       </picture>
     </div>
