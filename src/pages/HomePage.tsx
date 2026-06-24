@@ -5,7 +5,7 @@ import { SiteHeader } from '../components/layout/SiteHeader'
 import { HeroSection } from '../components/sections/HeroSection'
 import { HomepageWorkflowSection } from '../components/sections/HomepageWorkflowSection'
 import { HomepageAssistantGridSection } from '../components/sections/HomepageAssistantGridSection'
-import { DesktopCompanionSection } from '../components/sections/DesktopCompanionSection'
+import { HomepageCommandGridSection } from '../components/sections/HomepageCommandGridSection'
 import { FinalCTASection } from '../components/sections/FinalCTASection'
 import { SiteFooter } from '../components/sections/SiteFooter'
 
@@ -21,7 +21,7 @@ export function HomePage() {
         <HeroSection />
         <HomepageWorkflowSection />
         <HomepageAssistantGridSection />
-        <DesktopCompanionSection />
+        <HomepageCommandGridSection />
         <FinalCTASection />
         <SiteFooter />
       </main>

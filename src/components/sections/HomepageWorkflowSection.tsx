@@ -150,12 +150,12 @@ function WorkflowFeatureButton({
         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-ledger-text transition-colors duration-200 ${
           active
             ? 'border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] text-ledger-text'
-            : 'border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] text-ledger-text-muted group-hover:border-(--ledger-header-border) group-hover:text-ledger-accent'
+            : 'border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] text-ledger-text-muted'
         }`}
       >
         <Icon className="h-3.5 w-3.5" strokeWidth={1.8} />
       </span>
-      <div className={`min-w-0 flex-1 ${active ? 'pt-0.5' : 'self-center translate-y-[1px]'}`}>
+      <div className={`min-w-0 flex-1 ${active ? 'pt-0.5' : 'self-center'}`}>
         <div
           className={`text-[15px] tracking-[-0.03em] sm:text-[16px] ${
             active ? 'font-semibold text-ledger-text' : 'font-medium text-ledger-text-muted group-hover:text-ledger-text'
@@ -194,8 +194,39 @@ function WorkflowStageShell({ feature }: { feature: WorkflowFeature }) {
   )
 }
 
+function WorkflowStageFrame({
+  feature,
+  rounded = false,
+  mobileFullBleed = false,
+}: {
+  feature: WorkflowFeature
+  rounded?: boolean
+  mobileFullBleed?: boolean
+}) {
+  const toneClass =
+    feature.id === 'capture'
+      ? 'bg-[rgba(255,122,89,0.08)]'
+      : feature.id === 'organize'
+        ? 'bg-[rgba(184,174,160,0.16)]'
+        : feature.id === 'act'
+          ? 'bg-[rgba(199,186,168,0.16)]'
+          : 'bg-[rgba(188,180,169,0.18)]'
+
+  return (
+    <div key={feature.id} className="workflow-panel-enter h-full w-full">
+      <div
+        className={`h-full min-h-[460px] w-full sm:min-h-[500px] ${
+          mobileFullBleed ? 'rounded-none' : rounded ? 'rounded-[28px]' : 'rounded-r-[28px] rounded-l-none'
+        } ${toneClass}`}
+      />
+    </div>
+  )
+}
+
 export function HomepageWorkflowSection() {
   const sectionRef = useRef<HTMLElement | null>(null)
+  const carouselRef = useRef<HTMLDivElement | null>(null)
+  const slideRefs = useRef<Array<HTMLDivElement | null>>([])
   const [activeFeature, setActiveFeature] = useState<WorkflowFeatureId>('capture')
   const [hoveredFeature, setHoveredFeature] = useState<WorkflowFeatureId | null>(null)
 
@@ -218,16 +249,52 @@ export function HomepageWorkflowSection() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const carouselEl = carouselRef.current
+    if (!carouselEl) return
+
+    const slides = Array.from(carouselEl.querySelectorAll<HTMLElement>('[data-workflow-slide]'))
+    if (!slides.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries.find((entry) => entry.isIntersecting)
+        if (!visibleEntry) return
+        const id = visibleEntry.target.getAttribute('data-workflow-slide') as WorkflowFeatureId | null
+        if (id) setActiveFeature(id)
+      },
+      {
+        root: carouselEl,
+        threshold: 0.65,
+      },
+    )
+
+    slides.forEach((slide) => observer.observe(slide))
+    return () => observer.disconnect()
+  }, [])
+
   const currentFeature = useMemo(
     () => workflowFeatures.find((feature) => feature.id === activeFeature) ?? workflowFeatures[0],
     [activeFeature],
   )
 
+  const activeFeatureIndex = workflowFeatures.findIndex((feature) => feature.id === activeFeature)
+  const scrollToFeature = (index: number) => {
+    const slide = slideRefs.current[index]
+    if (!slide) return
+    slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+  }
+  const moveCarousel = (direction: -1 | 1) => {
+    const nextIndex = Math.max(0, Math.min(workflowFeatures.length - 1, activeFeatureIndex + direction))
+    setActiveFeature(workflowFeatures[nextIndex]?.id ?? workflowFeatures[0].id)
+    scrollToFeature(nextIndex)
+  }
+
   return (
     <section
       ref={sectionRef}
       aria-label="How Ledger works"
-      className="homepage-workflow relative z-20 overflow-x-clip border-y border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,var(--ledger-bg)_100%)] px-6 py-20 sm:px-8 sm:py-24 xl:-mt-26"
+      className="homepage-workflow relative z-20 overflow-x-clip border-t border-(--ledger-border-subtle) bg-[var(--ledger-surface)] px-6 py-20 sm:px-8 sm:py-24 xl:-mt-26"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-workflow className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
@@ -238,14 +305,14 @@ export function HomepageWorkflowSection() {
 
         <div
           data-reveal-workflow
-          className="feature-reveal reveal-up mt-10 overflow-hidden rounded-[36px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) shadow-(--ledger-shadow-soft)"
+          className="feature-reveal reveal-up mt-10 overflow-hidden rounded-[24px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[28px] xl:rounded-[36px]"
           style={{ transitionDelay: '150ms' }}
         >
-          <div className="grid items-stretch gap-0 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
+          <div className="hidden items-stretch gap-0 lg:grid lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
             <div className="flex h-full flex-col justify-start border-b border-(--ledger-border-subtle) p-6 sm:p-7 lg:border-b-0 lg:border-r">
-              <div className="max-w-[28ch]">
-                <p className="text-[12px] font-medium tracking-[-0.01em] text-ledger-text-muted">Ledger workflow</p>
-                <h3 className="mt-3 text-[clamp(1rem,1.25vw,1.25rem)] font-semibold leading-[1.06] tracking-[-0.035em] text-ledger-text">
+              <div className="max-w-[34ch]">
+                <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Ledger workflow</p>
+                <h3 className="mt-3 text-[clamp(1.15rem,1.45vw,1.5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
                   Your workspace, always within reach.
                 </h3>
               </div>
@@ -293,6 +360,86 @@ export function HomepageWorkflowSection() {
               <WorkflowStageShell feature={currentFeature} />
             </div>
           </div>
+
+          <div className="relative overflow-hidden lg:hidden">
+            <div className="sticky top-0 z-20 border-b border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 py-4 sm:px-5 sm:py-5">
+              <div className="flex items-start justify-between gap-4">
+                <div className="max-w-[28ch]">
+                  <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Ledger workflow</p>
+                  <h3 className="mt-3 text-[clamp(1.15rem,1.45vw,1.5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text">
+                    Your workspace, always within reach.
+                  </h3>
+                </div>
+                <a
+                  href="/download"
+                  className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover"
+                  aria-label="Download Ledger"
+                >
+                  <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+                </a>
+              </div>
+            </div>
+            <div className="relative pt-0">
+              <button
+                type="button"
+                aria-label="Previous workflow"
+                onClick={() => moveCarousel(-1)}
+                className="absolute left-2 top-[calc(50%-1rem)] z-20 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text shadow-[0_10px_20px_rgba(23,21,18,0.08)] transition-colors duration-200 hover:bg-(--ledger-header-pill)"
+              >
+                <ArrowRight className="h-4 w-4 rotate-180" strokeWidth={2.2} />
+              </button>
+              <button
+                type="button"
+                aria-label="Next workflow"
+                onClick={() => moveCarousel(1)}
+                className="absolute right-2 top-[calc(50%-1rem)] z-20 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text shadow-[0_10px_20px_rgba(23,21,18,0.08)] transition-colors duration-200 hover:bg-(--ledger-header-pill)"
+              >
+                <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+              </button>
+              <div
+                ref={carouselRef}
+                className="grid grid-flow-col auto-cols-[100%] snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              >
+                {workflowFeatures.map((feature, index) => (
+                  <div
+                    key={feature.id}
+                    ref={(el) => {
+                      slideRefs.current[index] = el
+                    }}
+                    data-workflow-slide={feature.id}
+                    className="snap-start"
+                  >
+                    <WorkflowStageFrame feature={feature} mobileFullBleed />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative z-20 w-full border-t border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 py-3 sm:px-5 sm:py-4">
+              <div className="max-w-[30ch]">
+                <h4 className="text-[15px] font-semibold tracking-[-0.03em] text-ledger-text sm:text-[16px]">
+                  {currentFeature.label}
+                </h4>
+                <p className="mt-1 text-[13px] leading-5 text-ledger-text-muted sm:text-[14px] sm:leading-6">
+                  {currentFeature.subtitle}
+                </p>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                {workflowFeatures.map((feature) => {
+                  const isActive = feature.id === activeFeature
+
+                  return (
+                    <span
+                      key={feature.id}
+                      aria-hidden="true"
+                      className={`h-2 rounded-full transition-all duration-200 ease-out ${
+                        isActive ? 'w-4 bg-ledger-text-muted' : 'w-2 bg-(--ledger-border-subtle)'
+                      }`}
+                    />
+                  )
+                })}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div
@@ -307,12 +454,12 @@ export function HomepageWorkflowSection() {
               <a
                 key={card.title}
                 href={card.href}
-                className="group h-full rounded-[22px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-3 transition-[background-color,border-color] duration-120 ease-out hover:border-(--ledger-header-border) hover:bg-(--ledger-header-pill) sm:p-3.5 xl:rounded-3xl xl:p-4"
+                className="group h-full rounded-[22px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-3 transition-[border-color,box-shadow] duration-180 ease-out hover:border-(--ledger-header-border) hover:shadow-[0_10px_28px_rgba(23,21,18,0.08)] sm:p-3.5 xl:rounded-3xl xl:p-4"
                 style={{ transitionDelay: `${300 + index * 40}ms` }}
               >
                 <div className="flex items-start gap-3 xl:hidden">
-                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text transition-colors duration-120 ease-out group-hover:border-(--ledger-header-border) sm:h-10 sm:w-10">
-                    <Icon className="h-4 w-4 text-ledger-text transition-colors duration-120 ease-out group-hover:text-ledger-accent sm:h-4.5 sm:w-4.5" strokeWidth={1.8} />
+                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text sm:h-10 sm:w-10">
+                    <Icon className="h-4 w-4 text-ledger-text sm:h-4.5 sm:w-4.5" strokeWidth={1.8} />
                   </div>
                   <div className="min-w-0">
                     <h3 className="text-[15px] font-semibold tracking-[-0.03em] text-ledger-text transition-colors duration-200 ease-out group-hover:text-ledger-text sm:text-[16px] xl:text-[17px]">
@@ -324,8 +471,8 @@ export function HomepageWorkflowSection() {
                   </div>
                 </div>
                 <div className="hidden xl:block">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text transition-colors duration-120 ease-out group-hover:border-(--ledger-header-border)">
-                    <Icon className="h-4.5 w-4.5 text-ledger-text transition-colors duration-120 ease-out group-hover:text-ledger-accent" strokeWidth={1.8} />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text transition-shadow duration-180 ease-out group-hover:shadow-[0_8px_18px_rgba(23,21,18,0.05)]">
+                    <Icon className="h-4.5 w-4.5 text-ledger-text" strokeWidth={1.8} />
                   </div>
                   <h3 className="mt-4 text-[17px] font-semibold tracking-[-0.03em] text-ledger-text transition-colors duration-200 ease-out group-hover:text-ledger-text">
                     {card.title}
