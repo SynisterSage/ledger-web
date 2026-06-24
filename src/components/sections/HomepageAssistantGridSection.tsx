@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 
 function SharedWorkspaceMockup() {
   return (
-    <div className="relative isolate h-full min-h-[420px] overflow-hidden rounded-[18px] border border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[420px] sm:rounded-[22px] sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[28px]">
+    <div className="relative isolate h-full min-h-[320px] overflow-hidden rounded-[18px] border border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[360px] sm:rounded-[22px] sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[28px]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(255,255,255,0.88),transparent_36%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.58),transparent_30%)] opacity-80" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(0,0,0,0.02),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.0)_36%,rgba(255,255,255,0.16)_100%)]" />
 
@@ -40,7 +40,7 @@ export function HomepageAssistantGridSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-16 text-ledger-text sm:px-8 sm:py-20">
+    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-14 text-ledger-text sm:px-8 sm:py-16">
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-assistant className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
           <h2 className="mt-3 text-[clamp(2.4rem,4.2vw,4.5rem)] font-normal leading-[0.96] tracking-[-0.05em] text-ledger-text">
@@ -54,7 +54,7 @@ export function HomepageAssistantGridSection() {
             className="feature-reveal reveal-up overflow-hidden rounded-[20px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[24px] xl:rounded-[32px] md:col-span-2"
             style={{ transitionDelay: '150ms' }}
           >
-            <div className="grid min-h-[360px] gap-0 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
+            <div className="grid min-h-[320px] gap-0 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
               <div className="flex flex-col justify-between p-6 sm:p-7">
                 <div className="max-w-[32ch]">
                   <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Shared workspaces</p>
@@ -93,7 +93,7 @@ export function HomepageAssistantGridSection() {
               </div>
             </div>
             <div className="border-t border-(--ledger-border-subtle) bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.02)_100%)] p-0">
-              <div className="flex min-h-[420px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] bg-white/[0.04] sm:rounded-b-[24px] lg:min-h-[500px] lg:rounded-b-[28px]">
+              <div className="flex min-h-[320px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] bg-white/[0.04] sm:min-h-[360px] sm:rounded-b-[24px] lg:min-h-[500px] lg:rounded-b-[28px]">
                 <div className="w-full rounded-b-[20px] bg-[#f7f2ea]/95 sm:rounded-b-[24px] lg:rounded-b-[28px]" />
               </div>
             </div>
@@ -118,7 +118,7 @@ export function HomepageAssistantGridSection() {
               </div>
             </div>
             <div className="border-t border-(--ledger-border-subtle) bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.02)_100%)] p-0">
-              <div className="flex min-h-[420px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] bg-white/[0.04] sm:rounded-b-[24px] lg:min-h-[500px] lg:rounded-b-[28px]">
+              <div className="flex min-h-[320px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] bg-white/[0.04] sm:min-h-[360px] sm:rounded-b-[24px] lg:min-h-[500px] lg:rounded-b-[28px]">
                 <div className="w-full rounded-b-[20px] bg-[#f7f2ea]/95 sm:rounded-b-[24px] lg:rounded-b-[28px]" />
               </div>
             </div>

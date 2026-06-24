@@ -17,8 +17,8 @@ function AbstractStage({
   return <div className={`h-full w-full ${toneClass}`} />
 }
 
-const cardShellHeightClass = 'min-h-[520px] sm:min-h-[540px] md:min-h-[560px]'
-const wideCardShellHeightClass = 'min-h-[560px] sm:min-h-[580px] md:min-h-[560px]'
+const cardShellHeightClass = 'min-h-[420px] sm:min-h-[460px] md:min-h-[520px]'
+const wideCardShellHeightClass = 'min-h-[460px] sm:min-h-[500px] md:min-h-[560px]'
 
 function SmallCommandCard({
   label,
@@ -38,7 +38,7 @@ function SmallCommandCard({
         </h3>
       </div>
       <div className="flex flex-1 border-t border-(--ledger-border-subtle) p-0">
-        <div className="flex flex-1 items-stretch justify-stretch overflow-hidden rounded-b-[18px] sm:rounded-b-[22px] lg:rounded-b-[28px]">
+        <div className="flex flex-1 min-h-[300px] items-stretch justify-stretch overflow-hidden rounded-b-[18px] sm:min-h-[340px] sm:rounded-b-[22px] lg:rounded-b-[28px]">
           <AbstractStage tone={tone} />
         </div>
       </div>
@@ -64,7 +64,7 @@ function WideCommandCard() {
         </div>
 
         <div className="flex flex-1 border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0">
-          <div className="flex flex-1 items-stretch justify-stretch overflow-hidden rounded-b-[20px] sm:rounded-b-[24px] lg:rounded-b-[28px] lg:rounded-bl-none">
+          <div className="flex flex-1 min-h-[320px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] sm:min-h-[360px] sm:rounded-b-[24px] lg:rounded-b-[28px] lg:rounded-bl-none">
             <AbstractStage tone="neutral" />
           </div>
         </div>
@@ -96,7 +96,7 @@ export function HomepageCommandGridSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-16 text-ledger-text sm:px-8 sm:py-20">
+    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-14 text-ledger-text sm:px-8 sm:py-16">
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-command className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
           <h2 className="text-[clamp(2.4rem,4.2vw,4.5rem)] font-normal leading-[0.96] tracking-[-0.05em] text-ledger-text">
