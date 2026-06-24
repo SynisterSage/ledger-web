@@ -55,16 +55,18 @@ export function HomepageAssistantGridSection() {
             style={{ transitionDelay: '150ms' }}
           >
             <div className="grid min-h-[320px] gap-0 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
-              <div className="flex flex-col justify-between p-6 sm:p-7">
-                <div className="max-w-[32ch]">
-                  <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Shared workspaces</p>
-                  <h3 className="mt-3 text-[clamp(1.15rem,1.45vw,1.5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
-                    Work together without mixing every context.
-                  </h3>
-                </div>
+              <div className="p-6 sm:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0 flex-1 max-w-[32ch]">
+                    <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Shared workspaces</p>
+                    <h3 className="mt-3 text-[clamp(1.15rem,1.45vw,1.5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
+                      Share work without the mess.
+                    </h3>
+                  </div>
 
-                <div className="mt-8 inline-flex h-8 w-8 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
-                  <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+                  <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
+                    <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+                  </div>
                 </div>
               </div>
 

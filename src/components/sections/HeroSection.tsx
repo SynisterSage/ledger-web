@@ -145,19 +145,22 @@ export function HeroSection() {
             <br />
             <HeroTypewriter />
           </h1>
-          <p className="hero-enter hero-enter-copy mx-auto mt-0 max-w-2xl text-[18px] leading-[1.24] text-ledger-text sm:text-[20px]">
-            Capture notes, tasks, and plans beside the apps you already use, without pulling yourself out of flow.
+          <p className="hero-enter hero-enter-copy mx-auto mt-0 max-w-[34ch] text-[18px] leading-[1.24] text-ledger-text sm:max-w-2xl sm:text-[20px]">
+            <span className="sm:hidden">Capture what matters without leaving your flow.</span>
+            <span className="hidden sm:inline">
+              Capture notes, tasks, and plans beside the apps you already use, without pulling yourself out of flow.
+            </span>
           </p>
-          <div className="hero-enter hero-enter-cta mt-2.5 flex flex-col items-center justify-center gap-2.5 sm:mt-3 sm:flex-row sm:gap-3">
+          <div className="hero-enter hero-enter-cta mt-2.5 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:mt-3 sm:gap-3">
             <a
               href="/download"
-              className="inline-flex h-12 min-w-39 items-center justify-center rounded-full bg-ledger-accent px-7 text-[16px] font-semibold leading-none text-white transition hover:bg-ledger-accent-hover"
+              className="inline-flex h-10 w-auto min-w-0 items-center justify-center whitespace-nowrap rounded-full bg-ledger-accent px-5 text-[14px] font-semibold leading-none text-white transition hover:bg-ledger-accent-hover sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
             >
               Download
             </a>
             <a
               href="/about"
-              className="inline-flex h-12 min-w-39 items-center justify-center rounded-full border border-ledger-border bg-(--ledger-surface-card) px-7 text-[16px] font-semibold leading-none text-ledger-text transition hover:bg-ledger-surface-muted"
+              className="inline-flex h-10 w-auto min-w-0 items-center justify-center whitespace-nowrap rounded-full border border-ledger-border bg-(--ledger-surface-card) px-5 text-[14px] font-semibold leading-none text-ledger-text transition hover:bg-ledger-surface-muted sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
             >
               See features
             </a>

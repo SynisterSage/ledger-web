@@ -32,10 +32,17 @@ function SmallCommandCard({
   return (
     <article className={`flex h-full flex-col overflow-hidden rounded-[18px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px] ${cardShellHeightClass}`}>
       <div className="p-4 sm:p-5">
-        <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">{label}</p>
-        <h3 className="mt-3 max-w-[24ch] text-[clamp(1.1rem,1.25vw,1.3rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
-          {title}
-        </h3>
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">{label}</p>
+            <h3 className="mt-3 max-w-[24ch] text-[clamp(1.1rem,1.25vw,1.3rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
+              {title}
+            </h3>
+          </div>
+          <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
+            <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+          </div>
+        </div>
       </div>
       <div className="flex flex-1 border-t border-(--ledger-border-subtle) p-0">
         <div className="flex flex-1 min-h-[300px] items-stretch justify-stretch overflow-hidden rounded-b-[18px] sm:min-h-[340px] sm:rounded-b-[22px] lg:rounded-b-[28px]">
@@ -50,16 +57,18 @@ function WideCommandCard() {
   return (
     <article className={`flex h-full flex-col overflow-hidden rounded-[20px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[24px] xl:rounded-[32px] md:col-span-2 ${wideCardShellHeightClass}`}>
       <div className="flex flex-1 flex-col gap-0 lg:grid lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
-        <div className="flex flex-col justify-between p-6 sm:p-7">
-          <div className="max-w-[32ch]">
-            <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Command actions</p>
-            <h3 className="mt-3 text-[clamp(1.15rem,1.45vw,1.5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
-              Act on anything from one place.
-            </h3>
-          </div>
+        <div className="p-6 sm:p-7">
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0 flex-1 max-w-[32ch]">
+              <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Command actions</p>
+              <h3 className="mt-3 text-[clamp(1.15rem,1.45vw,1.5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
+                Act on anything from one place.
+              </h3>
+            </div>
 
-          <div className="mt-8 inline-flex h-8 w-8 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
-            <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+            <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
+              <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+            </div>
           </div>
         </div>
 
@@ -108,7 +117,7 @@ export function HomepageCommandGridSection() {
           <div data-reveal-command className="feature-reveal reveal-left" style={{ transitionDelay: '150ms' }}>
             <SmallCommandCard
               label="Desktop"
-              title="Float it or dock it beside your work."
+              title="Float it, Dock it."
               tone="warm"
             />
           </div>
@@ -116,7 +125,7 @@ export function HomepageCommandGridSection() {
           <div data-reveal-command className="feature-reveal reveal-right" style={{ transitionDelay: '220ms' }}>
             <SmallCommandCard
               label="Integrations"
-              title="Connect the tools already in your flow."
+              title="Connect tools you use daily."
               tone="cool"
             />
           </div>
