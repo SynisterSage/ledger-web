@@ -4,15 +4,16 @@ import { ArrowRight } from 'lucide-react'
 
 function SharedWorkspaceMockup() {
   return (
-    <div className="relative isolate h-full min-h-[320px] overflow-hidden rounded-[18px] border border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[360px] sm:rounded-[22px] sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[28px]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(255,255,255,0.88),transparent_36%),radial-gradient(circle_at_82%_18%,rgba(255,255,255,0.58),transparent_30%)] opacity-80" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_8%,rgba(0,0,0,0.02),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.0)_36%,rgba(255,255,255,0.16)_100%)]" />
-
-      <div className="relative h-full">
-        <div className="absolute left-[10%] top-[16%] h-[20%] w-[44%] rounded-[22px] border border-white/40 bg-white/35 shadow-[0_20px_40px_rgba(0,0,0,0.08)]" />
-        <div className="absolute right-[8%] top-[10%] h-[18%] w-[28%] rounded-[20px] border border-white/30 bg-white/25 shadow-[0_18px_36px_rgba(0,0,0,0.07)]" />
-        <div className="absolute left-[16%] bottom-[14%] h-[34%] w-[50%] rounded-[26px] border border-white/50 bg-white/55 shadow-[0_22px_48px_rgba(0,0,0,0.1)]" />
-      </div>
+    <div className="relative isolate h-full min-h-[320px] overflow-hidden rounded-b-[18px] rounded-t-none border border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[360px] sm:rounded-b-[22px] sm:rounded-t-none sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[24px] lg:rounded-t-none lg:rounded-b-none xl:rounded-r-[28px] xl:rounded-t-none xl:rounded-b-none">
+      <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
+        <source media="(min-width: 1024px)" srcSet="/assets/bentobox1/topbentodesktop_4x.webp" />
+        <img
+          src="/assets/bentobox1/topbentopmobtab_4x.webp"
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full rounded-[inherit] object-cover object-center"
+        />
+      </picture>
     </div>
   )
 }
