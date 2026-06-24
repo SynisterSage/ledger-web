@@ -457,15 +457,15 @@ export function HomepageWorkflowSection() {
                 className="group h-full rounded-[22px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-3 transition-[border-color,box-shadow] duration-180 ease-out hover:border-(--ledger-header-border) hover:shadow-[0_10px_28px_rgba(23,21,18,0.08)] sm:p-3.5 xl:rounded-3xl xl:p-4"
                 style={{ transitionDelay: `${300 + index * 40}ms` }}
               >
-                <div className="flex items-start gap-3 xl:hidden">
-                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text sm:h-10 sm:w-10">
+                <div className="flex items-center gap-3 xl:hidden">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-ledger-text sm:h-10 sm:w-10">
                     <Icon className="h-4 w-4 text-ledger-text sm:h-4.5 sm:w-4.5" strokeWidth={1.8} />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-[15px] font-semibold tracking-[-0.03em] text-ledger-text transition-colors duration-200 ease-out group-hover:text-ledger-text sm:text-[16px] xl:text-[17px]">
+                    <h3 className="text-[15px] font-semibold leading-[1.08] tracking-[-0.03em] text-ledger-text transition-colors duration-200 ease-out group-hover:text-ledger-text sm:text-[16px] xl:text-[17px]">
                       {card.title}
                     </h3>
-                    <p className="mt-1 text-[12px] leading-5 text-ledger-text-muted sm:text-[13px] sm:leading-6 xl:text-[14px]">
+                    <p className="mt-1 hidden text-[12px] leading-5 text-ledger-text-muted xl:block xl:text-[14px]">
                       {card.description}
                     </p>
                   </div>
