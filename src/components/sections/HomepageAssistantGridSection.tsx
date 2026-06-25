@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 
 function SharedWorkspaceMockup() {
   return (
-    <div className="relative isolate h-full min-h-[320px] overflow-hidden rounded-b-[18px] rounded-t-none border border-(--ledger-border-subtle) bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[360px] sm:rounded-b-[22px] sm:rounded-t-none sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[24px] lg:rounded-t-none lg:rounded-b-none xl:rounded-r-[28px] xl:rounded-t-none xl:rounded-b-none">
+    <div className="relative isolate h-full min-h-[320px] overflow-hidden rounded-b-[18px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[360px] sm:rounded-b-[22px] sm:rounded-t-none sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[24px] lg:rounded-t-none lg:rounded-b-none xl:rounded-r-[28px] xl:rounded-t-none xl:rounded-b-none">
       <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
         <source media="(min-width: 1024px)" srcSet="/assets/bentobox1/topbentodesktop_4x.webp" />
         <img
@@ -12,6 +12,38 @@ function SharedWorkspaceMockup() {
           alt=""
           aria-hidden="true"
           className="h-full w-full rounded-[inherit] object-cover object-center max-[420px]:object-[8%_center]"
+        />
+      </picture>
+    </div>
+  )
+}
+
+function SearchMockup() {
+  return (
+    <div className="relative isolate aspect-[5/3] w-full overflow-hidden rounded-b-[20px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] sm:rounded-b-[24px] lg:aspect-[63/50] lg:rounded-b-[28px]">
+      <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
+        <source media="(min-width: 1024px)" srcSet="/assets/bentobox1/2ndtopbentoboxdesktop_4x.webp" />
+        <img
+          src="/assets/bentobox1/2ndtopbentoboxmobtab_4x.webp"
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full rounded-[inherit] object-cover object-center"
+        />
+      </picture>
+    </div>
+  )
+}
+
+function WorkspaceFollowsMockup() {
+  return (
+    <div className="relative isolate aspect-[5/3] w-full overflow-hidden rounded-b-[20px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] sm:rounded-b-[24px] lg:aspect-[63/50] lg:rounded-b-[28px]">
+      <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
+        <source media="(min-width: 1024px)" srcSet="/assets/bentobox1/3rdtopbentoboxdesktop_4x.webp" />
+        <img
+          src="/assets/bentobox1/3rdtopbentoboxmobtab_4x.webp"
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full rounded-[inherit] object-cover object-center"
         />
       </picture>
     </div>
@@ -52,7 +84,7 @@ export function HomepageAssistantGridSection() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           <article
             data-reveal-assistant
-            className="feature-reveal reveal-up overflow-hidden rounded-[20px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[24px] xl:rounded-[32px] md:col-span-2"
+            className="feature-reveal reveal-up overflow-hidden rounded-[20px] bg-(--ledger-surface-card) sm:rounded-[24px] xl:rounded-[32px] md:col-span-2"
             style={{ transitionDelay: '150ms' }}
           >
             <div className="grid min-h-[320px] gap-0 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
@@ -65,7 +97,7 @@ export function HomepageAssistantGridSection() {
                     </h3>
                   </div>
 
-                  <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
+                  <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
                     <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                   </div>
                 </div>
@@ -79,7 +111,7 @@ export function HomepageAssistantGridSection() {
 
           <article
             data-reveal-assistant
-            className="feature-reveal reveal-left overflow-hidden rounded-[18px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px]"
+            className="feature-reveal reveal-left overflow-hidden rounded-[18px] bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px]"
             style={{ transitionDelay: '220ms' }}
           >
             <div className="p-4 sm:p-5">
@@ -90,21 +122,17 @@ export function HomepageAssistantGridSection() {
                     Search across every context.
                   </h3>
                 </div>
-                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
+                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
                   <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                 </div>
               </div>
             </div>
-            <div className="border-t border-(--ledger-border-subtle) bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.02)_100%)] p-0">
-              <div className="flex min-h-[320px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] bg-white/[0.04] sm:min-h-[360px] sm:rounded-b-[24px] lg:min-h-[500px] lg:rounded-b-[28px]">
-                <div className="w-full rounded-b-[20px] bg-[#f7f2ea]/95 sm:rounded-b-[24px] lg:rounded-b-[28px]" />
-              </div>
-            </div>
+            <SearchMockup />
           </article>
 
           <article
             data-reveal-assistant
-            className="feature-reveal reveal-right overflow-hidden rounded-[18px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px]"
+            className="feature-reveal reveal-right overflow-hidden rounded-[18px] bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px]"
             style={{ transitionDelay: '280ms' }}
           >
             <div className="p-4 sm:p-5">
@@ -115,16 +143,12 @@ export function HomepageAssistantGridSection() {
                     Your workspace follows you.
                   </h3>
                 </div>
-                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
+                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
                   <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                 </div>
               </div>
             </div>
-            <div className="border-t border-(--ledger-border-subtle) bg-[linear-gradient(135deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.02)_100%)] p-0">
-              <div className="flex min-h-[320px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] bg-white/[0.04] sm:min-h-[360px] sm:rounded-b-[24px] lg:min-h-[500px] lg:rounded-b-[28px]">
-                <div className="w-full rounded-b-[20px] bg-[#f7f2ea]/95 sm:rounded-b-[24px] lg:rounded-b-[28px]" />
-              </div>
-            </div>
+            <WorkspaceFollowsMockup />
           </article>
         </div>
       </div>

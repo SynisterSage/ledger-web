@@ -30,7 +30,7 @@ function SmallCommandCard({
   tone: 'warm' | 'cool'
 }) {
   return (
-    <article className={`flex h-full flex-col overflow-hidden rounded-[18px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px] ${cardShellHeightClass}`}>
+    <article className={`flex h-full flex-col overflow-hidden rounded-[18px] bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px] ${cardShellHeightClass}`}>
       <div className="p-4 sm:p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1">
@@ -39,7 +39,7 @@ function SmallCommandCard({
               {title}
             </h3>
           </div>
-          <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
+          <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
             <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
           </div>
         </div>
@@ -55,7 +55,7 @@ function SmallCommandCard({
 
 function WideCommandCard() {
   return (
-    <article className={`flex h-full flex-col overflow-hidden rounded-[20px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[24px] xl:rounded-[32px] md:col-span-2 ${wideCardShellHeightClass}`}>
+    <article className={`flex h-full flex-col overflow-hidden rounded-[20px] bg-(--ledger-surface-card) sm:rounded-[24px] xl:rounded-[32px] md:col-span-2 ${wideCardShellHeightClass}`}>
       <div className="flex flex-1 flex-col gap-0 lg:grid lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
         <div className="p-6 sm:p-7">
           <div className="flex items-start justify-between gap-4">
@@ -66,7 +66,7 @@ function WideCommandCard() {
               </h3>
             </div>
 
-            <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover">
+            <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
               <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
             </div>
           </div>

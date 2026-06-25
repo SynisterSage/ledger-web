@@ -294,7 +294,7 @@ export function HomepageWorkflowSection() {
     <section
       ref={sectionRef}
       aria-label="How Ledger works"
-      className="homepage-workflow relative z-20 overflow-x-clip border-t border-(--ledger-border-subtle) bg-[var(--ledger-surface)] px-6 py-20 sm:px-8 sm:py-24 -mt-20 sm:-mt-22 lg:-mt-26 xl:-mt-26"
+      className="homepage-workflow relative z-20 overflow-x-clip bg-[var(--ledger-surface)] px-6 py-20 sm:px-8 sm:py-24 -mt-20 sm:-mt-22 lg:-mt-26 xl:-mt-26"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-workflow className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
@@ -305,7 +305,7 @@ export function HomepageWorkflowSection() {
 
         <div
           data-reveal-workflow
-          className="feature-reveal reveal-up mt-10 overflow-hidden rounded-[24px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) sm:rounded-[28px] xl:rounded-[36px]"
+          className="feature-reveal reveal-up mt-10 overflow-hidden rounded-[24px] bg-(--ledger-surface-card) sm:rounded-[28px] xl:rounded-[36px]"
           style={{ transitionDelay: '150ms' }}
         >
           <div className="hidden items-stretch gap-0 lg:grid lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
@@ -319,7 +319,7 @@ export function HomepageWorkflowSection() {
 
               <a
                 href="/download"
-                className="mt-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover"
+                className="mt-3 inline-flex h-8 w-8 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
                 aria-label="Download Ledger"
               >
                 <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
@@ -372,7 +372,7 @@ export function HomepageWorkflowSection() {
                 </div>
                 <a
                   href="/download"
-                  className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-colors duration-200 hover:bg-ledger-accent-hover"
+                  className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
                   aria-label="Download Ledger"
                 >
                   <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
@@ -454,7 +454,7 @@ export function HomepageWorkflowSection() {
               <a
                 key={card.title}
                 href={card.href}
-                className="group h-full rounded-[22px] border border-(--ledger-border-subtle) bg-(--ledger-surface-card) p-3 transition-[border-color,box-shadow] duration-180 ease-out hover:border-(--ledger-header-border) hover:shadow-[0_10px_28px_rgba(23,21,18,0.08)] sm:p-3.5 xl:rounded-3xl xl:p-4"
+                className="group h-full rounded-[22px] bg-(--ledger-surface-card) p-3 transition-[box-shadow] duration-180 ease-out hover:shadow-[0_10px_28px_rgba(23,21,18,0.08)] sm:p-3.5 xl:rounded-3xl xl:p-4"
                 style={{ transitionDelay: `${300 + index * 40}ms` }}
               >
                 <div className="flex items-center gap-3 xl:hidden">
