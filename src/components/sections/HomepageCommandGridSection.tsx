@@ -1,6 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { ArrowRight } from 'lucide-react'
+
+const desktopCommandFrames = [
+  '/assets/bentobox2/3rdbottombentoboxdesktop1_4x.webp',
+  '/assets/bentobox2/3rdbottombentoboxdesktop2_4x.webp',
+  '/assets/bentobox2/3rdbottombentoboxdesktop3_4x.webp',
+]
 
 function AbstractStage({
   tone = 'neutral',
@@ -15,6 +21,82 @@ function AbstractStage({
         : 'bg-[linear-gradient(180deg,rgba(247,242,234,0.96)_0%,rgba(238,234,228,0.96)_100%)]'
 
   return <div className={`h-full w-full ${toneClass}`} />
+}
+
+function DesktopCommandBentoMockup() {
+  const frameIndexRef = useRef(0)
+  const intervalRef = useRef<number | null>(null)
+  const [frameIndex, setFrameIndex] = useState(0)
+
+  useEffect(() => {
+    desktopCommandFrames.forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const desktopQuery = window.matchMedia('(min-width: 1024px)')
+
+    const stop = () => {
+      if (intervalRef.current !== null) {
+        window.clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+
+    const start = () => {
+      stop()
+
+      if (prefersReducedMotion || !desktopQuery.matches) {
+        return
+      }
+
+      intervalRef.current = window.setInterval(() => {
+        frameIndexRef.current = (frameIndexRef.current + 1) % desktopCommandFrames.length
+        setFrameIndex(frameIndexRef.current)
+      }, 1200)
+    }
+
+    const handleChange = () => {
+      start()
+    }
+
+    start()
+    if (typeof desktopQuery.addEventListener === 'function') {
+      desktopQuery.addEventListener('change', handleChange)
+    } else {
+      desktopQuery.addListener(handleChange)
+    }
+
+    return () => {
+      stop()
+      if (typeof desktopQuery.removeEventListener === 'function') {
+        desktopQuery.removeEventListener('change', handleChange)
+      } else {
+        desktopQuery.removeListener(handleChange)
+      }
+    }
+  }, [])
+
+  return (
+    <div className="relative isolate aspect-[5/3] w-full overflow-hidden rounded-b-[20px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] sm:rounded-b-[24px] lg:aspect-[7/5] lg:rounded-l-none lg:rounded-r-[28px] lg:rounded-bl-none">
+      <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
+        <source media="(min-width: 1024px)" srcSet={desktopCommandFrames[frameIndex]} />
+        <img
+          src="/assets/bentobox2/3rdbottombentoboxmobtab_4x.webp"
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full rounded-[inherit] object-cover object-center max-[620px]:object-[8%_center]"
+        />
+      </picture>
+    </div>
+  )
 }
 
 const cardShellHeightClass = 'min-h-[420px] sm:min-h-[460px] md:min-h-[520px]'
@@ -73,8 +155,8 @@ function WideCommandCard() {
         </div>
 
         <div className="flex flex-1 border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0">
-          <div className="flex flex-1 min-h-[280px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] sm:min-h-[320px] sm:rounded-b-[24px] lg:rounded-b-[28px] lg:rounded-bl-none">
-            <AbstractStage tone="neutral" />
+          <div className="flex flex-1 items-stretch justify-stretch overflow-hidden rounded-b-[20px] sm:rounded-b-[24px] lg:rounded-b-[28px] lg:rounded-bl-none">
+            <DesktopCommandBentoMockup />
           </div>
         </div>
       </div>

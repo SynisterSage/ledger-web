@@ -101,7 +101,12 @@ For the homepage assistant bento boxes:
   - mob/tablet asset below `lg`
   - frame should match the exported art ratio so the bottom edge lands naturally
 
+- Desktop animated frames:
+  - use a small pre-rendered sequence of desktop assets
+  - cycle only on `lg` and above
+  - keep mob/tablet static with a single fallback image
+  - preload the desktop frames so the loop feels like a short GIF instead of a flash
+
 ## Reminder
 
 If the image still feels off after matching the aspect ratio, the next thing to check is the exported artboard itself, not the card shell.
-
