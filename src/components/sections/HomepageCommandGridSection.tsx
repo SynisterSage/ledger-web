@@ -18,7 +18,7 @@ function AbstractStage({
 }
 
 const cardShellHeightClass = 'min-h-[420px] sm:min-h-[460px] md:min-h-[520px]'
-const wideCardShellHeightClass = 'min-h-[460px] sm:min-h-[500px] md:min-h-[560px]'
+const wideCardShellHeightClass = 'min-h-[420px] sm:min-h-[460px] md:min-h-[520px]'
 
 function SmallCommandCard({
   label,
@@ -57,12 +57,12 @@ function WideCommandCard() {
   return (
     <article className={`flex h-full flex-col overflow-hidden rounded-[20px] bg-(--ledger-surface-card) sm:rounded-[24px] xl:rounded-[32px] md:col-span-2 ${wideCardShellHeightClass}`}>
       <div className="flex flex-1 flex-col gap-0 lg:grid lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
-        <div className="p-6 sm:p-7">
+        <div className="p-5 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 flex-1 max-w-[32ch]">
-              <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Command actions</p>
+              <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Desktop</p>
               <h3 className="mt-3 text-[clamp(1.15rem,1.45vw,1.5rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
-                Act on anything from one place.
+                Float it, Dock it.
               </h3>
             </div>
 
@@ -73,7 +73,7 @@ function WideCommandCard() {
         </div>
 
         <div className="flex flex-1 border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0">
-          <div className="flex flex-1 min-h-[320px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] sm:min-h-[360px] sm:rounded-b-[24px] lg:rounded-b-[28px] lg:rounded-bl-none">
+          <div className="flex flex-1 min-h-[280px] items-stretch justify-stretch overflow-hidden rounded-b-[20px] sm:min-h-[320px] sm:rounded-b-[24px] lg:rounded-b-[28px] lg:rounded-bl-none">
             <AbstractStage tone="neutral" />
           </div>
         </div>
@@ -116,8 +116,8 @@ export function HomepageCommandGridSection() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           <div data-reveal-command className="feature-reveal reveal-left" style={{ transitionDelay: '150ms' }}>
             <SmallCommandCard
-              label="Desktop"
-              title="Float it, Dock it."
+              label="Command actions"
+              title="Act on anything from one place."
               tone="warm"
             />
           </div>

@@ -129,7 +129,7 @@ export function HeroSection() {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-16 z-0 flex w-screen -translate-x-1/2 justify-center sm:top-20 lg:top-24"
+        className="pointer-events-none absolute left-1/2 top-24 z-0 flex w-screen -translate-x-1/2 justify-center sm:top-28 lg:top-32"
       >
         <img
           src="/assets/logos/outline-hero.svg"

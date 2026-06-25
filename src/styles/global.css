@@ -155,10 +155,10 @@ img {
 }
 
 .site-nav--scrolled {
-  --site-nav-height: 56px;
-  --site-nav-menu-offset: 56px;
+  --site-nav-height: 48px;
+  --site-nav-menu-offset: 48px;
   background-color: var(--ledger-header-background-scrolled);
-  border-bottom-color: var(--ledger-header-border);
+  border-bottom-color: var(--ledger-border);
 }
 
 .site-nav__inner {
@@ -357,22 +357,22 @@ img {
 
 @media (max-width: 1023px) {
   .site-nav {
-    --site-nav-height: 72px;
-    --site-nav-menu-offset: 72px;
+    --site-nav-height: 60px;
+    --site-nav-menu-offset: 60px;
     background-color: color-mix(in srgb, var(--ledger-surface-card) 96%, white 4%);
     border-bottom-color: var(--ledger-border);
   }
 
   .site-nav--scrolled {
-    --site-nav-height: 72px;
-    --site-nav-menu-offset: 72px;
+    --site-nav-height: 60px;
+    --site-nav-menu-offset: 60px;
     background-color: color-mix(in srgb, var(--ledger-surface-card) 96%, white 4%);
     border-bottom-color: var(--ledger-header-border);
   }
 
   .site-nav--menu-open {
-    --site-nav-height: 72px;
-    --site-nav-menu-offset: 72px;
+    --site-nav-height: 60px;
+    --site-nav-menu-offset: 60px;
     background-color: color-mix(in srgb, var(--ledger-surface-card) 96%, white 4%);
     border-bottom-color: var(--ledger-header-border);
   }
@@ -390,11 +390,11 @@ img {
 
 @media (min-width: 1024px) {
   .site-nav {
-    --site-nav-height: 72px;
-    --site-nav-menu-offset: 72px;
+    --site-nav-height: 64px;
+    --site-nav-menu-offset: 64px;
     background-color: color-mix(in srgb, var(--ledger-surface-card) 96%, white 4%);
     border-bottom-color: var(--ledger-border);
-    box-shadow: 0 1px 0 rgba(23, 21, 18, 0.04), 0 10px 28px rgba(23, 21, 18, 0.03);
+    box-shadow: none;
     transition:
       background-color 220ms ease-out,
       border-color 220ms ease-out,
@@ -402,11 +402,12 @@ img {
   }
 
   .site-nav--scrolled {
-    --site-nav-height: 72px;
-    --site-nav-menu-offset: 72px;
+    --site-nav-height: 64px;
+    --site-nav-menu-offset: 64px;
     background-color: color-mix(in srgb, var(--ledger-surface-card) 96%, white 4%);
     border-bottom-color: var(--ledger-border);
     transform: none;
+    box-shadow: none;
   }
 
   .site-nav__inner {

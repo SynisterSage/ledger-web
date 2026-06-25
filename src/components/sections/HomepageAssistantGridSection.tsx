@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 
 function SharedWorkspaceMockup() {
   return (
-    <div className="relative isolate h-full min-h-[320px] overflow-hidden rounded-b-[18px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[360px] sm:rounded-b-[22px] sm:rounded-t-none sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[24px] lg:rounded-t-none lg:rounded-b-none xl:rounded-r-[28px] xl:rounded-t-none xl:rounded-b-none">
+    <div className="relative isolate h-full min-h-[280px] overflow-hidden rounded-b-[18px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[300px] sm:rounded-b-[22px] sm:rounded-t-none sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[24px] lg:rounded-t-none lg:rounded-b-none xl:rounded-r-[28px] xl:rounded-t-none xl:rounded-b-none">
       <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
         <source media="(min-width: 1024px)" srcSet="/assets/bentobox1/topbentodesktop_4x.webp" />
         <img
@@ -88,7 +88,7 @@ export function HomepageAssistantGridSection() {
             style={{ transitionDelay: '150ms' }}
           >
             <div className="grid min-h-[320px] gap-0 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
-              <div className="p-6 sm:p-7">
+              <div className="p-4 sm:p-5 lg:p-7">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1 max-w-[32ch]">
                     <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Shared workspaces</p>
