@@ -50,17 +50,17 @@ body {
   margin: 0;
   padding: 0;
   color: var(--ledger-text);
-  background-color: var(--ledger-bg);
+  background-color: transparent;
 }
 
 html {
-  background-color: var(--ledger-bg);
+  background-color: #fff;
 }
 
 body {
   font-family: var(--font-sans);
   min-height: 100dvh;
-  background: radial-gradient(circle at top, var(--ledger-background-muted) 0%, var(--ledger-background) 58%);
+  background: transparent;
 }
 
 @media (prefers-color-scheme: light) {
