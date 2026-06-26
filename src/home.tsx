@@ -6,6 +6,7 @@ import { DownloadPage } from './pages/DownloadPage'
 import { HomePage } from './pages/HomePage'
 import { InviteLandingPage } from './pages/InviteLandingPage'
 import { InviteSuccessPage } from './pages/InviteSuccessPage'
+import { LoginPage } from './pages/LoginPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { DocsPage } from './pages/DocsPage'
 import { PlanningPage } from './pages/PlanningPage'
@@ -35,6 +36,8 @@ function AppRouter() {
       return <InviteLandingPage />
     case '/joined':
       return <InviteSuccessPage />
+    case '/login':
+      return <LoginPage />
     case '/privacy':
       return <PrivacyPage />
     case '/terms':

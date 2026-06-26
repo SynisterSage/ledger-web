@@ -75,7 +75,7 @@ function DesktopCommandBentoMockup() {
   }, [])
 
   return (
-    <div className="relative isolate aspect-[5/3] w-full overflow-hidden rounded-b-[20px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] sm:rounded-b-[24px] lg:aspect-[7/5] lg:rounded-l-none lg:rounded-r-[28px] lg:rounded-bl-none">
+    <div className="relative isolate aspect-[5/3] w-full overflow-hidden rounded-b-[20px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] sm:rounded-b-[24px] lg:aspect-[63/50] lg:rounded-bl-none lg:rounded-br-[28px]">
       <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
         <source media="(min-width: 1024px)" srcSet={desktopCommandFrames[frameIndex]} />
         <img
@@ -135,7 +135,7 @@ function CommandActionsMockup() {
   )
 }
 
-const wideCardShellHeightClass = 'min-h-[360px] sm:min-h-[420px] md:min-h-[520px]'
+const wideCardShellHeightClass = 'lg:min-h-[320px]'
 
 function WideCommandCard() {
   return (
@@ -189,7 +189,7 @@ export function HomepageCommandGridSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-10 text-ledger-text sm:px-8 sm:py-12">
+    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 pt-6 pb-8 text-ledger-text sm:px-8 sm:pt-8 sm:pb-10">
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-command className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
           <h2 className="text-[clamp(2.4rem,4.2vw,4.5rem)] font-normal leading-[0.96] tracking-[-0.05em] text-ledger-text">

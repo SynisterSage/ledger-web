@@ -294,7 +294,7 @@ export function HomepageWorkflowSection() {
     <section
       ref={sectionRef}
       aria-label="How Ledger works"
-      className="homepage-workflow relative z-20 overflow-x-clip bg-[var(--ledger-surface)] px-6 py-12 sm:px-8 sm:py-16 -mt-20 sm:-mt-22 lg:-mt-26 xl:-mt-26"
+      className="homepage-workflow relative z-20 overflow-x-clip bg-[var(--ledger-surface)] px-6 pt-10 pb-8 sm:px-8 sm:pt-14 sm:pb-10 -mt-20 sm:-mt-22 lg:-mt-26 xl:-mt-26"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-workflow className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>

@@ -17,7 +17,7 @@ const secondaryLinks = [
 ]
 
 const actions = [
-  { href: '/about', label: 'Log in', kind: 'ghost' as const },
+  { href: '/login', label: 'Log in', kind: 'ghost' as const },
   { href: '/download', label: 'Get Ledger', kind: 'primary' as const },
 ]
 
@@ -218,7 +218,7 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
           </div>
 
           <div className="site-nav__mobile-meta">
-            <a href="/about" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-meta-link">
+            <a href="/login" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-meta-link">
               Log in
             </a>
             <a href="/download" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-cta">

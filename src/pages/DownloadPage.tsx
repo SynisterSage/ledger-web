@@ -94,7 +94,7 @@ export function DownloadPage() {
   }
 
   return (
-    <div className="min-h-dhv bg-ledger-bg text-(--ledger-text-primary)">
+    <div className="min-h-dhv bg-ledger-surface text-(--ledger-text-primary)">
       <SiteHeader currentPath="/download" />
 
       <main className="mx-auto w-full max-w-6xl px-6 pb-20 pt-14 sm:px-8 sm:pt-20 lg:pt-24">
