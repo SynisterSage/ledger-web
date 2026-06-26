@@ -122,7 +122,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-12 pt-10 sm:px-7 sm:pb-16 sm:pt-18 lg:pb-20 lg:pt-24">
+    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-8 pt-10 sm:px-7 sm:pb-12 sm:pt-18 lg:pb-16 lg:pt-24">
       <div
         aria-hidden="true"
         className="hero-bottom-glow pointer-events-none absolute inset-x-0 bottom-0 z-0 h-104 sm:h-136 lg:h-160"
@@ -167,7 +167,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="hero-enter hero-enter-video relative mx-auto mt-7 w-full max-w-6xl sm:mt-8">
+        <div className="hero-enter hero-enter-video relative mx-auto mt-5 w-full max-w-6xl sm:mt-6">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-20 hidden md:block">
             <div className="hero-ornament hero-ornament--left pointer-events-auto absolute -left-19 top-[60%] w-[clamp(3.3rem,4.4vw,4.75rem)] rotate-[-16deg] opacity-80 lg:-left-25 lg:top-[63%] lg:w-[clamp(3.8rem,5.1vw,5.6rem)]">
               <img src="/assets/images/hero-left.svg" alt="" className="block h-full w-full" />

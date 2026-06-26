@@ -15,7 +15,7 @@ export function HomePage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh">
       <SiteHeader currentPath="/" />
       <main>
         <HeroSection />

@@ -27,7 +27,7 @@ const footerColumns = [
 
 export function SiteFooter() {
   return (
-    <footer className="overflow-x-clip border-t border-(--ledger-border-subtle) bg-ledger-bg px-6 py-12 sm:px-8">
+    <footer className="overflow-x-clip border-t border-(--ledger-border-subtle) bg-ledger-bg px-6 py-10 sm:px-8 sm:py-12">
       <div className="mx-auto w-full max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-12">
           <div className="shrink-0">

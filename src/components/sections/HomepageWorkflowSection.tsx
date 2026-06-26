@@ -72,14 +72,14 @@ const workflowFeatures: WorkflowFeature[] = [
 
 const ecosystemCards: EcosystemCard[] = [
   {
-    title: 'Desktop sidebar',
-    description: 'Dock Ledger beside the apps you already use.',
+    title: 'Desktop app',
+    description: 'Float, dock, and keep Ledger beside your work.',
     href: '/sidebar',
     icon: Monitor,
   },
   {
-    title: 'Mobile capture',
-    description: 'Save reminders, tasks, events, notes, and project actions away from your desk.',
+    title: 'Mobile app',
+    description: 'Capture, check Today, and review notifications away from your desk.',
     href: '/help/mobile',
     icon: Smartphone,
   },
@@ -90,8 +90,8 @@ const ecosystemCards: EcosystemCard[] = [
     icon: Puzzle,
   },
   {
-    title: 'Siri Shortcuts',
-    description: 'Add reminders, tasks, events, and notes by voice.',
+    title: 'Shortcuts',
+    description: 'Add reminders, tasks, and notes by voice.',
     href: '/help/siri-shortcuts',
     icon: Sparkles,
   },
@@ -294,18 +294,18 @@ export function HomepageWorkflowSection() {
     <section
       ref={sectionRef}
       aria-label="How Ledger works"
-      className="homepage-workflow relative z-20 overflow-x-clip bg-[var(--ledger-surface)] px-6 py-20 sm:px-8 sm:py-24 -mt-20 sm:-mt-22 lg:-mt-26 xl:-mt-26"
+      className="homepage-workflow relative z-20 overflow-x-clip bg-[var(--ledger-surface)] px-6 py-12 sm:px-8 sm:py-16 -mt-20 sm:-mt-22 lg:-mt-26 xl:-mt-26"
     >
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-workflow className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
-          <h2 className="mt-4 text-[44px] font-medium leading-[1.02] tracking-[-0.055em] text-ledger-text sm:text-[64px] lg:text-[68px]">
+          <h2 className="mt-2 text-[44px] font-medium leading-[1.02] tracking-[-0.055em] text-ledger-text sm:text-[64px] lg:text-[68px]">
             Everything lands where it belongs.
           </h2>
         </div>
 
         <div
           data-reveal-workflow
-          className="feature-reveal reveal-up mt-10 overflow-hidden rounded-[24px] bg-(--ledger-surface-card) sm:rounded-[28px] xl:rounded-[36px]"
+          className="feature-reveal reveal-up mt-6 overflow-hidden rounded-[24px] bg-(--ledger-surface-card) sm:rounded-[28px] xl:rounded-[36px]"
           style={{ transitionDelay: '150ms' }}
         >
           <div className="hidden items-stretch gap-0 lg:grid lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]">
@@ -444,7 +444,7 @@ export function HomepageWorkflowSection() {
 
         <div
           data-reveal-workflow
-          className="feature-reveal reveal-up mt-5 grid gap-3 sm:gap-3.5 xl:grid-cols-5"
+          className="feature-reveal reveal-up mt-3 grid gap-3 sm:gap-3.5 xl:grid-cols-5"
           style={{ transitionDelay: '260ms' }}
         >
           {ecosystemCards.map((card, index) => {

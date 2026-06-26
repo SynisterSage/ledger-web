@@ -1,7 +1,7 @@
 export function NotFoundPage() {
   return (
-    <main className="min-h-screen bg-ledger-bg text-ledger-text">
-      <div className="flex min-h-screen flex-col">
+    <main className="min-h-dhv bg-ledger-bg text-ledger-text">
+      <div className="flex min-h-dhv flex-col">
         <div className="flex items-start px-4 py-4 sm:px-6">
           <a href="/" className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 leading-none">
             <img src="/assets/logos/logo.svg" alt="Ledger" className="h-7 w-auto" />

@@ -9,7 +9,7 @@ export function AboutPage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dhv">
       <SiteHeader currentPath="/about" />
       <main className="mx-auto w-full max-w-4xl px-5 py-20 sm:px-8">
         <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">About Ledger</h1>

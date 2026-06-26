@@ -59,7 +59,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  min-height: 100vh;
+  min-height: 100dvh;
   background: radial-gradient(circle at top, var(--ledger-background-muted) 0%, var(--ledger-background) 58%);
 }
 

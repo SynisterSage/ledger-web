@@ -16,7 +16,7 @@ export function InviteSuccessPage() {
   const workspaceName = getWorkspaceName()
 
   return (
-    <main className="min-h-screen bg-ledger-bg px-5 py-8 text-ledger-text sm:px-8">
+    <main className="min-h-dhv bg-ledger-bg px-5 py-8 text-ledger-text sm:px-8">
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md items-center justify-center">
         <section className="w-full rounded-3xl border border-ledger-border bg-ledger-surface px-6 py-7 text-center shadow-(--ledger-shadow-soft)">
           <p className="text-[12px] font-medium text-ledger-text-muted">

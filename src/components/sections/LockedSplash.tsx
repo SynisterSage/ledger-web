@@ -1,7 +1,7 @@
 export function LockedSplash() {
   return (
-    <main className="min-h-screen bg-ledger-bg">
-      <div className="flex min-h-screen items-center justify-center px-6">
+    <main className="min-h-dhv bg-ledger-bg">
+      <div className="flex min-h-dhv items-center justify-center px-6">
         <img
           src="/assets/logos/logo.svg"
           alt="Ledger"

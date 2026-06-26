@@ -73,7 +73,7 @@ export function HomepageAssistantGridSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-14 text-ledger-text sm:px-8 sm:py-16">
+    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-10 text-ledger-text sm:px-8 sm:py-12">
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-assistant className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
           <h2 className="mt-3 text-[clamp(2.4rem,4.2vw,4.5rem)] font-normal leading-[0.96] tracking-[-0.05em] text-ledger-text">
@@ -81,7 +81,7 @@ export function HomepageAssistantGridSection() {
           </h2>
         </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
           <article
             data-reveal-assistant
             className="feature-reveal reveal-up overflow-hidden rounded-[20px] bg-(--ledger-surface-card) sm:rounded-[24px] xl:rounded-[32px] md:col-span-2"

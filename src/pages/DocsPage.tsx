@@ -1398,7 +1398,7 @@ function DocsHomePage({
 }) {
   return (
     <div
-      className="min-h-screen bg-ledger-bg text-ledger-text"
+      className="min-h-dhv bg-ledger-bg text-ledger-text"
       style={{ '--site-nav-menu-offset': '64px' } as CSSProperties}
     >
       <DocsHeader onSearchOpen={onSearchOpen} isMenuOpen={isMenuOpen} onMenuToggle={onMenuToggle} />
@@ -1553,7 +1553,7 @@ function DocsArticlePage({
 
   return (
     <div
-      className="min-h-screen bg-ledger-bg text-ledger-text"
+      className="min-h-dhv bg-ledger-bg text-ledger-text"
       style={{ '--site-nav-menu-offset': '64px' } as CSSProperties}
     >
       <DocsHeader
@@ -1679,7 +1679,7 @@ function ContactSupportPage({
 
   return (
     <div
-      className="min-h-screen bg-ledger-bg text-ledger-text"
+      className="min-h-dhv bg-ledger-bg text-ledger-text"
       style={{ '--site-nav-menu-offset': '64px' } as CSSProperties}
     >
       <DocsHeader

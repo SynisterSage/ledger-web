@@ -189,7 +189,7 @@ export function HomepageCommandGridSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-14 text-ledger-text sm:px-8 sm:py-16">
+    <section ref={sectionRef} className="bg-[var(--ledger-surface)] px-6 py-10 text-ledger-text sm:px-8 sm:py-12">
       <div className="mx-auto w-full max-w-7xl">
         <div data-reveal-command className="feature-reveal reveal-up max-w-4xl" style={{ transitionDelay: '70ms' }}>
           <h2 className="text-[clamp(2.4rem,4.2vw,4.5rem)] font-normal leading-[0.96] tracking-[-0.05em] text-ledger-text">
@@ -197,7 +197,7 @@ export function HomepageCommandGridSection() {
           </h2>
         </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
           <article
             data-reveal-command
             className="feature-reveal reveal-left overflow-hidden rounded-[18px] bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px]"
@@ -208,7 +208,7 @@ export function HomepageCommandGridSection() {
                 <div className="min-w-0 flex-1">
                   <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Planning</p>
                   <h3 className="mt-3 max-w-[30ch] text-[clamp(1.1rem,1.25vw,1.3rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
-                    Plan across notes, events, and projects.
+                    Your week, connected.
                   </h3>
                 </div>
                 <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
