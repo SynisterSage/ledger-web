@@ -8,6 +8,9 @@ const desktopCommandFrames = [
   '/assets/bentobox2/3rdbottombentoboxdesktop3_4x.webp',
 ]
 
+const integrationsDesktopSrc = '/assets/bentobox2/2ndtopbentoboxdesktop_4x.webp'
+const integrationsMobileSrc = '/assets/bentobox2/2ndtopbentoboxmobtab_4x.webp'
+
 function AbstractStage({
   tone = 'neutral',
 }: {
@@ -99,41 +102,30 @@ function DesktopCommandBentoMockup() {
   )
 }
 
-const cardShellHeightClass = 'min-h-[420px] sm:min-h-[460px] md:min-h-[520px]'
-const wideCardShellHeightClass = 'min-h-[420px] sm:min-h-[460px] md:min-h-[520px]'
+function IntegrationsMockup() {
+  useEffect(() => {
+    ;[integrationsDesktopSrc, integrationsMobileSrc].forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
 
-function SmallCommandCard({
-  label,
-  title,
-  tone,
-}: {
-  label: string
-  title: string
-  tone: 'warm' | 'cool'
-}) {
   return (
-    <article className={`flex h-full flex-col overflow-hidden rounded-[18px] bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px] ${cardShellHeightClass}`}>
-      <div className="p-4 sm:p-5">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0 flex-1">
-            <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">{label}</p>
-            <h3 className="mt-3 max-w-[24ch] text-[clamp(1.1rem,1.25vw,1.3rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
-              {title}
-            </h3>
-          </div>
-          <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
-            <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-1 border-t border-(--ledger-border-subtle) p-0">
-        <div className="flex flex-1 min-h-[300px] items-stretch justify-stretch overflow-hidden rounded-b-[18px] sm:min-h-[340px] sm:rounded-b-[22px] lg:rounded-b-[28px]">
-          <AbstractStage tone={tone} />
-        </div>
-      </div>
-    </article>
+    <div className="relative isolate aspect-[5/3] w-full overflow-hidden rounded-b-[20px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] sm:rounded-b-[24px] lg:aspect-[63/50] lg:rounded-b-[28px]">
+      <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
+        <source media="(min-width: 1024px)" srcSet={integrationsDesktopSrc} />
+        <img
+          src={integrationsMobileSrc}
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full rounded-[inherit] object-cover object-center"
+        />
+      </picture>
+    </div>
   )
 }
+
+const wideCardShellHeightClass = 'min-h-[360px] sm:min-h-[420px] md:min-h-[520px]'
 
 function WideCommandCard() {
   return (
@@ -196,21 +188,51 @@ export function HomepageCommandGridSection() {
         </div>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <div data-reveal-command className="feature-reveal reveal-left" style={{ transitionDelay: '150ms' }}>
-            <SmallCommandCard
-              label="Command actions"
-              title="Act on anything from one place."
-              tone="warm"
-            />
-          </div>
+          <article
+            data-reveal-command
+            className="feature-reveal reveal-left overflow-hidden rounded-[18px] bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px]"
+            style={{ transitionDelay: '150ms' }}
+          >
+            <div className="p-4 sm:p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0 flex-1">
+                  <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Command actions</p>
+                  <h3 className="mt-3 max-w-[30ch] text-[clamp(1.1rem,1.25vw,1.3rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
+                    Act on anything from one place.
+                  </h3>
+                </div>
+                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
+                  <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+                </div>
+              </div>
+            </div>
+            <div className="border-t border-(--ledger-border-subtle) p-0">
+              <div className="aspect-[5/3] w-full overflow-hidden rounded-b-[20px] sm:rounded-b-[24px] lg:aspect-[63/50] lg:rounded-b-[28px]">
+                <AbstractStage tone="warm" />
+              </div>
+            </div>
+          </article>
 
-          <div data-reveal-command className="feature-reveal reveal-right" style={{ transitionDelay: '220ms' }}>
-            <SmallCommandCard
-              label="Integrations"
-              title="Connect tools you use daily."
-              tone="cool"
-            />
-          </div>
+          <article
+            data-reveal-command
+            className="feature-reveal reveal-right overflow-hidden rounded-[18px] bg-(--ledger-surface-card) sm:rounded-[22px] xl:rounded-[28px]"
+            style={{ transitionDelay: '220ms' }}
+          >
+            <div className="p-4 sm:p-5">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0 flex-1">
+                  <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Integrations</p>
+                  <h3 className="mt-3 max-w-[30ch] text-[clamp(1.1rem,1.25vw,1.3rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
+                    Connect tools you use daily.
+                  </h3>
+                </div>
+                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
+                  <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
+                </div>
+              </div>
+            </div>
+            <IntegrationsMockup />
+          </article>
 
           <div data-reveal-command className="feature-reveal reveal-up md:col-span-2" style={{ transitionDelay: '290ms' }}>
             <WideCommandCard />

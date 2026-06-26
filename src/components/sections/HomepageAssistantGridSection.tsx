@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react'
 
 function SharedWorkspaceMockup() {
   return (
-    <div className="relative isolate h-full min-h-[280px] overflow-hidden rounded-b-[18px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] p-3 sm:min-h-[300px] sm:rounded-b-[22px] sm:rounded-t-none sm:p-4 lg:min-h-[500px] lg:rounded-l-none lg:rounded-r-[24px] lg:rounded-t-none lg:rounded-b-none xl:rounded-r-[28px] xl:rounded-t-none xl:rounded-b-none">
+    <div className="relative isolate aspect-[5/3] w-full overflow-hidden rounded-b-[20px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] sm:rounded-b-[24px] lg:aspect-[63/50] lg:rounded-l-none lg:rounded-r-[24px] lg:rounded-t-none lg:rounded-b-none xl:rounded-r-[28px]">
       <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
         <source media="(min-width: 1024px)" srcSet="/assets/bentobox1/topbentodesktop_4x.webp" />
         <img
