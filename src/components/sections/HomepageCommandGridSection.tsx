@@ -10,21 +10,8 @@ const desktopCommandFrames = [
 
 const integrationsDesktopSrc = '/assets/bentobox2/2ndtopbentoboxdesktop_4x.webp'
 const integrationsMobileSrc = '/assets/bentobox2/2ndtopbentoboxmobtab_4x.webp'
-
-function AbstractStage({
-  tone = 'neutral',
-}: {
-  tone?: 'neutral' | 'warm' | 'cool'
-}) {
-  const toneClass =
-    tone === 'warm'
-      ? 'bg-[linear-gradient(180deg,rgba(255,244,238,0.96)_0%,rgba(246,239,229,0.96)_100%)]'
-      : tone === 'cool'
-        ? 'bg-[linear-gradient(180deg,rgba(241,244,246,0.96)_0%,rgba(230,233,236,0.96)_100%)]'
-        : 'bg-[linear-gradient(180deg,rgba(247,242,234,0.96)_0%,rgba(238,234,228,0.96)_100%)]'
-
-  return <div className={`h-full w-full ${toneClass}`} />
-}
+const commandActionsDesktopSrc = '/assets/bentobox2/topbentoboxdesktop_4x.webp'
+const commandActionsMobileSrc = '/assets/bentobox2/topbentoboxmobtab_4x.webp.webp'
 
 function DesktopCommandBentoMockup() {
   const frameIndexRef = useRef(0)
@@ -125,6 +112,29 @@ function IntegrationsMockup() {
   )
 }
 
+function CommandActionsMockup() {
+  useEffect(() => {
+    ;[commandActionsDesktopSrc, commandActionsMobileSrc].forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
+
+  return (
+    <div className="relative isolate aspect-[5/3] w-full overflow-hidden rounded-b-[20px] rounded-t-none bg-[linear-gradient(180deg,var(--ledger-background-muted)_0%,rgba(255,255,255,0.52)_100%)] sm:rounded-b-[24px] lg:aspect-[63/50] lg:rounded-b-[28px]">
+      <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
+        <source media="(min-width: 1024px)" srcSet={commandActionsDesktopSrc} />
+        <img
+          src={commandActionsMobileSrc}
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full rounded-[inherit] object-cover object-center"
+        />
+      </picture>
+    </div>
+  )
+}
+
 const wideCardShellHeightClass = 'min-h-[360px] sm:min-h-[420px] md:min-h-[520px]'
 
 function WideCommandCard() {
@@ -196,9 +206,9 @@ export function HomepageCommandGridSection() {
             <div className="p-4 sm:p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0 flex-1">
-                  <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Command actions</p>
+                  <p className="text-[13px] font-medium tracking-[-0.01em] text-ledger-text-muted">Planning</p>
                   <h3 className="mt-3 max-w-[30ch] text-[clamp(1.1rem,1.25vw,1.3rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-ledger-text xl:whitespace-nowrap">
-                    Act on anything from one place.
+                    Plan across notes, events, and projects.
                   </h3>
                 </div>
                 <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
@@ -207,9 +217,7 @@ export function HomepageCommandGridSection() {
               </div>
             </div>
             <div className="border-t border-(--ledger-border-subtle) p-0">
-              <div className="aspect-[5/3] w-full overflow-hidden rounded-b-[20px] sm:rounded-b-[24px] lg:aspect-[63/50] lg:rounded-b-[28px]">
-                <AbstractStage tone="warm" />
-              </div>
+              <CommandActionsMockup />
             </div>
           </article>
 
