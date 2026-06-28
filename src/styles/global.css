@@ -478,6 +478,42 @@ img {
   animation-delay: 560ms;
 }
 
+@keyframes heroFrameSpring0 {
+  0% {
+    opacity: 0.92;
+    transform: translate3d(0, 7px, 0);
+  }
+  62% {
+    opacity: 1;
+    transform: translate3d(0, -1px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroFrameSpring1 {
+  0% {
+    opacity: 0.92;
+    transform: translate3d(0, 7px, 0);
+  }
+  62% {
+    opacity: 1;
+    transform: translate3d(0, -1px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-frame-spring {
+  animation-duration: 190ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+
 @keyframes heroOutlineFloat {
   0% {
     transform: translate3d(-1.2%, -4%, 0) scale(1.18);

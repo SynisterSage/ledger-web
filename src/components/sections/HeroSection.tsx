@@ -1,5 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 
+const heroDesktopFrames = Array.from(
+  { length: 3 },
+  (_, index) => `/assets/hero/herodesktop${index + 1}_4x.webp`,
+)
+
+const heroMobileFrames = Array.from(
+  { length: 3 },
+  (_, index) => `/assets/hero/heromob${index + 1}_4x.webp`,
+)
+
+const heroFrameSets = [heroDesktopFrames, heroMobileFrames]
+
 const rotatingWords = [
   'life',
   'work',
@@ -33,6 +45,47 @@ const rotatingWords = [
   'freelance work',
 ]
 type TypewriterPhase = 'typing' | 'holding' | 'deleting' | 'advancing'
+
+function useHeroFrame(frameDuration = 3200) {
+  const frameIndexRef = useRef(0)
+  const intervalRef = useRef<number | null>(null)
+  const [frameState, setFrameState] = useState({ index: 0, tick: 0 })
+
+  useEffect(() => {
+    heroFrameSets.flat().forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      return
+    }
+
+    intervalRef.current = window.setInterval(() => {
+      frameIndexRef.current = (frameIndexRef.current + 1) % heroDesktopFrames.length
+      setFrameState((current) => ({
+        index: frameIndexRef.current,
+        tick: current.tick + 1,
+      }))
+    }, frameDuration)
+
+    return () => {
+      if (intervalRef.current !== null) {
+        window.clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [frameDuration])
+
+  return frameState
+}
 
 function HeroTypewriter() {
   const [wordIndex, setWordIndex] = useState(0)
@@ -105,22 +158,24 @@ function HeroTypewriter() {
   )
 }
 
+function HeroProductVisual() {
+  const { index: frameIndex, tick: frameTick } = useHeroFrame()
+
+  return (
+    <picture className="relative z-10 block aspect-[39/48] w-full overflow-hidden rounded-[20px] sm:aspect-[9/5]">
+      <source media="(min-width: 640px)" srcSet={heroDesktopFrames[frameIndex]} />
+      <img
+        src={heroMobileFrames[frameIndex]}
+        alt=""
+        aria-hidden="true"
+        className="hero-frame-spring h-full w-full object-cover object-[center_18%] sm:object-center"
+        style={{ animationName: `heroFrameSpring${frameTick % 2}` }}
+      />
+    </picture>
+  )
+}
+
 export function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isPlaying, setIsPlaying] = useState(true)
-
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause()
-        setIsPlaying(false)
-      } else {
-        videoRef.current.play()
-        setIsPlaying(true)
-      }
-    }
-  }
-
   return (
     <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 bg-[var(--ledger-surface)] px-5 pb-8 pt-10 sm:px-7 sm:pb-12 sm:pt-18 lg:pb-16 lg:pt-24">
       <div
@@ -182,34 +237,7 @@ export function HeroSection() {
               <img src="/assets/images/Frame 11.svg" alt="" className="block h-full w-full" />
             </div>
           </div>
-          <video
-            ref={videoRef}
-            className="relative z-10 mx-auto aspect-video w-full rounded-[20px] shadow-[0_18px_60px_rgba(0,0,0,0.24)]"
-            src="/assets/videos/herovideo.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            controls={false}
-          />
-          <button
-            onClick={togglePlay}
-            className="absolute top-4 left-4 z-20 flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-sm transition sm:bottom-8 sm:top-auto"
-            style={{
-              backgroundColor: 'color-mix(in srgb, var(--ledger-surface-card) 32%, transparent)',
-            }}
-            aria-label={isPlaying ? 'Pause video' : 'Play video'}
-          >
-            {isPlaying ? (
-              <svg className="h-6 w-6 fill-(--ledger-text-primary)" viewBox="0 0 24 24">
-                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
-              </svg>
-            ) : (
-              <svg className="h-6 w-6 fill-(--ledger-text-primary)" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            )}
-          </button>
+          <HeroProductVisual />
         </div>
       </div>
     </section>

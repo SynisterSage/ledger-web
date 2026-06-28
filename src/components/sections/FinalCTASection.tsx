@@ -2,7 +2,7 @@ import { ActionButton } from '../ui/ActionButton'
 
 export function FinalCTASection() {
   return (
-    <section className="bg-ledger-surface px-6 py-20 sm:px-8 sm:py-24 lg:py-28">
+    <section className="bg-ledger-surface px-6 py-24 sm:px-8 sm:py-32 lg:py-40">
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center text-center">
         <div className="max-w-[56rem]">
           <h2 className="text-[clamp(2.8rem,6vw,5rem)] font-medium leading-[0.98] tracking-[-0.055em] text-ledger-text-primary">
