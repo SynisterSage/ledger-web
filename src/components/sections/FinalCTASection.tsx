@@ -2,23 +2,20 @@ import { ActionButton } from '../ui/ActionButton'
 
 export function FinalCTASection() {
   return (
-    <section className="bg-(--ledger-surface-card) px-6 py-10 sm:px-8 sm:py-12 lg:py-16">
-      <div className="mx-auto w-full max-w-7xl">
-        <div className="mx-auto max-w-5xl text-center">
-          <h2 className="text-[40px] font-medium leading-[1.05] tracking-[-0.03em] text-(--ledger-text-primary) sm:text-[54px] lg:text-[62px]">
-            Ready to run your day with less friction?
+    <section className="bg-ledger-surface px-6 py-20 sm:px-8 sm:py-24 lg:py-28">
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center text-center">
+        <div className="max-w-[56rem]">
+          <h2 className="text-[clamp(2.8rem,6vw,5rem)] font-medium leading-[0.98] tracking-[-0.055em] text-ledger-text-primary">
+            Everything you need. <br /> Right beside your work.
           </h2>
-          <div className="mt-8 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:mt-10 sm:gap-3">
-            <ActionButton
-              href="/download"
-              className="h-10 min-w-0 w-auto whitespace-nowrap px-5 text-[14px] sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
-            >
+          <div className="mt-10 flex flex-row flex-wrap items-center justify-center gap-3 sm:mt-12">
+            <ActionButton href="/download" className="h-11 px-6 text-[15px] sm:h-12 sm:px-7 sm:text-[16px]">
               Download Ledger
             </ActionButton>
             <ActionButton
               href="/help/contact-support"
               variant="secondary"
-              className="h-10 min-w-0 w-auto whitespace-nowrap px-5 text-[14px] sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
+              className="h-11 px-6 text-[15px] sm:h-12 sm:px-7 sm:text-[16px]"
             >
               Contact
             </ActionButton>

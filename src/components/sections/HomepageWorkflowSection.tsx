@@ -70,6 +70,18 @@ const workflowFeatures: WorkflowFeature[] = [
   },
 ]
 
+const captureDesktopFrames = Array.from(
+  { length: 7 },
+  (_, index) => `/assets/workflowsection/capture/capturedesktop${index + 1}_4x.webp`,
+)
+
+const captureMobileFrames = Array.from(
+  { length: 7 },
+  (_, index) => `/assets/workflowsection/capture/capturemob${index + 1}_4x.webp`,
+)
+
+const captureFrameSets = [captureDesktopFrames, captureMobileFrames]
+
 const ecosystemCards: EcosystemCard[] = [
   {
     title: 'Desktop app',
@@ -102,6 +114,68 @@ const ecosystemCards: EcosystemCard[] = [
     icon: Plug2,
   },
 ]
+
+function useStopMotionFrame(frameSets: string[][], frameDuration = 1300) {
+  const frameIndexRef = useRef(0)
+  const intervalRef = useRef<number | null>(null)
+  const [frameIndex, setFrameIndex] = useState(0)
+
+  useEffect(() => {
+    frameSets.flat().forEach((src) => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [frameSets])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      return
+    }
+
+    intervalRef.current = window.setInterval(() => {
+      frameIndexRef.current = (frameIndexRef.current + 1) % frameSets[0].length
+      setFrameIndex(frameIndexRef.current)
+    }, frameDuration)
+
+    return () => {
+      if (intervalRef.current !== null) {
+        window.clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [frameDuration, frameSets])
+
+  return frameIndex
+}
+
+function CaptureWorkflowVisual({
+  className,
+  imageClassName = 'object-cover object-center',
+}: {
+  className: string
+  imageClassName?: string
+}) {
+  const frameIndex = useStopMotionFrame(captureFrameSets)
+
+  return (
+    <div className={`workflow-panel-enter relative isolate overflow-hidden bg-[rgba(255,122,89,0.08)] ${className}`}>
+      <picture className="absolute inset-0 block overflow-hidden rounded-[inherit]">
+        <source media="(min-width: 640px)" srcSet={captureDesktopFrames[frameIndex]} />
+        <img
+          src={captureMobileFrames[frameIndex]}
+          alt=""
+          aria-hidden="true"
+          className={`h-full w-full rounded-[inherit] ${imageClassName}`}
+        />
+      </picture>
+    </div>
+  )
+}
 
 function WorkflowFeatureButton({
   feature,
@@ -178,13 +252,15 @@ function WorkflowFeatureButton({
 }
 
 function WorkflowStageShell({ feature }: { feature: WorkflowFeature }) {
+  if (feature.id === 'capture') {
+    return <CaptureWorkflowVisual className="h-full min-h-[560px] w-full rounded-r-[28px] rounded-l-none" />
+  }
+
   const toneClass =
-    feature.id === 'capture'
-      ? 'bg-[rgba(255,122,89,0.08)]'
-      : feature.id === 'organize'
-        ? 'bg-[rgba(184,174,160,0.16)]'
-        : feature.id === 'act'
-          ? 'bg-[rgba(199,186,168,0.16)]'
+    feature.id === 'organize'
+      ? 'bg-[rgba(184,174,160,0.16)]'
+      : feature.id === 'act'
+        ? 'bg-[rgba(199,186,168,0.16)]'
           : 'bg-[rgba(188,180,169,0.18)]'
 
   return (
@@ -203,13 +279,22 @@ function WorkflowStageFrame({
   rounded?: boolean
   mobileFullBleed?: boolean
 }) {
+  if (feature.id === 'capture') {
+    return (
+      <CaptureWorkflowVisual
+        className={`h-full min-h-[430px] w-full sm:min-h-[500px] ${
+          mobileFullBleed ? 'rounded-none' : rounded ? 'rounded-[28px]' : 'rounded-r-[28px] rounded-l-none'
+        }`}
+        imageClassName="object-cover object-center"
+      />
+    )
+  }
+
   const toneClass =
-    feature.id === 'capture'
-      ? 'bg-[rgba(255,122,89,0.08)]'
-      : feature.id === 'organize'
-        ? 'bg-[rgba(184,174,160,0.16)]'
-        : feature.id === 'act'
-          ? 'bg-[rgba(199,186,168,0.16)]'
+    feature.id === 'organize'
+      ? 'bg-[rgba(184,174,160,0.16)]'
+      : feature.id === 'act'
+        ? 'bg-[rgba(199,186,168,0.16)]'
           : 'bg-[rgba(188,180,169,0.18)]'
 
   return (

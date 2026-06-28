@@ -122,7 +122,7 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 px-5 pb-8 pt-10 sm:px-7 sm:pb-12 sm:pt-18 lg:pb-16 lg:pt-24">
+    <section className="relative overflow-x-clip overflow-y-visible border-b border-ledger-border/80 bg-[var(--ledger-surface)] px-5 pb-8 pt-10 sm:px-7 sm:pb-12 sm:pt-18 lg:pb-16 lg:pt-24">
       <div
         aria-hidden="true"
         className="hero-bottom-glow pointer-events-none absolute inset-x-0 bottom-0 z-0 h-104 sm:h-136 lg:h-160"

@@ -99,7 +99,7 @@ export function DownloadPage() {
 
       <main className="mx-auto w-full max-w-6xl px-6 pb-20 pt-14 sm:px-8 sm:pt-20 lg:pt-24">
         <section className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <div className="flex h-24 w-24 items-center justify-center rounded-3xl border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] shadow-[0_12px_40px_rgba(0,0,0,0.28)]">
+          <div className="flex h-24 w-24 items-center justify-center rounded-3xl border border-(--ledger-border-subtle) bg-[rgba(247,242,234,0.04)] shadow-[0_4px_10px_rgba(0,0,0,0.34)]">
             <img src="/assets/logos/logo.svg" alt="" className="h-14 w-14" />
           </div>
 
@@ -108,7 +108,7 @@ export function DownloadPage() {
           </h1>
 
           <p className="mt-4 max-w-2xl text-[16px] leading-7 text-(--ledger-text-secondary) sm:text-[17px]">
-            Available for desktop, mobile, and web. Choose the platform that fits your workflow and keep your work close
+            Available for desktop and mobile. Choose the platform that fits your workflow and keep your work close
             wherever you are.
           </p>
 

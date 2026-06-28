@@ -1,13 +1,10 @@
 export function NotFoundPage() {
   return (
-    <main className="min-h-dhv bg-ledger-bg text-ledger-text">
-      <div className="flex min-h-dhv flex-col">
+    <main className="min-h-dvh bg-[var(--ledger-surface)] text-ledger-text">
+      <div className="flex min-h-dvh flex-col">
         <div className="flex items-start px-4 py-4 sm:px-6">
           <a href="/" className="inline-flex items-center gap-2 rounded-full px-1.5 py-1 leading-none">
             <img src="/assets/logos/logo.svg" alt="Ledger" className="h-7 w-auto" />
-            <span className="relative top-0.5 text-[19px] font-medium tracking-[-0.02em] text-ledger-text">
-              Ledger
-            </span>
           </a>
         </div>
 
@@ -22,7 +19,7 @@ export function NotFoundPage() {
           </div>
         </section>
 
-        <footer className="px-4 pb-5 sm:px-6">
+        <footer className="px-4 pb-6 sm:px-6 sm:pb-8">
           <div className="flex items-center justify-center gap-3 text-[13px] text-ledger-text-muted">
             <a href="/" className="transition-colors hover:text-ledger-text">
               What is Ledger?

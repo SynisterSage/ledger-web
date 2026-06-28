@@ -109,11 +109,8 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
 
       <div className="site-nav__shell mx-auto w-full">
         <div className="site-nav__inner flex items-center gap-4">
-          <a href="/" className="site-nav__brand inline-flex min-w-max items-center gap-2 rounded-full leading-none">
+          <a href="/" className="site-nav__brand inline-flex min-w-max items-center rounded-full leading-none" aria-label="Ledger home">
             <img src="/assets/logos/logo.svg" alt="" className="h-7 w-auto sm:h-7.25" />
-            <span className="relative top-0.5 text-[19px] font-medium tracking-[-0.02em] text-(--ledger-header-text)">
-              Ledger
-            </span>
           </a>
 
           <div className="ml-auto flex items-center gap-3">

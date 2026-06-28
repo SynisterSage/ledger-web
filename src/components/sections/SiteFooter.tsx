@@ -27,22 +27,24 @@ const footerColumns = [
 
 export function SiteFooter() {
   return (
-    <footer className="overflow-x-clip border-t border-(--ledger-border-subtle) bg-ledger-bg px-6 py-8 sm:px-8 sm:py-10">
+    <footer className="overflow-x-clip border-t border-(--ledger-border-subtle) bg-ledger-bg px-6 py-12 sm:px-8 sm:py-14 lg:py-16">
       <div className="mx-auto w-full max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-12">
-          <div className="shrink-0">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:items-start lg:gap-12">
+          <div className="max-w-xs">
             <img src="/assets/logos/logo.svg" alt="Ledger" className="h-8 w-auto" />
-            <p className="mt-2 text-sm font-medium text-(--ledger-text-primary)">Live a little simpler</p>
           </div>
 
-          <div className="grid min-w-0 grid-cols-2 gap-10 sm:grid-cols-3 lg:flex lg:justify-end lg:gap-16">
+          <div className="grid min-w-0 grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-10 lg:gap-12">
             {footerColumns.map((column) => (
               <div key={column.title}>
-                <h3 className="text-xs font-semibold text-(--ledger-text-primary)">{column.title}</h3>
-                <ul className="mt-3 space-y-2">
+                <h3 className="text-[13px] font-semibold tracking-[-0.02em] text-(--ledger-text-primary)">{column.title}</h3>
+                <ul className="mt-3 space-y-2.5">
                   {column.links.map((link) => (
                     <li key={link.label}>
-                      <a href={link.href} className="text-xs text-(--ledger-text-secondary) transition-colors hover:text-(--ledger-text-primary)">
+                      <a
+                        href={link.href}
+                        className="text-[13px] leading-5 text-(--ledger-text-secondary) transition-colors hover:text-(--ledger-text-primary)"
+                      >
                         {link.label}
                       </a>
                     </li>
@@ -53,9 +55,6 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 flex justify-start border-t border-(--ledger-border-subtle) pt-4 md:justify-end">
-          <p className="text-left text-xs text-(--ledger-text-secondary) md:text-right">Ledger 2026.</p>
-        </div>
       </div>
     </footer>
   )
