@@ -728,11 +728,17 @@ img {
   .hero-enter,
   .feature-reveal,
   .workflow-panel-enter,
-  .hero-outline-float,
   .hero-ornament {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
+  }
+
+  .hero-outline-float {
+    animation: none !important;
+    opacity: 0.08 !important;
+    transform: translate3d(-1.2%, -4%, 0) scale(1.18) !important;
     transition: none !important;
   }
 

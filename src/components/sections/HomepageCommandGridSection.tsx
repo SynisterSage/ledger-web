@@ -30,7 +30,6 @@ function DesktopCommandBentoMockup() {
       return
     }
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const desktopQuery = window.matchMedia('(min-width: 1024px)')
 
     const stop = () => {
@@ -43,7 +42,7 @@ function DesktopCommandBentoMockup() {
     const start = () => {
       stop()
 
-      if (prefersReducedMotion || !desktopQuery.matches) {
+      if (!desktopQuery.matches) {
         return
       }
 

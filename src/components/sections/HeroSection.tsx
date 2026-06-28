@@ -63,11 +63,6 @@ function useHeroFrame(frameDuration = 3200) {
       return
     }
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) {
-      return
-    }
-
     intervalRef.current = window.setInterval(() => {
       frameIndexRef.current = (frameIndexRef.current + 1) % heroDesktopFrames.length
       setFrameState((current) => ({

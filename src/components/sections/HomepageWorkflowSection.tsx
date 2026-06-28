@@ -132,11 +132,6 @@ function useStopMotionFrame(frameSets: string[][], frameDuration = 1300) {
       return
     }
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) {
-      return
-    }
-
     intervalRef.current = window.setInterval(() => {
       frameIndexRef.current = (frameIndexRef.current + 1) % frameSets[0].length
       setFrameIndex(frameIndexRef.current)
