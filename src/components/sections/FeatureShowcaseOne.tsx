@@ -49,7 +49,7 @@ export function FeatureShowcaseOne() {
               Dock Ledger next to the apps you already use, capture thoughts the moment they appear, and get back to work without losing context.
             </p>
             <a
-              href="/sidebar"
+              href="/features/desktop"
               className="mt-8 inline-flex text-[20px] font-light leading-none text-ledger-text/48 transition-colors hover:text-ledger-text/70"
             >
               1.0 Sidebar →

@@ -17,8 +17,8 @@ export function LoginPage() {
       mode === 'login'
         ? {
             eyebrow: 'Ledger account',
-            title: 'Your workspace, within reach.',
-            subtitle: 'Log in to your Ledger account.',
+            title: 'Welcome to Ledger',
+            subtitle: 'Sign in to continue to your workspace.',
             primaryLabel: 'Continue',
             googleLabel: 'Continue with Google',
             footerPrompt: 'New to Ledger?',
@@ -26,7 +26,7 @@ export function LoginPage() {
           }
         : {
             eyebrow: 'Ledger account',
-            title: 'Start with Ledger.',
+            title: 'Welcome to Ledger',
             subtitle: 'Create your Ledger account.',
             primaryLabel: 'Create account',
             googleLabel: 'Continue with Google',
@@ -67,7 +67,7 @@ export function LoginPage() {
 
           <div className="mt-7">
             <h1 className="mt-2 text-[26px] font-semibold leading-tight text-ledger-text">{copy.title}</h1>
-            <p className="mt-1 text-[22px] font-semibold leading-tight text-ledger-text-muted">{copy.subtitle}</p>
+            <p className="mt-3 text-[16px] leading-7 text-ledger-text-muted">{copy.subtitle}</p>
           </div>
 
           <div className="mt-8 text-left">
@@ -142,6 +142,12 @@ export function LoginPage() {
               </button>
             </p>
           </div>
+
+          <p className="mt-6 text-[13px] leading-5 text-ledger-text-muted">
+            <a href="/" className="underline decoration-ledger-text-muted/40 underline-offset-3 transition-colors hover:text-ledger-accent">
+              Back to home
+            </a>
+          </p>
         </section>
       </main>
     </div>

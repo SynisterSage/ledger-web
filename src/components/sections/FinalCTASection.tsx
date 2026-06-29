@@ -13,7 +13,7 @@ export function FinalCTASection() {
               Download Ledger
             </ActionButton>
             <ActionButton
-              href="/help/contact-support"
+              href="/help/contact"
               variant="secondary"
               className="h-11 px-6 text-[15px] sm:h-12 sm:px-7 sm:text-[16px]"
             >

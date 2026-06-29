@@ -49,7 +49,7 @@ export function FeatureShowcaseTwo() {
               Create projects, add tasks, and schedule follow-ups before scattered thoughts disappear into another tab.
             </p>
             <a
-              href="/planning"
+              href="/features"
               className="mt-8 inline-flex text-[20px] font-light leading-none text-ledger-text/48 transition-colors hover:text-ledger-text/70"
             >
               2.0 Planning →

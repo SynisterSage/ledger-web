@@ -86,7 +86,7 @@ const ecosystemCards: EcosystemCard[] = [
   {
     title: 'Desktop app',
     description: 'Float, dock, and keep Ledger beside your work.',
-    href: '/sidebar',
+    href: '/features/desktop',
     icon: Monitor,
   },
   {
@@ -104,13 +104,13 @@ const ecosystemCards: EcosystemCard[] = [
   {
     title: 'Shortcuts',
     description: 'Add reminders, tasks, and notes by voice.',
-    href: '/help/siri-shortcuts',
+    href: '/help/shortcuts',
     icon: Sparkles,
   },
   {
     title: 'Integrations',
     description: 'Connect the tools you already use to the same workspace context.',
-    href: '/help/integrations',
+    href: '/features/integrations',
     icon: Plug2,
   },
 ]

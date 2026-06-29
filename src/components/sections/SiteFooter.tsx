@@ -2,18 +2,18 @@ const footerColumns = [
   {
     title: 'Product',
     links: [
-      { label: 'Features', href: '/about' },
-      { label: 'Help', href: '/help' },
+      { label: 'Features', href: '/features' },
       { label: 'Download', href: '/download' },
-      { label: 'Changelog', href: '/about' },
+      { label: 'Changelog', href: '/changelog' },
+      { label: 'Help', href: '/help' },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { label: 'Getting Started', href: '/about' },
-      { label: 'Shortcuts', href: '/about' },
-      { label: 'Contact', href: '/help/contact-support' },
+      { label: 'Getting Started', href: '/help/getting-started' },
+      { label: 'Shortcuts', href: '/help/shortcuts' },
+      { label: 'Contact', href: '/help/contact' },
     ],
   },
   {
@@ -54,7 +54,6 @@ export function SiteFooter() {
             ))}
           </div>
         </div>
-
       </div>
     </footer>
   )

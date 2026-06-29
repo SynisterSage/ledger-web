@@ -49,12 +49,15 @@ type TypewriterPhase = 'typing' | 'holding' | 'deleting' | 'advancing'
 function useHeroFrame(frameDuration = 3200) {
   const frameIndexRef = useRef(0)
   const intervalRef = useRef<number | null>(null)
+  const preloadedFramesRef = useRef<HTMLImageElement[]>([])
   const [frameState, setFrameState] = useState({ index: 0, tick: 0 })
 
   useEffect(() => {
-    heroFrameSets.flat().forEach((src) => {
+    preloadedFramesRef.current = heroFrameSets.flat().map((src) => {
       const img = new Image()
+      img.decoding = 'async'
       img.src = src
+      return img
     })
   }, [])
 
@@ -85,21 +88,16 @@ function useHeroFrame(frameDuration = 3200) {
 function HeroTypewriter() {
   const [wordIndex, setWordIndex] = useState(0)
   const [text, setText] = useState(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    if (typeof window === 'undefined') {
       return rotatingWords[0]
     }
 
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? rotatingWords[0] : ''
+    return ''
   })
   const [phase, setPhase] = useState<TypewriterPhase>('typing')
 
   useEffect(() => {
-    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-      return
-    }
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReducedMotion) {
+    if (typeof window === 'undefined') {
       return
     }
 
@@ -163,6 +161,9 @@ function HeroProductVisual() {
         src={heroMobileFrames[frameIndex]}
         alt=""
         aria-hidden="true"
+        loading="eager"
+        decoding="sync"
+        fetchPriority="high"
         className="hero-frame-spring h-full w-full object-cover object-[center_18%] sm:object-center"
         style={{ animationName: `heroFrameSpring${frameTick % 2}` }}
       />
@@ -209,7 +210,7 @@ export function HeroSection() {
               Download
             </a>
             <a
-              href="/about"
+              href="/features"
               className="inline-flex h-10 w-auto min-w-0 items-center justify-center whitespace-nowrap rounded-full border border-ledger-border bg-(--ledger-surface-card) px-5 text-[14px] font-semibold leading-none text-ledger-text transition hover:bg-ledger-surface-muted sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
             >
               See features

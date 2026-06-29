@@ -49,7 +49,7 @@ export function FeatureShowcaseThree() {
               End the day with a quick check-in that captures what moved, what got blocked, and what needs your attention next.
             </p>
             <a
-              href="/review"
+              href="/features"
               className="mt-8 inline-flex text-[20px] font-light leading-none text-ledger-text/48 transition-colors hover:text-ledger-text/70"
             >
               3.0 Review →
