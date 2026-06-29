@@ -4,14 +4,14 @@ const footerColumns = [
     links: [
       { label: 'Features', href: '/features' },
       { label: 'Download', href: '/download' },
-      { label: 'Changelog', href: '/changelog' },
-      { label: 'Help', href: '/help' },
     ],
   },
   {
     title: 'Resources',
     links: [
       { label: 'Getting Started', href: '/help/getting-started' },
+      { label: 'Help', href: '/help' },
+      { label: 'Changelog', href: '/changelog' },
       { label: 'Shortcuts', href: '/help/shortcuts' },
       { label: 'Contact', href: '/help/contact' },
     ],

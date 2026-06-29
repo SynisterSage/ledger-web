@@ -1410,7 +1410,7 @@ function DocsHomePage({
         </div>
 
         <main className="min-w-0 w-full justify-self-center px-5 py-10 sm:px-8 lg:max-w-330 lg:px-12 lg:py-12">
-          <div className="mx-auto w-full max-w-4xl">
+          <div className="mx-auto w-full max-w-5xl">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-[13px] font-medium text-ledger-text-muted">Help</p>
@@ -1474,9 +1474,10 @@ function DocsArticlePage({
     }
 
     let rafId = 0
+    const activationOffset = 96
 
     const updateActiveSection = () => {
-      const viewportLine = window.scrollY + window.innerHeight * 0.34
+      const viewportLine = window.scrollY + activationOffset
       const atPageBottom =
         window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 24
       let nextSectionId = sectionIds[0] ?? ''
@@ -1767,6 +1768,7 @@ function ContactSupportPage({
 }
 
 function DocsPageShell({ pathname }: { pathname: string }) {
+  const canonicalPathname = pathname === '/help/contact' ? '/help/contact-support' : pathname
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -1809,11 +1811,11 @@ function DocsPageShell({ pathname }: { pathname: string }) {
   const onSearchOpen = () => setIsSearchOpen(true)
   const onSearchClose = () => setIsSearchOpen(false)
 
-  if (pathname === '/help' || pathname === '/help/index' || pathname === '/docs' || pathname === '/docs/index') {
+  if (canonicalPathname === '/help' || canonicalPathname === '/help/index' || canonicalPathname === '/docs' || canonicalPathname === '/docs/index') {
     return (
       <>
         <DocsHomePage
-          pathname={pathname.replace(/^\/docs/, '/help')}
+          pathname={canonicalPathname.replace(/^\/docs/, '/help')}
           onSearchOpen={onSearchOpen}
           isMenuOpen={isMenuOpen}
           onMenuToggle={() => setIsMenuOpen((current) => !current)}
@@ -1828,8 +1830,8 @@ function DocsPageShell({ pathname }: { pathname: string }) {
     )
   }
 
-  if (pathname.startsWith('/help/') || pathname.startsWith('/docs/')) {
-    if (pathname === '/help/contact-support' || pathname === '/docs/contact-support') {
+  if (canonicalPathname.startsWith('/help/') || canonicalPathname.startsWith('/docs/')) {
+    if (canonicalPathname === '/help/contact-support' || canonicalPathname === '/docs/contact-support') {
       return (
         <>
           <ContactSupportPage
@@ -1850,7 +1852,7 @@ function DocsPageShell({ pathname }: { pathname: string }) {
     return (
       <>
         <DocsArticlePage
-          pathname={pathname.replace(/^\/docs/, '/help')}
+          pathname={canonicalPathname.replace(/^\/docs/, '/help')}
           onSearchOpen={onSearchOpen}
           isMenuOpen={isMenuOpen}
           onMenuToggle={() => setIsMenuOpen((current) => !current)}

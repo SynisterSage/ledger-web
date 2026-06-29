@@ -148,18 +148,21 @@ function WideCommandCard() {
                 Float it, Dock it.
               </h3>
             </div>
-
-            <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
+            <a
+              href="/features/desktop"
+              aria-label="Open desktop app"
+              className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
+            >
               <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-            </div>
+            </a>
           </div>
         </div>
 
-        <div className="flex flex-1 border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0">
+        <a href="/features/desktop" aria-label="Open desktop app" className="flex flex-1 border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0">
           <div className="flex flex-1 items-stretch justify-stretch overflow-hidden rounded-b-[20px] sm:rounded-b-[24px] lg:rounded-b-[28px] lg:rounded-bl-none">
             <DesktopCommandBentoMockup />
           </div>
-        </div>
+        </a>
       </div>
     </article>
   )
@@ -210,14 +213,18 @@ export function HomepageCommandGridSection() {
                     Your week, connected.
                   </h3>
                 </div>
-                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
+                <a
+                  href="/features/planning"
+                  aria-label="Open planning"
+                  className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
+                >
                   <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-                </div>
+                </a>
               </div>
             </div>
-            <div className="border-t border-(--ledger-border-subtle) p-0">
+            <a href="/features/planning" aria-label="Open planning" className="border-t border-(--ledger-border-subtle) p-0">
               <CommandActionsMockup />
-            </div>
+            </a>
           </article>
 
           <article
@@ -233,12 +240,18 @@ export function HomepageCommandGridSection() {
                     Connect tools you use daily.
                   </h3>
                 </div>
-                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
+                <a
+                  href="/features/integrations"
+                  aria-label="Open integrations"
+                  className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
+                >
                   <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-                </div>
+                </a>
               </div>
             </div>
-            <IntegrationsMockup />
+            <a href="/features/integrations" aria-label="Open integrations">
+              <IntegrationsMockup />
+            </a>
           </article>
 
           <div data-reveal-command className="feature-reveal reveal-up md:col-span-2" style={{ transitionDelay: '290ms' }}>

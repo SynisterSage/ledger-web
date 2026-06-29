@@ -79,6 +79,12 @@ function AppRouter() {
       return <ProductScaffoldPage page="browser" />
     case '/features/integrations':
       return <ProductScaffoldPage page="integrations" />
+    case '/features/shared-workspaces':
+      return <ProductScaffoldPage page="shared-workspaces" />
+    case '/features/search':
+      return <ProductScaffoldPage page="search" />
+    case '/features/planning':
+      return <ProductScaffoldPage page="planning" />
     case '/changelog':
       return <ChangelogPage />
     case '/login':

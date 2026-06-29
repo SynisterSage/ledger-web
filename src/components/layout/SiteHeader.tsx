@@ -30,16 +30,30 @@ const productLinks = [
     label: 'Integrations',
     description: 'Bring outside context into Ledger.',
   },
+  {
+    href: '/features/shared-workspaces',
+    label: 'Shared workspaces',
+    description: 'Keep collaborative context in one place.',
+  },
+  {
+    href: '/features/search',
+    label: 'Search',
+    description: 'Find what you need across Ledger.',
+  },
+  {
+    href: '/features/planning',
+    label: 'Planning',
+    description: 'Turn captures into a simple next step.',
+  },
 ]
 
 const topLinks = [
   { href: '/download', label: 'Download' },
-  { href: '/changelog', label: 'Changelog' },
   { href: '/help', label: 'Help' },
 ]
 
 const actions = [
-  { href: '/help/contact', label: 'Contact', kind: 'ghost' as const },
+  { href: '/login', label: 'Log in', kind: 'ghost' as const },
   { href: '/download', label: 'Download Ledger', kind: 'primary' as const },
 ]
 
@@ -65,9 +79,10 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
     return window.scrollY > 12
   })
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isProductOpen, setIsProductOpen] = useState(false)
+  const [isProductHovered, setIsProductHovered] = useState(false)
+  const [isProductPinned, setIsProductPinned] = useState(false)
+  const [openMobileSection, setOpenMobileSection] = useState<'product' | 'links' | 'legal'>('product')
 
-  const isProductActive = pathname === '/' || pathname.startsWith('/features')
   const isHelpActive = pathname === '/help' || pathname.startsWith('/help/')
 
   useEffect(() => {
@@ -131,7 +146,7 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
   }, [])
 
   useEffect(() => {
-    if (!isProductOpen) {
+    if (!isProductPinned) {
       return
     }
 
@@ -140,7 +155,7 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
         return
       }
 
-      setIsProductOpen(false)
+      setIsProductPinned(false)
     }
 
     window.addEventListener('pointerdown', onPointerDown)
@@ -148,7 +163,9 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
     return () => {
       window.removeEventListener('pointerdown', onPointerDown)
     }
-  }, [isProductOpen])
+  }, [isProductPinned])
+
+  const isProductOpen = isProductHovered || isProductPinned
 
   return (
     <header
@@ -167,12 +184,12 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
               <div
                 ref={productDropdownRef}
                 className="site-nav__product"
-                onPointerEnter={() => setIsProductOpen(true)}
-                onPointerLeave={() => setIsProductOpen(false)}
-                onFocus={() => setIsProductOpen(true)}
+                onPointerEnter={() => setIsProductHovered(true)}
+                onPointerLeave={() => setIsProductHovered(false)}
+                onFocus={() => setIsProductHovered(true)}
                 onBlur={(event) => {
                   if (!event.currentTarget.contains(event.relatedTarget)) {
-                    setIsProductOpen(false)
+                    setIsProductHovered(false)
                   }
                 }}
               >
@@ -180,8 +197,18 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
                   type="button"
                   aria-expanded={isProductOpen}
                   aria-haspopup="menu"
-                  className={`${navLinkClass(isProductActive)} gap-1.5`}
-                  onClick={() => setIsProductOpen((current) => !current)}
+                  className={`${navLinkClass(false)} gap-1.5`}
+                  style={{
+                    color: 'var(--ledger-header-text-muted)',
+                    fontSize: '13px',
+                    fontWeight: 500,
+                    lineHeight: 1,
+                    letterSpacing: '-0.01em',
+                  }}
+                  onClick={() => {
+                    setIsProductPinned((current) => !current)
+                    setIsProductHovered(true)
+                  }}
                 >
                   Product
                   <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true">
@@ -197,7 +224,10 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
                       role="menuitem"
                       aria-current={item.href === pathname ? 'page' : undefined}
                       className={`site-nav__product-link ${item.href === pathname ? 'is-active' : ''}`}
-                      onClick={() => setIsProductOpen(false)}
+                      onClick={() => {
+                        setIsProductPinned(false)
+                        setIsProductHovered(false)
+                      }}
                     >
                       <span className="site-nav__product-link-label">{item.label}</span>
                       <span className="site-nav__product-link-description">{item.description}</span>
@@ -277,9 +307,19 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
 
       <div className={`site-nav__mobile-sheet lg:hidden ${isMenuOpen ? 'is-open' : ''}`}>
         <nav className="site-nav__mobile-links">
-          <div className="site-nav__mobile-group">
-            <div className="site-nav__mobile-group-title">Product</div>
-            <div className="site-nav__mobile-group-list">
+          <div className="site-nav__mobile-section">
+            <button
+              type="button"
+              className="site-nav__mobile-section-trigger"
+              aria-expanded={openMobileSection === 'product'}
+              onClick={() => setOpenMobileSection((current) => (current === 'product' ? 'product' : 'product'))}
+            >
+              <span>Product</span>
+              <svg viewBox="0 0 16 16" className={`site-nav__mobile-section-chevron ${openMobileSection === 'product' ? 'is-open' : ''}`} aria-hidden="true">
+                <path d="M4.75 6.25 8 9.5l3.25-3.25" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+              </svg>
+            </button>
+            <div className={`site-nav__mobile-section-panel ${openMobileSection === 'product' ? 'is-open' : ''}`}>
               {productLinks.map((item) => {
                 const isActive = item.href === pathname
                 return (
@@ -288,59 +328,88 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
                     href={item.href}
                     aria-current={isActive ? 'page' : undefined}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`site-nav__mobile-product-link ${isActive ? 'is-active' : ''}`}
+                    className={`site-nav__mobile-section-link ${isActive ? 'is-active' : ''}`}
                   >
-                    <span>{item.label}</span>
-                    <span>{item.description}</span>
+                    <span className="site-nav__mobile-section-link-title">{item.label}</span>
+                    <span className="site-nav__mobile-section-link-copy">{item.description}</span>
                   </a>
                 )
               })}
             </div>
           </div>
 
-          {topLinks.map((item) => {
-            const isActive = item.href === pathname || (item.href === '/help' && isHelpActive)
-            return (
+          <div className="site-nav__mobile-section">
+            <button
+              type="button"
+              className="site-nav__mobile-section-trigger"
+              aria-expanded={openMobileSection === 'links'}
+              onClick={() => setOpenMobileSection((current) => (current === 'links' ? 'links' : 'links'))}
+            >
+              <span>Links</span>
+              <svg viewBox="0 0 16 16" className={`site-nav__mobile-section-chevron ${openMobileSection === 'links' ? 'is-open' : ''}`} aria-hidden="true">
+                <path d="M4.75 6.25 8 9.5l3.25-3.25" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+              </svg>
+            </button>
+            <div className={`site-nav__mobile-section-panel ${openMobileSection === 'links' ? 'is-open' : ''}`}>
+              {topLinks.map((item) => {
+                const isActive = item.href === pathname || (item.href === '/help' && isHelpActive)
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    aria-current={isActive ? 'page' : undefined}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`site-nav__mobile-section-link site-nav__mobile-section-link--compact ${isActive ? 'is-active' : ''}`}
+                  >
+                    <span className="site-nav__mobile-section-link-title">{item.label}</span>
+                  </a>
+                )
+              })}
               <a
-                key={item.label}
-                href={item.href}
-                aria-current={isActive ? 'page' : undefined}
+                href="/login"
                 onClick={() => setIsMenuOpen(false)}
-                className={`site-nav__mobile-link ${isActive ? 'is-active' : ''}`}
+                aria-current={pathname === '/login' ? 'page' : undefined}
+                className={`site-nav__mobile-section-link site-nav__mobile-section-link--compact ${pathname === '/login' ? 'is-active' : ''}`}
               >
-                {item.label}
+                <span className="site-nav__mobile-section-link-title">Log in</span>
               </a>
-            )
-          })}
+            </div>
+          </div>
 
-          <a
-            href="/help/contact"
-            onClick={() => setIsMenuOpen(false)}
-            aria-current={pathname === '/help/contact' ? 'page' : undefined}
-            className={`site-nav__mobile-link ${pathname === '/help/contact' ? 'is-active' : ''}`}
-          >
-            Contact
-          </a>
-        </nav>
-
-        <div className="site-nav__mobile-bottom">
-          <div className="site-nav__mobile-panel">
-            <div className="site-nav__mobile-panel-title">Legal</div>
-            <div className="site-nav__mobile-panel-list">
+          <div className="site-nav__mobile-section">
+            <button
+              type="button"
+              className="site-nav__mobile-section-trigger"
+              aria-expanded={openMobileSection === 'legal'}
+              onClick={() => setOpenMobileSection((current) => (current === 'legal' ? 'legal' : 'legal'))}
+            >
+              <span>Legal</span>
+              <svg viewBox="0 0 16 16" className={`site-nav__mobile-section-chevron ${openMobileSection === 'legal' ? 'is-open' : ''}`} aria-hidden="true">
+                <path d="M4.75 6.25 8 9.5l3.25-3.25" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+              </svg>
+            </button>
+            <div className={`site-nav__mobile-section-panel ${openMobileSection === 'legal' ? 'is-open' : ''}`}>
               {[
                 { href: '/privacy', label: 'Privacy' },
                 { href: '/terms', label: 'Terms' },
               ].map((item) => (
-                <a key={item.label} href={item.href} onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-panel-link">
-                  {item.label}
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"
+                >
+                  <span className="site-nav__mobile-section-link-title">{item.label}</span>
                 </a>
               ))}
             </div>
           </div>
+        </nav>
 
+        <div className="site-nav__mobile-bottom">
           <div className="site-nav__mobile-meta">
-            <a href="/help/contact" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-meta-link">
-              Contact
+            <a href="/login" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-meta-link">
+              Log in
             </a>
             <a href="/download" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-cta">
               Download Ledger

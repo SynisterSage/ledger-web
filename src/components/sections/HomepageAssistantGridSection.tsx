@@ -96,16 +96,23 @@ export function HomepageAssistantGridSection() {
                       Share work without the mess.
                     </h3>
                   </div>
-
-                  <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
+                  <a
+                    href="/features/shared-workspaces"
+                    aria-label="Open shared workspaces"
+                    className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
+                  >
                     <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-                  </div>
+                  </a>
                 </div>
               </div>
 
-              <div className="border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0">
+              <a
+                href="/features/shared-workspaces"
+                aria-label="Open shared workspaces"
+                className="border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0"
+              >
                 <SharedWorkspaceMockup />
-              </div>
+              </a>
             </div>
           </article>
 
@@ -122,12 +129,18 @@ export function HomepageAssistantGridSection() {
                     Search across every context.
                   </h3>
                 </div>
-                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
+                <a
+                  href="/features/search"
+                  aria-label="Open search"
+                  className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
+                >
                   <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-                </div>
+                </a>
               </div>
             </div>
-            <SearchMockup />
+            <a href="/features/search" aria-label="Open search">
+              <SearchMockup />
+            </a>
           </article>
 
           <article
@@ -143,12 +156,18 @@ export function HomepageAssistantGridSection() {
                     Your workspace follows you.
                   </h3>
                 </div>
-                <div className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover">
+                <a
+                  href="/features/mobile"
+                  aria-label="Open mobile"
+                  className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
+                >
                   <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
-                </div>
+                </a>
               </div>
             </div>
-            <WorkspaceFollowsMockup />
+            <a href="/features/mobile" aria-label="Open mobile">
+              <WorkspaceFollowsMockup />
+            </a>
           </article>
         </div>
       </div>
