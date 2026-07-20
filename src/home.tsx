@@ -14,6 +14,7 @@ import { ProductScaffoldPage } from './pages/ProductScaffoldPage'
 import { PrivacyPage } from './pages/PrivacyPage'
 import { RedirectPage } from './pages/RedirectPage'
 import { TermsPage } from './pages/TermsPage'
+import { FigmaPluginAuthorizationPage } from './pages/FigmaPluginAuthorizationPage'
 
 const featureRedirects: Record<string, string> = {
   '/desktop-app': '/features/desktop',
@@ -55,6 +56,12 @@ function normalizePath(pathname: string) {
 
 function AppRouter() {
   const pathname = typeof window !== 'undefined' ? normalizePath(window.location.pathname) : '/'
+  const pluginSession = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('figmaPluginAuth') : null
+  const pluginCode = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('code') : null
+
+  if (pluginSession && pluginCode) {
+    return <FigmaPluginAuthorizationPage sessionId={pluginSession} code={pluginCode} />
+  }
 
   if (pathname in featureRedirects) {
     return <RedirectPage to={featureRedirects[pathname]} />
