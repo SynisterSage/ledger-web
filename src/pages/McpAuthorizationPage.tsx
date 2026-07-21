@@ -42,7 +42,7 @@ const authRequest = async (path: string, body: Record<string, string>) => {
 
 const labels: Record<string, string> = {
   'workspace:read': 'View workspace context', 'projects:read': 'View projects', 'tasks:read': 'View tasks', 'notes:read': 'View notes', 'calendar:read': 'View calendar items', 'daily:read': 'View Today',
-  'intake:write': 'Send items to Intake', 'tasks:write': 'Create and update tasks', 'notes:write': 'Create notes', 'daily:write': 'Update Today’s focus',
+  'intake:write': 'Send items to Intake', 'tasks:write': 'Create and update tasks', 'notes:write': 'Create notes', 'daily:write': 'Update Today’s focus', 'projects:write': 'Create projects',
 }
 
 export function McpAuthorizationPage({ requestId }: { requestId: string }) {
