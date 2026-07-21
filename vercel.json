@@ -41,6 +41,7 @@
     { "source": "/help/sessions-account", "destination": "/help/account", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/integrations/mcp/authorize", "destination": "/index.html" },
     { "source": "/download", "destination": "/html-pages/download.html" },
     { "source": "/features", "destination": "/features/index.html" },
     { "source": "/features/(.*)", "destination": "/features/index.html" },
