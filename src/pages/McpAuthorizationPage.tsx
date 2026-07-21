@@ -58,6 +58,13 @@ export function McpAuthorizationPage({ requestId }: { requestId: string }) {
   const loadRequest = async (accessToken: string) => {
     const response = await fetch(`${API_BASE}/oauth/authorize/requests/${encodeURIComponent(requestId)}`, { headers: { Authorization: `Bearer ${accessToken}` } })
     const payload = await response.json().catch(() => ({}))
+    if (response.status === 401) {
+      saveSession(null)
+      setSession(null)
+      setError('Your Ledger session expired. Sign in again to continue.')
+      setState('sign_in')
+      return
+    }
     if (!response.ok) throw new Error(payload?.error || 'This authorization request is invalid or expired.')
     setRequest(payload as RequestInfo)
     setWorkspaceId((payload.workspaces?.[0] as Workspace | undefined)?.id || '')
