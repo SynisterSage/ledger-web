@@ -20,6 +20,8 @@ type ViewState = 'loading' | 'ready' | 'opening' | 'joined' | 'error'
 
 const API_BASE = import.meta.env.VITE_API_URL?.trim() || 'https://api.ledgerworkspace.com'
 const DOWNLOAD_URL = '/download'
+const LEDGER_APP_URL = import.meta.env.VITE_LEDGER_APP_URL?.trim() || '/app'
+const BROWSER_INVITE_CONTINUATION_KEY = 'ledger:browser-invite:v1'
 
 const getInviteToken = () => {
   const path = window.location.pathname.split('/').filter(Boolean)
@@ -163,7 +165,20 @@ export function InviteLandingPage() {
     'your team'
   const expiryLabel = formatExpiry(invite?.expires_at)
 
-  const openLedger = () => {
+  const continueInBrowser = () => {
+    try {
+      window.sessionStorage.setItem(BROWSER_INVITE_CONTINUATION_KEY, token)
+    } catch {
+      setState('error')
+      setErrorMessage('This browser cannot securely continue the invitation.')
+      return
+    }
+    setOpenRequested(true)
+    setState('opening')
+    window.location.assign(LEDGER_APP_URL)
+  }
+
+  const openDesktopLedger = () => {
     setOpenRequested(true)
     setState('opening')
     window.location.assign(`ledger://invite/${encodeURIComponent(token)}`)
@@ -226,15 +241,18 @@ export function InviteLandingPage() {
               <h1 className="mt-3 text-[32px] font-semibold leading-tight tracking-tight text-ledger-text">
                 {workspaceName}
               </h1>
-              <p className="mt-3 text-sm leading-6 text-ledger-text-muted">
-                You&apos;re in. Open Ledger to continue.
-              </p>
+              <p className="mt-3 text-sm leading-6 text-ledger-text-muted">You&apos;re in. Continue in Ledger to open the workspace.</p>
               <a
-                href={`ledger://invite/${encodeURIComponent(token)}`}
+                href={LEDGER_APP_URL}
+                onClick={(event) => {
+                  event.preventDefault()
+                  continueInBrowser()
+                }}
                 className="mt-8 inline-flex h-11 items-center justify-center rounded-2xl bg-ledger-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
               >
-                Open Ledger
+                Continue in browser
               </a>
+              <button type="button" onClick={openDesktopLedger} className="mt-3 block w-full text-center text-xs text-ledger-text-muted underline underline-offset-3">Open desktop app</button>
             </div>
           )}
 
@@ -260,11 +278,11 @@ export function InviteLandingPage() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <button
                   type="button"
-                  onClick={openLedger}
+                  onClick={continueInBrowser}
                   disabled={state === 'opening'}
                   className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover disabled:cursor-default disabled:opacity-80"
                 >
-                  {state === 'opening' ? 'Waiting for Ledger…' : 'Continue in Ledger'}
+                  {state === 'opening' ? 'Opening Ledger…' : 'Continue in browser'}
                 </button>
                 <a
                   href={DOWNLOAD_URL}
@@ -275,9 +293,10 @@ export function InviteLandingPage() {
               </div>
 
               <p className="mt-4 text-xs leading-5 text-ledger-text-muted">
-                If Ledger is already installed, the button will open the app and bring this invite
-                in automatically. If not, download Ledger first and sign in there.
-              </p>            </>
+                Sign in or create your account in Ledger Web if needed. The invitation will be accepted there.
+              </p>
+              <button type="button" onClick={openDesktopLedger} className="mt-3 text-xs text-ledger-text-muted underline underline-offset-3">Open the desktop app instead</button>
+            </>
           )}
         </section>
       </div>

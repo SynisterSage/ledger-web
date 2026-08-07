@@ -115,6 +115,10 @@ function AppRouter() {
       return <ChangelogPage />
     case '/login':
       return <LoginPage />
+    case '/signup':
+      return <LoginPage initialMode="signup" />
+    case '/auth/callback':
+      return <LoginPage />
     case '/invite':
       return <InviteLandingPage />
     case '/joined':

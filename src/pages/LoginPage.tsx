@@ -1,16 +1,38 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type FormEvent } from 'react'
 
 import { LockedSplash } from '../components/sections/LockedSplash'
 import { isSiteLocked } from '../lib/siteLock'
+import { productAuth } from '../lib/auth'
+import { getReturnTo } from '../lib/returnTo'
+import { supabaseConfigError } from '../lib/supabase'
 
 type Mode = 'login' | 'signup'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export function LoginPage() {
-  const [mode, setMode] = useState<Mode>('login')
+export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
+  const [mode, setMode] = useState<Mode>(initialMode)
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [fullName, setFullName] = useState('')
   const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [returnTo] = useState(() => getReturnTo())
+
+  useEffect(() => {
+    let mounted = true
+    void productAuth.getSession().then((session) => {
+      if (mounted && session) window.location.replace(returnTo)
+    }).catch(() => undefined)
+    const subscription = productAuth.onAuthStateChange((_event, session) => {
+      if (mounted && session) window.location.replace(returnTo)
+    })
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
+  }, [returnTo])
 
   const copy = useMemo(
     () =>
@@ -36,7 +58,7 @@ export function LoginPage() {
     [mode],
   )
 
-  const validateEmail = () => {
+  const validate = () => {
     const trimmed = email.trim()
 
     if (!trimmed) {
@@ -49,8 +71,44 @@ export function LoginPage() {
       return false
     }
 
+    if (password.length < 8) {
+      setError('Use a password with at least 8 characters.')
+      return false
+    }
+
+    if (mode === 'signup' && !fullName.trim()) {
+      setError('Add your name to create an account.')
+      return false
+    }
+
     setError('')
     return true
+  }
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    if (!validate()) return
+    if (supabaseConfigError) {
+      setError(supabaseConfigError.message)
+      return
+    }
+    setIsSubmitting(true)
+    setError('')
+    setNotice('')
+    try {
+      const session = mode === 'login'
+        ? await productAuth.signIn(email.trim(), password)
+        : await productAuth.signUp(email.trim(), password, fullName.trim())
+      if (session) {
+        window.location.replace(returnTo)
+      } else {
+        setNotice('Check your email to confirm your account, then return to Ledger.')
+      }
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : 'Authentication failed.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSiteLocked()) {
@@ -73,11 +131,14 @@ export function LoginPage() {
           <div className="mt-8 text-left">
             <form
               className="space-y-4"
-              onSubmit={(event) => {
-                event.preventDefault()
-                validateEmail()
-              }}
+              onSubmit={(event) => void handleSubmit(event)}
             >
+              {mode === 'signup' && (
+                <div className="space-y-2">
+                  <label htmlFor="full-name" className="text-[13px] font-medium text-ledger-text-muted">Name</label>
+                  <input id="full-name" type="text" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Your name" className="h-11 w-full rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" />
+                </div>
+              )}
               <div className="space-y-2">
                 <label htmlFor="email" className="text-[13px] font-medium text-ledger-text-muted">
                   Email
@@ -99,12 +160,17 @@ export function LoginPage() {
                 />
               </div>
 
+              <div className="space-y-2">
+                <label htmlFor="password" className="text-[13px] font-medium text-ledger-text-muted">Password</label>
+                <input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Your password" className="h-11 w-full rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" />
+              </div>
+
               <div className="space-y-3">
                 <button
                   type="submit"
                   className="inline-flex h-11 w-full items-center justify-center rounded-full bg-ledger-accent px-5 text-center text-[15px] font-semibold leading-none text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
                 >
-                  {copy.primaryLabel}
+                  {isSubmitting ? 'Working…' : copy.primaryLabel}
                 </button>
 
                 <div className="flex items-center gap-3 py-2">
@@ -117,6 +183,7 @@ export function LoginPage() {
 
                 <button
                   type="button"
+                  onClick={() => void productAuth.signInWithGoogle().catch((caught) => setError(caught instanceof Error ? caught.message : 'Could not start Google sign in.'))}
                   className="inline-flex h-11 w-full items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-5 text-center text-[15px] font-semibold leading-none text-ledger-text transition-colors duration-200 hover:bg-(--ledger-surface-muted)"
                 >
                   {copy.googleLabel}
@@ -125,6 +192,7 @@ export function LoginPage() {
 
               <div aria-live="polite" className="min-h-5 text-[13px] leading-5">
                 {error ? <span className="text-red-600">{error}</span> : null}
+                {!error && notice ? <span className="text-ledger-text-muted">{notice}</span> : null}
               </div>
             </form>
 
@@ -136,6 +204,7 @@ export function LoginPage() {
                 onClick={() => {
                   setMode(mode === 'login' ? 'signup' : 'login')
                   setError('')
+                  setNotice('')
                 }}
               >
                 {copy.footerAction}

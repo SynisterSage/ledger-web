@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "test:web-auth-phase14": "node --test scripts/tests/web-auth-phase14.test.mjs",
+    "test:web-invite-phase15": "node --test scripts/tests/web-invite-phase15.test.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.112.2",
     "lucide-react": "^1.21.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
