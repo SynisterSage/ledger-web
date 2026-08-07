@@ -47,6 +47,14 @@
     { "source": "/help/sessions-account", "destination": "/help/account", "permanent": true }
   ],
   "rewrites": [
+    {
+      "source": "/app",
+      "destination": "https://dist-web-rho-two.vercel.app/app"
+    },
+    {
+      "source": "/app/:path*",
+      "destination": "https://dist-web-rho-two.vercel.app/app/:path*"
+    },
     { "source": "/integrations/mcp/authorize", "destination": "/index.html" },
     { "source": "/integrations/mcp/switch-workspace", "destination": "/index.html" },
     { "source": "/download", "destination": "/html-pages/download.html" },
