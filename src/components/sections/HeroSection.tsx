@@ -205,13 +205,13 @@ export function HeroSection() {
           <div className="hero-enter hero-enter-cta mt-2.5 flex flex-row flex-wrap items-center justify-center gap-2.5 sm:mt-3 sm:gap-3">
             <a
               href="/download"
-              className="inline-flex h-10 w-auto min-w-0 items-center justify-center whitespace-nowrap rounded-full bg-ledger-accent px-5 text-[14px] font-semibold leading-none text-white transition hover:bg-ledger-accent-hover sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
+              className="ledger-button h-10 w-auto min-w-0 whitespace-nowrap bg-ledger-accent px-5 text-[14px] font-semibold text-white transition hover:bg-ledger-accent-hover sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
             >
               Download
             </a>
             <a
               href="/features"
-              className="inline-flex h-10 w-auto min-w-0 items-center justify-center whitespace-nowrap rounded-full border border-ledger-border bg-(--ledger-surface-card) px-5 text-[14px] font-semibold leading-none text-ledger-text transition hover:bg-ledger-surface-muted sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
+              className="ledger-button h-10 w-auto min-w-0 whitespace-nowrap border border-ledger-border bg-(--ledger-surface-card) px-5 text-[14px] font-semibold text-ledger-text transition hover:bg-ledger-surface-muted sm:h-12 sm:min-w-39 sm:px-7 sm:text-[16px]"
             >
               See features
             </a>

@@ -1713,7 +1713,7 @@ function ContactSupportPage({
                   <input
                     name="name"
                     type="text"
-                    className="h-11 rounded-xl border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
+                    className="ledger-field h-11 border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
                     placeholder="Your name"
                   />
                 </label>
@@ -1722,7 +1722,7 @@ function ContactSupportPage({
                   <input
                     name="email"
                     type="email"
-                    className="h-11 rounded-xl border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
+                    className="ledger-field h-11 border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
                     placeholder="you@example.com"
                   />
                 </label>
@@ -1733,7 +1733,7 @@ function ContactSupportPage({
                 <input
                   name="subject"
                   type="text"
-                  className="h-11 rounded-xl border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
+                  className="ledger-field h-11 border border-(--ledger-border-subtle) bg-ledger-bg px-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
                   placeholder="What do you need help with?"
                 />
               </label>
@@ -1743,7 +1743,7 @@ function ContactSupportPage({
                 <textarea
                   name="message"
                   rows={7}
-                  className="rounded-xl border border-(--ledger-border-subtle) bg-ledger-bg px-3 py-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
+                  className="ledger-field border border-(--ledger-border-subtle) bg-ledger-bg px-3 py-3 text-[15px] text-ledger-text outline-none transition-colors placeholder:text-ledger-text-muted/60 focus:border-(--ledger-header-border)"
                   placeholder="Add a few details about the issue."
                 />
               </label>
@@ -1754,7 +1754,7 @@ function ContactSupportPage({
                 </p>
                 <button
                   type="submit"
-                  className="inline-flex h-11 items-center justify-center rounded-full bg-ledger-accent px-5 text-[14px] font-medium text-white transition-colors hover:bg-ledger-accent-hover"
+                  className="ledger-button h-11 bg-ledger-accent px-5 text-[14px] font-medium text-white transition-colors hover:bg-ledger-accent-hover"
                 >
                   Send message
                 </button>

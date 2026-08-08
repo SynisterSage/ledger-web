@@ -34,19 +34,19 @@ export function InviteSuccessPage() {
           </div>
           <a
             href={OPEN_TARGET_URL}
-            className="mt-6 inline-flex h-11 w-full items-center justify-center rounded-2xl bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
+            className="ledger-button mt-6 h-11 w-full bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
           >
             Open Ledger
           </a>
           <a
             href="/download"
-            className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-surface-muted"
+            className="ledger-button mt-3 h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-surface-muted"
           >
             Download Ledger
           </a>
           <a
             href="/"
-            className="mt-3 inline-flex h-11 w-full items-center justify-center rounded-2xl border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-surface-muted"
+            className="ledger-button mt-3 h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-surface-muted"
           >
             Go to dashboard
           </a>

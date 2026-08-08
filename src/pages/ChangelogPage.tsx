@@ -61,7 +61,7 @@ export function ChangelogPage() {
             <div className="mt-8">
               <a
                 href="/help/contact"
-                className="inline-flex h-11 items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-5 text-[14px] font-semibold leading-none text-ledger-text transition-colors duration-200 hover:bg-(--ledger-surface-muted)"
+                className="ledger-button h-11 border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-5 text-[14px] font-semibold text-ledger-text transition-colors duration-200 hover:bg-(--ledger-surface-muted)"
               >
                 Ask about a release
               </a>

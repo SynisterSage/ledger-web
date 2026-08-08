@@ -105,18 +105,18 @@ export function FigmaPluginAuthorizationPage({ sessionId, code }: { sessionId: s
             <>
               <p className="mx-auto mt-3 max-w-[320px] text-[15px] leading-7 text-ledger-text-muted">Sign in to approve this plugin connection for your Ledger workspace.</p>
               <form className="mx-auto mt-7 space-y-3 text-left" onSubmit={(event) => void signIn(event)}>
-                <label className="block text-[13px] font-medium text-ledger-text-muted">Email<input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} className="mt-2 h-11 w-full rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" /></label>
-                <label className="block text-[13px] font-medium text-ledger-text-muted">Password<input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} className="mt-2 h-11 w-full rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" /></label>
-                <button className="h-11 w-full rounded-full bg-ledger-accent px-5 text-[15px] font-semibold text-white hover:bg-ledger-accent-hover" type="submit">Continue</button>
+                <label className="block text-[13px] font-medium text-ledger-text-muted">Email<input required type="email" value={email} onChange={(event) => setEmail(event.target.value)} className="ledger-field mt-2 h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" /></label>
+                <label className="block text-[13px] font-medium text-ledger-text-muted">Password<input required type="password" value={password} onChange={(event) => setPassword(event.target.value)} className="ledger-field mt-2 h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" /></label>
+                <button className="ledger-button h-11 w-full bg-ledger-accent px-5 text-[15px] font-semibold text-white hover:bg-ledger-accent-hover" type="submit">Continue</button>
                 <div className="flex items-center gap-3 py-1"><span className="h-px flex-1 bg-(--ledger-border-subtle)" /><span className="text-[12px] text-ledger-text-muted">or</span><span className="h-px flex-1 bg-(--ledger-border-subtle)" /></div>
-                <button className="h-11 w-full rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-5 text-[15px] font-semibold text-ledger-text hover:bg-(--ledger-surface-muted)" type="button" onClick={signInWithGoogle}>Continue with Google</button>
+                <button className="ledger-button h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-5 text-[15px] font-semibold text-ledger-text hover:bg-(--ledger-surface-muted)" type="button" onClick={signInWithGoogle}>Continue with Google</button>
               </form>
             </>
           ) : (
             <>
               <p className="mx-auto mt-3 max-w-[320px] text-[15px] leading-7 text-ledger-text-muted">Approve this plugin connection to view your workspaces and send designs into Ledger.</p>
               <p className="mx-auto mt-5 max-w-[250px] rounded-xl bg-(--ledger-surface-muted) px-4 py-3 text-xs text-ledger-text-muted">Verification code <strong className="ml-1 text-ledger-text">{code}</strong></p>
-              <button className="mt-6 h-11 rounded-full bg-ledger-accent px-5 text-[15px] font-semibold text-white hover:bg-ledger-accent-hover" type="button" disabled={state === 'busy'} onClick={() => session && void approve(session.access_token)}>Approve plugin access</button>
+              <button className="ledger-button mt-6 h-11 bg-ledger-accent px-5 text-[15px] font-semibold text-white hover:bg-ledger-accent-hover" type="button" disabled={state === 'busy'} onClick={() => session && void approve(session.access_token)}>Approve plugin access</button>
             </>
           )}
           {error && <p className="mx-auto mt-4 max-w-[320px] text-sm leading-6 text-red-600" role="alert">{error}</p>}

@@ -136,7 +136,7 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
               {mode === 'signup' && (
                 <div className="space-y-2">
                   <label htmlFor="full-name" className="text-[13px] font-medium text-ledger-text-muted">Name</label>
-                  <input id="full-name" type="text" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Your name" className="h-11 w-full rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" />
+                  <input id="full-name" type="text" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Your name" className="ledger-field h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" />
                 </div>
               )}
               <div className="space-y-2">
@@ -154,7 +154,7 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
                     }
                   }}
                   placeholder="Enter your email address..."
-                  className={`h-11 w-full rounded-full border bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none transition-colors duration-200 placeholder:text-ledger-text-muted/55 focus:border-(--ledger-header-border) ${
+                  className={`ledger-field h-11 w-full border bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none transition-colors duration-200 placeholder:text-ledger-text-muted/55 focus:border-(--ledger-header-border) ${
                     error ? 'border-red-300 focus:border-red-400' : 'border-(--ledger-border-subtle)'
                   }`}
                 />
@@ -162,13 +162,13 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
 
               <div className="space-y-2">
                 <label htmlFor="password" className="text-[13px] font-medium text-ledger-text-muted">Password</label>
-                <input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Your password" className="h-11 w-full rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" />
+                <input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Your password" className="ledger-field h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" />
               </div>
 
               <div className="space-y-3">
                 <button
                   type="submit"
-                  className="inline-flex h-11 w-full items-center justify-center rounded-full bg-ledger-accent px-5 text-center text-[15px] font-semibold leading-none text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
+                  className="ledger-button h-11 w-full bg-ledger-accent px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
                 >
                   {isSubmitting ? 'Working…' : copy.primaryLabel}
                 </button>
@@ -184,7 +184,7 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
                 <button
                   type="button"
                   onClick={() => void productAuth.signInWithGoogle().catch((caught) => setError(caught instanceof Error ? caught.message : 'Could not start Google sign in.'))}
-                  className="inline-flex h-11 w-full items-center justify-center rounded-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-5 text-center text-[15px] font-semibold leading-none text-ledger-text transition-colors duration-200 hover:bg-(--ledger-surface-muted)"
+                  className="ledger-button h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-5 text-[15px] font-semibold text-ledger-text transition-colors duration-200 hover:bg-(--ledger-surface-muted)"
                 >
                   {copy.googleLabel}
                 </button>

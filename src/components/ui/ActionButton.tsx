@@ -16,7 +16,7 @@ export function ActionButton({ href, children, className = '', variant = 'primar
   return (
     <a
       href={href}
-      className={`inline-flex h-12 min-w-39 w-fit items-center justify-center rounded-full px-7 text-[16px] font-semibold leading-none transition-colors duration-200 ${variantClassName} ${className}`}
+      className={`ledger-button h-12 min-w-39 w-fit px-7 text-[16px] font-semibold transition-colors duration-200 ${variantClassName} ${className}`}
     >
       {children}
     </a>

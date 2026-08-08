@@ -45,6 +45,48 @@
   font-family: var(--font-sans);
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Shared web controls mirror the desktop control token. Keep pills for
+   navigation and compact status elements, not for full-width form actions. */
+.ledger-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ledger-control-radius, 12px);
+  line-height: 1.25;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.ledger-field {
+  border-radius: var(--ledger-control-radius, 12px);
+  line-height: 1.25;
+}
+
+/* Covers legacy auth/integration markup while it is migrated to the shared
+   classes above. The selectors are limited to form controls, so navigation
+   pills and icon buttons keep their intentional shapes. */
+input.rounded-full,
+select.rounded-full,
+textarea.rounded-full,
+form button.rounded-full,
+button.rounded-full.w-full,
+button.rounded-full.flex-1 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ledger-control-radius, 12px);
+  line-height: 1.25;
+  text-align: center;
+  vertical-align: middle;
+}
+
 html,
 body {
   margin: 0;

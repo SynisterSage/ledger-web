@@ -254,7 +254,7 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
                   <a
                     key={action.label}
                     href={action.href}
-                    className="inline-flex h-9 items-center justify-center rounded-full bg-ledger-accent px-4.5 text-[13px] font-semibold leading-none text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
+                    className="ledger-button h-9 rounded-[var(--ledger-control-radius)] bg-ledger-accent px-4.5 text-[13px] font-semibold text-white transition-colors duration-200 hover:bg-ledger-accent-hover"
                   >
                     {action.label}
                   </a>

@@ -280,13 +280,13 @@ export function InviteLandingPage() {
                   type="button"
                   onClick={continueInBrowser}
                   disabled={state === 'opening'}
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover disabled:cursor-default disabled:opacity-80"
+                  className="ledger-button h-11 flex-1 bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover disabled:cursor-default disabled:opacity-80"
                 >
                   {state === 'opening' ? 'Opening Ledger…' : 'Continue in browser'}
                 </button>
                 <a
                   href={DOWNLOAD_URL}
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl border border-ledger-border bg-ledger-surface px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-bg"
+                  className="ledger-button h-11 flex-1 border border-ledger-border bg-ledger-surface px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-bg"
                 >
                   Download Ledger
                 </a>
