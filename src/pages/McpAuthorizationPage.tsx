@@ -9,26 +9,14 @@ type ViewState = 'loading' | 'sign_in' | 'ready' | 'busy' | 'done' | 'error'
 const API_BASE = import.meta.env.VITE_API_URL?.trim() || 'https://api.ledgerworkspace.com'
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.trim() || ''
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() || ''
-const SESSION_KEY = 'ledger-web-auth-session'
-
-const readSession = (): WebSession | null => {
-  try {
-    const value = JSON.parse(window.localStorage.getItem(SESSION_KEY) || 'null') as WebSession | null
-    return value?.access_token ? value : null
-  } catch { return null }
-}
-
-const saveSession = (session: WebSession | null) => {
-  if (session) window.localStorage.setItem(SESSION_KEY, JSON.stringify(session))
-  else window.localStorage.removeItem(SESSION_KEY)
-}
+const clearLegacySession = () => window.localStorage.removeItem('ledger-web-auth-session')
 
 const readOAuthSession = () => {
   const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''))
   const accessToken = hash.get('access_token')
   if (!accessToken) return null
   const session = { access_token: accessToken, refresh_token: hash.get('refresh_token') || undefined, expires_at: Number(hash.get('expires_at') || 0) || undefined }
-  saveSession(session)
+  clearLegacySession()
   window.history.replaceState({}, document.title, `${window.location.pathname}${window.location.search}`)
   return session
 }
@@ -59,7 +47,7 @@ export function McpAuthorizationPage({ requestId }: { requestId: string }) {
     const response = await fetch(`${API_BASE}/oauth/authorize/requests/${encodeURIComponent(requestId)}`, { headers: { Authorization: `Bearer ${accessToken}` } })
     const payload = await response.json().catch(() => ({}))
     if (response.status === 401) {
-      saveSession(null)
+      clearLegacySession()
       setSession(null)
       setError('Your Ledger session expired. Sign in again to continue.')
       setState('sign_in')
@@ -72,7 +60,8 @@ export function McpAuthorizationPage({ requestId }: { requestId: string }) {
   }
 
   useEffect(() => {
-    const nextSession = readOAuthSession() || readSession()
+    const nextSession = readOAuthSession()
+    clearLegacySession()
     setSession(nextSession)
     if (!configured) { setError('Ledger web authentication is not configured.'); setState('error'); return }
     if (!nextSession) { setState('sign_in'); return }
@@ -81,7 +70,7 @@ export function McpAuthorizationPage({ requestId }: { requestId: string }) {
 
   const signIn = async (event: FormEvent) => {
     event.preventDefault(); setState('busy'); setError('')
-    try { const nextSession = await authRequest('token?grant_type=password', { email: email.trim(), password }); saveSession(nextSession); setSession(nextSession); await loadRequest(nextSession.access_token) }
+    try { const nextSession = await authRequest('token?grant_type=password', { email: email.trim(), password }); setSession(nextSession); await loadRequest(nextSession.access_token) }
     catch (caught) { setState('sign_in'); setError(caught instanceof Error ? caught.message : 'Ledger sign-in failed.') }
   }
 
@@ -95,7 +84,7 @@ export function McpAuthorizationPage({ requestId }: { requestId: string }) {
       const payload = await response.json().catch(() => ({}))
       if (!response.ok) throw new Error(payload?.error || 'Ledger could not complete this authorization.')
       setState('done')
-      if (payload.redirect_uri) window.location.assign(payload.redirect_uri)
+      if (payload.redirect_uri && /^(?:https?:|ledger:)/i.test(String(payload.redirect_uri))) window.location.assign(payload.redirect_uri)
     } catch (caught) { setState('error'); setError(caught instanceof Error ? caught.message : 'Ledger could not complete this authorization.') }
   }
 

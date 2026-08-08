@@ -12,28 +12,14 @@ type ViewState = 'loading' | 'sign_in' | 'ready' | 'busy' | 'approved' | 'error'
 const API_BASE = import.meta.env.VITE_API_URL?.trim() || 'https://api.ledgerworkspace.com'
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL?.trim() || ''
 const SUPABASE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() || ''
-const SESSION_KEY = 'ledger-web-auth-session'
-
-const readSession = (): WebSession | null => {
-  try {
-    const value = JSON.parse(window.localStorage.getItem(SESSION_KEY) || 'null') as WebSession | null
-    return value?.access_token ? value : null
-  } catch {
-    return null
-  }
-}
-
-const saveSession = (session: WebSession | null) => {
-  if (session) window.localStorage.setItem(SESSION_KEY, JSON.stringify(session))
-  else window.localStorage.removeItem(SESSION_KEY)
-}
+const clearLegacySession = () => window.localStorage.removeItem('ledger-web-auth-session')
 
 const readOAuthSession = () => {
   const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''))
   const accessToken = hash.get('access_token')
   if (!accessToken) return null
   const session = { access_token: accessToken, refresh_token: hash.get('refresh_token') || undefined, expires_at: Number(hash.get('expires_at') || 0) || undefined }
-  saveSession(session)
+  clearLegacySession()
   window.history.replaceState({}, document.title, `${window.location.pathname}${window.location.search}`)
   return session
 }
@@ -60,7 +46,8 @@ export function FigmaPluginAuthorizationPage({ sessionId, code }: { sessionId: s
   const currentUrl = useMemo(() => window.location.href.split('#')[0], [])
 
   useEffect(() => {
-    const nextSession = readOAuthSession() || readSession()
+    const nextSession = readOAuthSession()
+    clearLegacySession()
     setSession(nextSession)
     setState(configured ? (nextSession ? 'ready' : 'sign_in') : 'error')
     if (!configured) setError('Ledger web authentication is not configured.')
@@ -90,7 +77,6 @@ export function FigmaPluginAuthorizationPage({ sessionId, code }: { sessionId: s
     setError('')
     try {
       const nextSession = await authRequest('token?grant_type=password', { email: email.trim(), password })
-      saveSession(nextSession)
       setSession(nextSession)
       setState('ready')
     } catch (caught) {
