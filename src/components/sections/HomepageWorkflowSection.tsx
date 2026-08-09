@@ -86,7 +86,7 @@ const ecosystemCards: EcosystemCard[] = [
   {
     title: 'Desktop app',
     description: 'Float, dock, and keep Ledger beside your work.',
-    href: '/features/desktop',
+    href: '/features/sidebar',
     icon: Monitor,
   },
   {
@@ -110,7 +110,7 @@ const ecosystemCards: EcosystemCard[] = [
   {
     title: 'Integrations',
     description: 'Connect the tools you already use to the same workspace context.',
-    href: '/features/integrations',
+    href: '/features/connected-work',
     icon: Plug2,
   },
 ]

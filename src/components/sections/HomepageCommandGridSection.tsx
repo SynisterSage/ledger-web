@@ -149,7 +149,7 @@ function WideCommandCard() {
               </h3>
             </div>
             <a
-              href="/features/desktop"
+              href="/features/sidebar"
               aria-label="Open desktop app"
               className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
             >
@@ -158,7 +158,7 @@ function WideCommandCard() {
           </div>
         </div>
 
-        <a href="/features/desktop" aria-label="Open desktop app" className="flex flex-1 border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0">
+        <a href="/features/sidebar" aria-label="Open sidebar" className="flex flex-1 border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0">
           <div className="flex flex-1 items-stretch justify-stretch overflow-hidden rounded-b-[20px] sm:rounded-b-[24px] lg:rounded-b-[28px] lg:rounded-bl-none">
             <DesktopCommandBentoMockup />
           </div>
@@ -214,7 +214,7 @@ export function HomepageCommandGridSection() {
                   </h3>
                 </div>
                 <a
-                  href="/features/planning"
+                  href="/features/calendar"
                   aria-label="Open planning"
                   className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
                 >
@@ -222,7 +222,7 @@ export function HomepageCommandGridSection() {
                 </a>
               </div>
             </div>
-            <a href="/features/planning" aria-label="Open planning" className="border-t border-(--ledger-border-subtle) p-0">
+            <a href="/features/calendar" aria-label="Open calendar" className="border-t border-(--ledger-border-subtle) p-0">
               <CommandActionsMockup />
             </a>
           </article>
@@ -241,7 +241,7 @@ export function HomepageCommandGridSection() {
                   </h3>
                 </div>
                 <a
-                  href="/features/integrations"
+                  href="/integrations"
                   aria-label="Open integrations"
                   className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
                 >
@@ -249,7 +249,7 @@ export function HomepageCommandGridSection() {
                 </a>
               </div>
             </div>
-            <a href="/features/integrations" aria-label="Open integrations">
+            <a href="/integrations" aria-label="Open integrations">
               <IntegrationsMockup />
             </a>
           </article>

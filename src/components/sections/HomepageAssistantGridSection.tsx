@@ -97,7 +97,7 @@ export function HomepageAssistantGridSection() {
                     </h3>
                   </div>
                   <a
-                    href="/features/shared-workspaces"
+                    href="/features/workspaces"
                     aria-label="Open shared workspaces"
                     className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
                   >
@@ -107,7 +107,7 @@ export function HomepageAssistantGridSection() {
               </div>
 
               <a
-                href="/features/shared-workspaces"
+                href="/features/workspaces"
                 aria-label="Open shared workspaces"
                 className="border-t border-(--ledger-border-subtle) p-0 lg:border-l lg:border-t-0"
               >
@@ -130,7 +130,7 @@ export function HomepageAssistantGridSection() {
                   </h3>
                 </div>
                 <a
-                  href="/features/search"
+                  href="/features/connected-work"
                   aria-label="Open search"
                   className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
                 >
@@ -138,7 +138,7 @@ export function HomepageAssistantGridSection() {
                 </a>
               </div>
             </div>
-            <a href="/features/search" aria-label="Open search">
+            <a href="/features/connected-work" aria-label="Open connected work">
               <SearchMockup />
             </a>
           </article>
@@ -157,7 +157,7 @@ export function HomepageAssistantGridSection() {
                   </h3>
                 </div>
                 <a
-                  href="/features/mobile"
+                  href="/platforms/mobile"
                   aria-label="Open mobile"
                   className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ledger-accent text-white transition-colors duration-200 hover:bg-ledger-accent-hover focus-visible:bg-ledger-accent-hover"
                 >
@@ -165,7 +165,7 @@ export function HomepageAssistantGridSection() {
                 </a>
               </div>
             </div>
-            <a href="/features/mobile" aria-label="Open mobile">
+            <a href="/platforms/mobile" aria-label="Open mobile">
               <WorkspaceFollowsMockup />
             </a>
           </article>

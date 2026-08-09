@@ -19,15 +19,21 @@ import { GithubCallbackPage } from './pages/GithubCallbackPage'
 import { McpAuthorizationPage } from './pages/McpAuthorizationPage'
 import { McpWorkspaceSwitchPage } from './pages/McpWorkspaceSwitchPage'
 
-const featureRedirects: Record<string, string> = {
-  '/desktop-app': '/features/desktop',
-  '/mobile-app': '/features/mobile',
-  '/browser-extension': '/features/browser',
-  '/integrations': '/features/integrations',
-  '/sidebar': '/features/desktop',
-  '/planning': '/features',
+const legacyRedirects: Record<string, string> = {
+  '/desktop-app': '/platforms/desktop',
+  '/mobile-app': '/platforms/mobile',
+  '/browser-extension': '/platforms/browser-extension',
+  '/sidebar': '/features/sidebar',
+  '/planning': '/features/calendar',
   '/review': '/features',
   '/about': '/features',
+  '/features/desktop': '/platforms/desktop',
+  '/features/mobile': '/platforms/mobile',
+  '/features/browser': '/platforms/browser-extension',
+  '/features/integrations': '/integrations',
+  '/features/shared-workspaces': '/features/workspaces',
+  '/features/search': '/features',
+  '/features/planning': '/features/calendar',
 }
 
 const docsRedirects: Record<string, string> = {
@@ -46,7 +52,7 @@ const docsRedirects: Record<string, string> = {
   '/docs/search': '/help/search',
   '/docs/mobile': '/help/mobile',
   '/docs/browser-extension': '/help/browser-extension',
-  '/docs/integrations': '/features/integrations',
+  '/docs/integrations': '/integrations',
   '/docs/siri-shortcuts': '/help/shortcuts',
   '/docs/sessions-account': '/help/account',
   '/docs/contact-support': '/help/contact',
@@ -82,8 +88,8 @@ function AppRouter() {
     return <GithubCallbackPage />
   }
 
-  if (pathname in featureRedirects) {
-    return <RedirectPage to={featureRedirects[pathname]} />
+  if (pathname in legacyRedirects) {
+    return <RedirectPage to={legacyRedirects[pathname]} />
   }
 
   if (pathname in docsRedirects) {
@@ -97,20 +103,32 @@ function AppRouter() {
       return <DownloadPage />
     case '/features':
       return <ProductScaffoldPage page="features" />
-    case '/features/desktop':
+    case '/features/sidebar':
+      return <ProductScaffoldPage page="sidebar" />
+    case '/features/capture':
+      return <ProductScaffoldPage page="capture" />
+    case '/features/notes':
+      return <ProductScaffoldPage page="notes" />
+    case '/features/projects':
+      return <ProductScaffoldPage page="projects" />
+    case '/features/calendar':
+      return <ProductScaffoldPage page="calendar" />
+    case '/features/connected-work':
+      return <ProductScaffoldPage page="connected-work" />
+    case '/features/workspaces':
+      return <ProductScaffoldPage page="workspaces" />
+    case '/platforms':
+      return <ProductScaffoldPage page="platforms" />
+    case '/platforms/desktop':
       return <ProductScaffoldPage page="desktop" />
-    case '/features/mobile':
+    case '/platforms/web':
+      return <ProductScaffoldPage page="web" />
+    case '/platforms/mobile':
       return <ProductScaffoldPage page="mobile" />
-    case '/features/browser':
-      return <ProductScaffoldPage page="browser" />
-    case '/features/integrations':
+    case '/platforms/browser-extension':
+      return <ProductScaffoldPage page="browser-extension" />
+    case '/integrations':
       return <ProductScaffoldPage page="integrations" />
-    case '/features/shared-workspaces':
-      return <ProductScaffoldPage page="shared-workspaces" />
-    case '/features/search':
-      return <ProductScaffoldPage page="search" />
-    case '/features/planning':
-      return <ProductScaffoldPage page="planning" />
     case '/changelog':
       return <ChangelogPage />
     case '/login':

@@ -1,4 +1,5 @@
 export type DesktopThemeScheme = 'light' | 'dark'
+export type DesktopThemePreference = DesktopThemeScheme | 'system'
 
 type DesktopColorTokens = {
   background: string
@@ -6,6 +7,7 @@ type DesktopColorTokens = {
   surface: string
   surfaceCard: string
   surfaceMuted: string
+  menuBackground: string
   surfaceSelected: string
   surfaceHover: string
   textPrimary: string
@@ -55,11 +57,11 @@ const sharedSpacing = {
 } as const
 
 const sharedRadius = {
-  control: 12,
-  surface: 16,
-  sheet: 24,
+  control: 8,
+  surface: 12,
+  sheet: 16,
   pill: 999,
-  window: 24,
+  window: 18,
 } as const
 
 const sharedShadows = {
@@ -126,91 +128,89 @@ const sharedStructure = {
 } as const
 
 const lightColors: DesktopColorTokens = {
-  background: '#F7F4EF',
-  backgroundMuted: '#EFEAE3',
-  surface: '#FFFCF7',
-  surfaceCard: '#FBF7F0',
-  surfaceMuted: '#F1ECE4',
-  surfaceSelected: '#F4E7DE',
-  surfaceHover: '#E2DDD5',
-  textPrimary: '#171512',
-  textSecondary: '#4F4A43',
-  textMuted: '#766F65',
-  borderSubtle: '#DED6CB',
-  borderStrong: '#C8BDAF',
+  background: '#FFFFFF',
+  backgroundMuted: '#F9F9F9',
+  surface: '#FFFFFF',
+  surfaceCard: '#FAFAFA',
+  surfaceMuted: '#F5F5F5',
+  menuBackground: '#FFFFFF',
+  surfaceSelected: '#F0F0F0',
+  surfaceHover: '#F8F8F8',
+  textPrimary: '#0A0A0A',
+  textSecondary: '#666666',
+  textMuted: '#999999',
+  borderSubtle: '#E5E5E5',
+  borderStrong: '#D0D0D0',
   accent: '#FF5F40',
-  accentHover: '#E95235',
-  accentSoft: '#FFE1D7',
-  danger: '#C24135',
-  success: '#168A5B',
-  warning: '#B86B16',
-  inputBackground: '#FFFCF8',
-  placeholder: '#9A9288',
-  tabBar: '#F4EFE7',
-  tabBarBorder: '#DED6CB',
-  backdrop: 'rgba(23, 21, 18, 0.48)',
-  shadow: 'rgba(23, 21, 18, 0.09)',
-  glassWhite: 'rgba(255, 252, 247, 0.9)',
-  glassCream: 'rgba(244, 239, 231, 0.86)',
-  glassIconWhite: 'rgba(255, 252, 247, 0.72)',
-  glassIconCream: 'rgba(244, 239, 231, 0.68)',
-  glassBorder: 'rgba(222, 214, 203, 0.86)',
-  glassOutline: 'rgba(200, 189, 175, 0.16)',
-  glassShadow:
-    '0 30px 90px rgba(23, 21, 18, 0.2), inset 0 1px 0 rgba(255, 252, 247, 0.86), inset 0 -1px 0 rgba(23, 21, 18, 0.045)',
-  glassIconShadow:
-    '0 14px 38px rgba(23, 21, 18, 0.13), inset 0 1px 0 rgba(255, 252, 247, 0.76)',
-  glassHighlight: 'rgba(255, 252, 247, 0.58)',
-  glassSheen: 'rgba(255, 252, 247, 0.28)',
-  glassSolidBackground: 'rgba(255, 252, 247, 0.96)',
-  glassSolidBorder: 'rgba(222, 214, 203, 0.9)',
-  modalBackdrop: 'rgba(23, 21, 18, 0.48)',
-  scrollbarThumb: 'rgb(190 181 169)',
-  scrollbarThumbHover: 'rgb(150 141 130)',
+  accentHover: '#E85430',
+  accentSoft: '#FFE8DC',
+  danger: '#D92D20',
+  success: '#12B76A',
+  warning: '#DC6803',
+  inputBackground: '#FAFAFA',
+  placeholder: '#A0A0A0',
+  tabBar: '#F5F5F5',
+  tabBarBorder: '#E0E0E0',
+  backdrop: 'rgba(10, 10, 10, 0.4)',
+  shadow: 'rgba(0, 0, 0, 0.06)',
+  glassWhite: 'rgba(255, 255, 255, 0.9)',
+  glassCream: 'rgba(248, 248, 248, 0.86)',
+  glassIconWhite: 'rgba(255, 255, 255, 0.72)',
+  glassIconCream: 'rgba(248, 248, 248, 0.68)',
+  glassBorder: 'rgba(229, 229, 229, 0.86)',
+  glassOutline: 'rgba(208, 208, 208, 0.16)',
+  glassShadow: '0 30px 90px rgba(0, 0, 0, 0.14)',
+  glassIconShadow: '0 14px 38px rgba(0, 0, 0, 0.1)',
+  glassHighlight: 'rgba(255, 255, 255, 0.58)',
+  glassSheen: 'rgba(255, 255, 255, 0.28)',
+  glassSolidBackground: 'rgba(255, 255, 255, 0.96)',
+  glassSolidBorder: 'rgba(229, 229, 229, 0.9)',
+  modalBackdrop: 'rgba(10, 10, 10, 0.4)',
+  scrollbarThumb: 'rgb(200 200 200)',
+  scrollbarThumbHover: 'rgb(150 150 150)',
 }
 
 const darkColors: DesktopColorTokens = {
-  background: '#11100E',
-  backgroundMuted: '#171512',
-  surface: '#1A1815',
-  surfaceCard: '#211F1B',
-  surfaceMuted: '#28251F',
-  surfaceSelected: '#332820',
-  surfaceHover: '#2D2923',
-  textPrimary: '#F7F2EA',
-  textSecondary: '#D4CCC0',
-  textMuted: '#A79D90',
-  borderSubtle: '#38332B',
-  borderStrong: '#51493D',
-  accent: '#FF7A59',
-  accentHover: '#FF6846',
-  accentSoft: '#4B2B22',
+  background: '#0F0F0F',
+  backgroundMuted: '#161616',
+  surface: '#1A1A1A',
+  surfaceCard: '#1F1F1F',
+  surfaceMuted: '#262626',
+  menuBackground: '#242424',
+  surfaceSelected: '#2A2A2A',
+  surfaceHover: '#202020',
+  textPrimary: '#F5F5F5',
+  textSecondary: '#B0B0B0',
+  textMuted: '#808080',
+  borderSubtle: '#333333',
+  borderStrong: '#404040',
+  accent: '#FF8C5F',
+  accentHover: '#FF7A4D',
+  accentSoft: '#FFAB8F',
   danger: '#F97066',
   success: '#32D583',
   warning: '#FDB022',
-  inputBackground: '#181612',
-  placeholder: '#81786C',
-  tabBar: '#15130F',
-  tabBarBorder: '#332E27',
-  backdrop: 'rgba(8, 7, 6, 0.72)',
-  shadow: 'rgba(0, 0, 0, 0.42)',
-  glassWhite: 'rgba(26, 24, 21, 0.86)',
-  glassCream: 'rgba(20, 18, 15, 0.9)',
-  glassIconWhite: 'rgba(34, 31, 27, 0.72)',
-  glassIconCream: 'rgba(24, 22, 18, 0.78)',
-  glassBorder: 'rgba(247, 242, 234, 0.12)',
-  glassOutline: 'rgba(247, 242, 234, 0.06)',
-  glassShadow:
-    '0 32px 90px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 252, 247, 0.045), inset 0 -1px 0 rgba(247, 242, 234, 0.035)',
-  glassIconShadow:
-    '0 14px 38px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 252, 247, 0.04)',
-  glassHighlight: 'rgba(255, 252, 247, 0.045)',
-  glassSheen: 'rgba(255, 252, 247, 0.06)',
-  glassSolidBackground: 'rgba(26, 24, 21, 0.96)',
-  glassSolidBorder: 'rgba(247, 242, 234, 0.12)',
-  modalBackdrop: 'rgba(8, 7, 6, 0.76)',
-  scrollbarThumb: 'rgb(81 73 61)',
-  scrollbarThumbHover: 'rgb(116 105 90)',
+  inputBackground: '#161616',
+  placeholder: '#666666',
+  tabBar: '#0F0F0F',
+  tabBarBorder: '#2A2A2A',
+  backdrop: 'rgba(15, 15, 15, 0.6)',
+  shadow: 'rgba(0, 0, 0, 0.3)',
+  glassWhite: 'rgba(26, 26, 26, 0.86)',
+  glassCream: 'rgba(20, 20, 20, 0.9)',
+  glassIconWhite: 'rgba(34, 34, 34, 0.72)',
+  glassIconCream: 'rgba(24, 24, 24, 0.78)',
+  glassBorder: 'rgba(245, 245, 245, 0.12)',
+  glassOutline: 'rgba(245, 245, 245, 0.06)',
+  glassShadow: '0 32px 90px rgba(0, 0, 0, 0.5)',
+  glassIconShadow: '0 14px 38px rgba(0, 0, 0, 0.34)',
+  glassHighlight: 'rgba(255, 255, 255, 0.045)',
+  glassSheen: 'rgba(255, 255, 255, 0.06)',
+  glassSolidBackground: 'rgba(26, 26, 26, 0.96)',
+  glassSolidBorder: 'rgba(245, 245, 245, 0.12)',
+  modalBackdrop: 'rgba(15, 15, 15, 0.65)',
+  scrollbarThumb: 'rgb(80 80 80)',
+  scrollbarThumbHover: 'rgb(110 110 110)',
 }
 
 export const desktopTokens = {
@@ -234,6 +234,17 @@ export const getSystemDesktopThemeScheme = (): DesktopThemeScheme => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
+export const resolveDesktopThemeScheme = (
+  preference: DesktopThemePreference | undefined,
+  systemScheme: DesktopThemeScheme = getSystemDesktopThemeScheme()
+): DesktopThemeScheme => {
+  if (preference === 'light' || preference === 'dark') {
+    return preference
+  }
+
+  return systemScheme
+}
+
 export const getDesktopCssVars = (scheme: DesktopThemeScheme = 'light'): Record<string, string> => {
   const tokens = getDesktopTokens(scheme)
   const colors = tokens.colors
@@ -245,6 +256,7 @@ export const getDesktopCssVars = (scheme: DesktopThemeScheme = 'light'): Record<
     '--ledger-surface': colors.surface,
     '--ledger-surface-card': colors.surfaceCard,
     '--ledger-surface-muted': colors.surfaceMuted,
+    '--ledger-menu-background': colors.menuBackground,
     '--ledger-surface-selected': colors.surfaceSelected,
     '--ledger-surface-hover': colors.surfaceHover,
     '--ledger-text-primary': colors.textPrimary,
@@ -255,6 +267,7 @@ export const getDesktopCssVars = (scheme: DesktopThemeScheme = 'light'): Record<
     '--ledger-accent': colors.accent,
     '--ledger-accent-hover': colors.accentHover,
     '--ledger-accent-soft': colors.accentSoft,
+    '--ledger-new-tab-atmosphere': scheme === 'dark' ? 'rgba(255, 140, 95, 0.05)' : 'rgba(255, 95, 64, 0.08)',
     '--ledger-danger': colors.danger,
     '--ledger-success': colors.success,
     '--ledger-warning': colors.warning,
@@ -264,6 +277,7 @@ export const getDesktopCssVars = (scheme: DesktopThemeScheme = 'light'): Record<
     '--ledger-tab-bar-border': colors.tabBarBorder,
     '--ledger-backdrop': colors.backdrop,
     '--ledger-shadow': colors.shadow,
+    '--ledger-github-icon-filter': scheme === 'dark' ? 'invert(1)' : 'none',
     '--ledger-shadow-accent': tokens.shadows.accent,
     '--ledger-control-radius': `${tokens.radius.control}px`,
     '--ledger-surface-radius': `${tokens.radius.surface}px`,

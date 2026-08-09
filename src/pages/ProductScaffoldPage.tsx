@@ -3,15 +3,19 @@ import { LockedSplash } from '../components/sections/LockedSplash'
 import { SiteFooter } from '../components/sections/SiteFooter'
 import { isSiteLocked } from '../lib/siteLock'
 
-type FeaturePageKey =
+export type ProductPageKey =
   | 'features'
-  | 'desktop'
-  | 'mobile'
-  | 'browser'
-  | 'integrations'
-  | 'shared-workspaces'
-  | 'search'
-  | 'planning'
+  | 'sidebar'
+  | 'capture'
+  | 'notes'
+  | 'projects'
+  | 'calendar'
+  | 'connected-work'
+  | 'workspaces'
+
+export type PlatformPageKey = 'platforms' | 'desktop' | 'web' | 'mobile' | 'browser-extension'
+
+export type SiteScaffoldPageKey = ProductPageKey | PlatformPageKey | 'integrations'
 
 type FeaturePageContent = {
   path: string
@@ -19,45 +23,75 @@ type FeaturePageContent = {
   text: string
 }
 
-const featurePageContent: Record<FeaturePageKey, FeaturePageContent> = {
+const scaffoldPageContent: Record<SiteScaffoldPageKey, FeaturePageContent> = {
   features: {
     path: '/features',
     title: 'Features',
     text: 'Scaffold page.',
   },
+  sidebar: {
+    path: '/features/sidebar',
+    title: 'Sidebar',
+    text: 'Scaffold page.',
+  },
+  capture: {
+    path: '/features/capture',
+    title: 'Capture',
+    text: 'Scaffold page.',
+  },
+  notes: {
+    path: '/features/notes',
+    title: 'Notes',
+    text: 'Scaffold page.',
+  },
+  projects: {
+    path: '/features/projects',
+    title: 'Projects',
+    text: 'Scaffold page.',
+  },
+  calendar: {
+    path: '/features/calendar',
+    title: 'Calendar',
+    text: 'Scaffold page.',
+  },
+  'connected-work': {
+    path: '/features/connected-work',
+    title: 'Connected work',
+    text: 'Scaffold page.',
+  },
+  workspaces: {
+    path: '/features/workspaces',
+    title: 'Workspaces',
+    text: 'Scaffold page.',
+  },
+  platforms: {
+    path: '/platforms',
+    title: 'Platforms',
+    text: 'Scaffold page.',
+  },
   desktop: {
-    path: '/features/desktop',
+    path: '/platforms/desktop',
     title: 'Desktop app',
     text: 'Scaffold page.',
   },
+  web: {
+    path: '/platforms/web',
+    title: 'Web app',
+    text: 'Scaffold page.',
+  },
   mobile: {
-    path: '/features/mobile',
+    path: '/platforms/mobile',
     title: 'Mobile app',
     text: 'Scaffold page.',
   },
-  browser: {
-    path: '/features/browser',
+  'browser-extension': {
+    path: '/platforms/browser-extension',
     title: 'Browser extension',
     text: 'Scaffold page.',
   },
   integrations: {
-    path: '/features/integrations',
+    path: '/integrations',
     title: 'Integrations',
-    text: 'Scaffold page.',
-  },
-  'shared-workspaces': {
-    path: '/features/shared-workspaces',
-    title: 'Shared workspaces',
-    text: 'Scaffold page.',
-  },
-  search: {
-    path: '/features/search',
-    title: 'Search',
-    text: 'Scaffold page.',
-  },
-  planning: {
-    path: '/features/planning',
-    title: 'Planning',
     text: 'Scaffold page.',
   },
 }
@@ -75,8 +109,8 @@ function FeatureSimplePage({ content }: { content: FeaturePageContent }) {
   )
 }
 
-export function ProductScaffoldPage({ page }: { page: FeaturePageKey }) {
-  const content = featurePageContent[page]
+export function ProductScaffoldPage({ page }: { page: SiteScaffoldPageKey }) {
+  const content = scaffoldPageContent[page]
 
   if (isSiteLocked()) {
     return <LockedSplash />

@@ -216,13 +216,13 @@ export function InviteLandingPage() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href={DOWNLOAD_URL}
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
+                  className="ledger-button h-11 flex-1 bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
                 >
                   Download Ledger
                 </a>
                 <a
                   href={DOWNLOAD_URL}
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl border border-ledger-border bg-ledger-surface px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-bg"
+                  className="ledger-button h-11 flex-1 border border-ledger-border bg-ledger-surface px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-bg"
                 >
                   Continue in browser
                 </a>
@@ -248,7 +248,7 @@ export function InviteLandingPage() {
                   event.preventDefault()
                   continueInBrowser()
                 }}
-                className="mt-8 inline-flex h-11 items-center justify-center rounded-2xl bg-ledger-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
+                className="ledger-button mt-8 h-11 bg-ledger-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
               >
                 Continue in browser
               </a>

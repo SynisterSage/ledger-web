@@ -44,8 +44,6 @@ const rotatingWords = [
   'creative work',
   'freelance work',
 ]
-type TypewriterPhase = 'typing' | 'holding' | 'deleting' | 'advancing'
-
 function useHeroFrame(frameDuration = 3200) {
   const frameIndexRef = useRef(0)
   const intervalRef = useRef<number | null>(null)
@@ -87,65 +85,29 @@ function useHeroFrame(frameDuration = 3200) {
 
 function HeroTypewriter() {
   const [wordIndex, setWordIndex] = useState(0)
-  const [text, setText] = useState(() => {
-    if (typeof window === 'undefined') {
-      return rotatingWords[0]
-    }
-
-    return ''
-  })
-  const [phase, setPhase] = useState<TypewriterPhase>('typing')
 
   useEffect(() => {
     if (typeof window === 'undefined') {
       return
     }
 
-    const currentWord = rotatingWords[wordIndex]
+    const timer = window.setInterval(() => {
+      setWordIndex((value) => (value + 1) % rotatingWords.length)
+    }, 3000)
 
-    const timer = window.setTimeout(() => {
-      if (phase === 'typing') {
-        const nextText = currentWord.slice(0, text.length + 1)
-        setText(nextText)
-        if (nextText === currentWord) {
-          setPhase('holding')
-        }
-        return
-      }
-
-      if (phase === 'holding') {
-        setPhase('deleting')
-        return
-      }
-
-      if (phase === 'deleting') {
-        const nextText = currentWord.slice(0, Math.max(0, text.length - 1))
-        setText(nextText)
-        if (nextText.length === 0) {
-          setPhase('advancing')
-        }
-        return
-      }
-
-      if (phase === 'advancing') {
-        setWordIndex((value) => (value + 1) % rotatingWords.length)
-        setPhase('typing')
-      }
-    }, phase === 'holding' ? 2200 : phase === 'advancing' ? 280 : phase === 'deleting' ? 90 : 120)
-
-    return () => window.clearTimeout(timer)
-  }, [phase, text, wordIndex])
+    return () => window.clearInterval(timer)
+  }, [])
 
   return (
     <span
       className="hero-typewriter relative top-[-0.12em] mx-auto inline-grid min-h-[1em] w-fit align-middle leading-none sm:min-w-[15ch]"
+      aria-live="polite"
     >
       <span aria-hidden="true" className="invisible select-none">
         freelance work
       </span>
       <span className="absolute inset-0 inline-flex items-center justify-center whitespace-nowrap text-ledger-accent">
-        <span>{text}</span>
-        <span aria-hidden="true" className="hero-typewriter-cursor ml-1" />
+        <span key={rotatingWords[wordIndex]} className="hero-word-scale">{rotatingWords[wordIndex]}</span>
       </span>
     </span>
   )
