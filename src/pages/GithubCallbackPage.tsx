@@ -17,7 +17,7 @@ export function GithubCallbackPage() {
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md items-center justify-center">
         <section className="w-full rounded-3xl border border-ledger-border bg-ledger-surface px-6 py-7 text-center shadow-(--ledger-shadow-soft)">
           <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-(--ledger-surface-muted)">
-            <img src="/github-mark.svg" alt="GitHub" className="h-6 w-6" />
+            <img src="/github-mark.svg" alt="GitHub" className="h-6 w-6 ledger-invert-on-dark" />
           </div>
           <p className="mt-5 text-[12px] font-medium text-ledger-text-muted">GitHub integration</p>
           <h1 className="mt-3 text-[27px] font-semibold leading-tight tracking-tight">

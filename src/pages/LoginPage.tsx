@@ -38,7 +38,6 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
     () =>
       mode === 'login'
         ? {
-            eyebrow: 'Ledger account',
             title: 'Welcome to Ledger',
             subtitle: 'Sign in to continue to your workspace.',
             primaryLabel: 'Continue',
@@ -47,9 +46,7 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
             footerAction: 'Sign up',
           }
         : {
-            eyebrow: 'Ledger account',
             title: 'Welcome to Ledger',
-            subtitle: 'Create your Ledger account.',
             primaryLabel: 'Create account',
             googleLabel: 'Continue with Google',
             footerPrompt: 'Already have an account?',
@@ -120,15 +117,14 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
       <main className="mx-auto flex min-h-dvh w-full items-center justify-center px-6 py-12 sm:px-8">
         <section className="w-full max-w-[362px] text-center">
           <img src="/assets/logos/logo.svg" alt="Ledger" className="mx-auto h-10 w-10" />
-          <p className=" mt-3 text-[14px] font-medium text-ledger-text-muted">{copy.eyebrow}</p>
 
 
           <div className="mt-7">
             <h1 className="mt-2 text-[26px] font-semibold leading-tight text-ledger-text">{copy.title}</h1>
-            <p className="mt-3 text-[16px] leading-7 text-ledger-text-muted">{copy.subtitle}</p>
+            <p className="mt-2 text-[16px] leading-7 text-ledger-text-muted">{copy.subtitle}</p>
           </div>
 
-          <div className="mt-8 text-left">
+          <div className="mt-7 text-left">
             <form
               className="space-y-4"
               onSubmit={(event) => void handleSubmit(event)}
@@ -136,7 +132,7 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
               {mode === 'signup' && (
                 <div className="space-y-2">
                   <label htmlFor="full-name" className="text-[13px] font-medium text-ledger-text-muted">Name</label>
-                  <input id="full-name" type="text" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Your name" className="ledger-field h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" />
+                  <input id="full-name" type="text" value={fullName} onChange={(event) => setFullName(event.target.value)} placeholder="Your name" className="login-field border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-[15px] text-ledger-text placeholder:text-ledger-text-muted/65 outline-none focus:border-(--ledger-header-border)" />
                 </div>
               )}
               <div className="space-y-2">
@@ -146,6 +142,7 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
                 <input
                   id="email"
                   type="email"
+                  spellCheck={false}
                   value={email}
                   onChange={(event) => {
                     setEmail(event.target.value)
@@ -154,7 +151,7 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
                     }
                   }}
                   placeholder="Enter your email address..."
-                  className={`ledger-field h-11 w-full border bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none transition-colors duration-200 placeholder:text-ledger-text-muted/55 focus:border-(--ledger-header-border) ${
+                  className={`login-field border bg-(--ledger-surface-card) text-[15px] text-ledger-text placeholder:text-ledger-text-muted/65 outline-none transition-colors duration-200 focus:border-(--ledger-header-border) ${
                     error ? 'border-red-300 focus:border-red-400' : 'border-(--ledger-border-subtle)'
                   }`}
                 />
@@ -162,7 +159,7 @@ export function LoginPage({ initialMode = 'login' }: { initialMode?: Mode }) {
 
               <div className="space-y-2">
                 <label htmlFor="password" className="text-[13px] font-medium text-ledger-text-muted">Password</label>
-                <input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Your password" className="ledger-field h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-[15px] text-ledger-text outline-none focus:border-(--ledger-header-border)" />
+                <input id="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Your password" className="login-field border border-(--ledger-border-subtle) bg-(--ledger-surface-card) text-[15px] text-ledger-text placeholder:text-ledger-text-muted/65 outline-none focus:border-(--ledger-header-border)" />
               </div>
 
               <div className="space-y-3">

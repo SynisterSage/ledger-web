@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/global.css'
 
@@ -11,6 +11,12 @@ import { InviteSuccessPage } from './pages/InviteSuccessPage'
 import { LoginPage } from './pages/LoginPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { ProductScaffoldPage } from './pages/ProductScaffoldPage'
+import { IntegrationsDirectoryPage } from './pages/IntegrationsDirectoryPage'
+import { IntegrationDetailPage } from './pages/IntegrationDetailPage'
+import { getIntegrationBySlug } from './data/integrations'
+import { CaptureFeaturePage } from './pages/CaptureFeaturePage'
+import { NotesFeaturePage } from './pages/NotesFeaturePage'
+import { ProjectsFeaturePage } from './pages/ProjectsFeaturePage'
 import { PrivacyPage } from './pages/PrivacyPage'
 import { RedirectPage } from './pages/RedirectPage'
 import { TermsPage } from './pages/TermsPage'
@@ -72,6 +78,43 @@ function AppRouter() {
   const mcpSwitchCode = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('code') : null
   const githubResult = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('github') : null
 
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+    const integrationSlug = pathname.startsWith('/integrations/') ? pathname.slice('/integrations/'.length) : null
+    const integration = integrationSlug ? getIntegrationBySlug(integrationSlug) : undefined
+    const title = integration?.detail
+      ? `${integration.name} integration | Ledger`
+      : pathname === '/integrations'
+        ? 'Integrations | Ledger'
+        : pathname === '/help' || pathname.startsWith('/help/')
+          ? 'Ledger Help'
+          : pathname === '/download'
+            ? 'Download Ledger'
+            : 'Ledger | Connected work for teams'
+    const description = integration?.detail?.overview
+      || (pathname === '/integrations' ? 'Connect Ledger to the tools and surfaces that keep projects, context, and follow-through together.' : 'Ledger keeps capture, notes, projects, calendar, and connected work in one calm workspace.')
+    const canonical = `https://ledgerworkspace.com${pathname === '/' ? '/' : pathname}`
+    document.title = title
+    const setMeta = (selector: string, attribute: 'name' | 'property', content: string) => {
+      let element = document.head.querySelector<HTMLMetaElement>(selector)
+      if (!element) {
+        element = document.createElement('meta')
+        element.setAttribute(attribute, selector.match(/"([^"]+)"/)?.[1] || '')
+        document.head.appendChild(element)
+      }
+      element.content = content
+    }
+    setMeta('meta[name="description"]', 'name', description)
+    setMeta('meta[property="og:title"]', 'property', title)
+    setMeta('meta[property="og:description"]', 'property', description)
+    setMeta('meta[property="og:url"]', 'property', canonical)
+    setMeta('meta[name="twitter:title"]', 'name', title)
+    setMeta('meta[name="twitter:description"]', 'name', description)
+    let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    if (!link) { link = document.createElement('link'); link.rel = 'canonical'; document.head.appendChild(link) }
+    link.href = canonical
+  }, [pathname])
+
   if (pluginSession && pluginCode) {
     return <FigmaPluginAuthorizationPage sessionId={pluginSession} code={pluginCode} />
   }
@@ -96,6 +139,13 @@ function AppRouter() {
     return <RedirectPage to={docsRedirects[pathname]} />
   }
 
+  if (pathname.startsWith('/integrations/')) {
+    const slug = pathname.slice('/integrations/'.length)
+    const integration = getIntegrationBySlug(slug)
+    if (integration?.detail) return <IntegrationDetailPage slug={slug} />
+    return <NotFoundPage />
+  }
+
   switch (pathname) {
     case '/':
       return <HomePage />
@@ -106,11 +156,11 @@ function AppRouter() {
     case '/features/sidebar':
       return <ProductScaffoldPage page="sidebar" />
     case '/features/capture':
-      return <ProductScaffoldPage page="capture" />
+      return <CaptureFeaturePage />
     case '/features/notes':
-      return <ProductScaffoldPage page="notes" />
+      return <NotesFeaturePage />
     case '/features/projects':
-      return <ProductScaffoldPage page="projects" />
+      return <ProjectsFeaturePage />
     case '/features/calendar':
       return <ProductScaffoldPage page="calendar" />
     case '/features/connected-work':
@@ -128,7 +178,7 @@ function AppRouter() {
     case '/platforms/browser-extension':
       return <ProductScaffoldPage page="browser-extension" />
     case '/integrations':
-      return <ProductScaffoldPage page="integrations" />
+      return <IntegrationsDirectoryPage />
     case '/changelog':
       return <ChangelogPage />
     case '/login':

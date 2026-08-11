@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, CalendarDays, ChevronDown, FolderKanban, Globe2, Layers3, Link2, Monitor, NotebookPen, Puzzle, Smartphone } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { integrations } from '../../data/integrations'
+import { productAuth } from '../../lib/auth'
 
 type SiteHeaderProps = { currentPath?: string }
 type MenuName = 'product' | 'platforms' | 'integrations'
@@ -22,7 +24,7 @@ const platformLinks = [
   { href: '/platforms/browser-extension', label: 'Browser extension', icon: Puzzle },
 ]
 
-const integrationNames = ['Slack', 'Google Drive', 'GitHub', 'Figma', 'Calendar connections', 'MCP']
+const integrationMenuLinks = integrations.filter((integration) => integration.detail)
 const productVisuals: Record<string, string> = {
   '/features/capture': '/assets/mockups/feature1.png',
   '/features/notes': '/assets/mockups/feature2.png',
@@ -38,6 +40,7 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
   const [openMenu, setOpenMenu] = useState<MenuName | null>(null)
   const [pinnedMenu, setPinnedMenu] = useState<MenuName | null>(null)
   const [mobileSection, setMobileSection] = useState<'product' | 'platforms' | 'integrations' | 'legal'>('product')
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const rafId = useRef<number | null>(null)
   const isHelpActive = pathname === '/help' || pathname.startsWith('/help/')
@@ -78,6 +81,22 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 1024) setIsMenuOpen(false) }
     window.addEventListener('resize', onResize); return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  useEffect(() => {
+    let mounted = true
+    void productAuth.getSession().then((session) => {
+      if (mounted) setIsAuthenticated(Boolean(session))
+    }).catch(() => {
+      if (mounted) setIsAuthenticated(false)
+    })
+    const subscription = productAuth.onAuthStateChange((_event, session) => {
+      if (mounted) setIsAuthenticated(Boolean(session))
+    })
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
   }, [])
 
   const menuProps = (menu: MenuName) => ({
@@ -133,12 +152,12 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
   </div>
 
   const integrationsMenu = <div id="site-nav-integrations-menu" className={`site-nav__simple-menu site-nav__integrations-menu ${isOpen('integrations') ? 'is-open' : ''}`} role="menu" aria-label="Integrations menu" onPointerLeave={() => menuPointerLeave('integrations')}>
-    <div className="site-nav__menu-heading"><span>Popular connections</span><a href="/features/connected-work" role="menuitem" tabIndex={-1} onKeyDown={itemKeyDown} onClick={closeMenu}>Overview <ArrowUpRight aria-hidden="true" /></a></div><div className="site-nav__integration-grid">{integrationNames.map((name) => <span key={name}>{name}</span>)}</div><a href="/features/connected-work" role="menuitem" tabIndex={-1} onKeyDown={itemKeyDown} onClick={closeMenu} className="site-nav__menu-footer-link">See connected work <ArrowUpRight aria-hidden="true" /></a>
+    <div className="site-nav__menu-heading"><span>Connected work</span><a href="/integrations" role="menuitem" tabIndex={-1} onKeyDown={itemKeyDown} onClick={closeMenu}>Directory <ArrowUpRight aria-hidden="true" /></a></div><div className="site-nav__integration-grid">{integrationMenuLinks.map((integration) => <a key={integration.slug} href={`/integrations/${integration.slug}`} role="menuitem" tabIndex={-1} onKeyDown={itemKeyDown} onClick={closeMenu} aria-current={pathname === `/integrations/${integration.slug}` ? 'page' : undefined}>{integration.name}</a>)}</div><a href="/integrations" role="menuitem" tabIndex={-1} onKeyDown={itemKeyDown} onClick={closeMenu} className="site-nav__menu-footer-link">Browse all integrations <ArrowUpRight aria-hidden="true" /></a>
   </div>
 
   const mobileProduct = <div className={`site-nav__mobile-section-panel site-nav__mobile-product-grid ${mobileSection === 'product' ? 'is-open' : ''}`}>{productLinks.map(({ href, label }) => <a key={href} href={href} onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link"><span className="site-nav__mobile-section-link-title">{label}</span></a>)}<a href="/features" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">All features</span></a></div>
   const mobilePlatforms = <div className={`site-nav__mobile-section-panel ${mobileSection === 'platforms' ? 'is-open' : ''}`}>{platformLinks.map(({ href, label }) => <a key={href} href={href} onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">{label}</span></a>)}</div>
-  const mobileIntegrations = <div className={`site-nav__mobile-section-panel ${mobileSection === 'integrations' ? 'is-open' : ''}`}><a href="/features/connected-work" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">Overview</span></a>{integrationNames.map((name) => <span key={name} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">{name}</span></span>)}</div>
+  const mobileIntegrations = <div className={`site-nav__mobile-section-panel ${mobileSection === 'integrations' ? 'is-open' : ''}`}><a href="/integrations" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">Directory</span></a>{integrationMenuLinks.map((integration) => <a key={integration.slug} href={`/integrations/${integration.slug}`} onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">{integration.name}</span></a>)}</div>
   const section = (name: 'product' | 'platforms' | 'integrations' | 'legal', label: string, content: React.ReactNode) => <div className="site-nav__mobile-section"><button type="button" className="site-nav__mobile-section-trigger" aria-expanded={mobileSection === name} onClick={() => setMobileSection((current) => current === name ? 'legal' : name)}><span>{label}</span><ChevronDown aria-hidden="true" className={`site-nav__mobile-section-chevron ${mobileSection === name ? 'is-open' : ''}`} /></button>{content}</div>
 
   return <header className={`site-nav site-header-enter px-6 sm:px-8 ${isScrolled ? 'site-nav--scrolled' : ''} ${isMenuOpen ? 'site-nav--menu-open' : ''}`}>
@@ -147,11 +166,11 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
       <div className="site-nav__cluster flex min-w-0 flex-1 items-center gap-3"><nav className="site-nav__links hidden items-center gap-0.5 lg:flex">
         <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('product') ? 'is-open' : ''}`} {...menuProps('product')}><button className={`${navLinkClass(false)} site-nav__dropdown-trigger ${isOpen('product') ? 'is-open' : ''}`} {...triggerProps('product')}><span>Product</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{productMenu}</div>
         <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('platforms') ? 'is-open' : ''}`} {...menuProps('platforms')}><button className={`${navLinkClass(pathname.startsWith('/platforms'))} site-nav__dropdown-trigger ${isOpen('platforms') ? 'is-open' : ''}`} {...triggerProps('platforms')}><span>Platforms</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{platformsMenu}</div>
-        <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('integrations') ? 'is-open' : ''}`} {...menuProps('integrations')}><button className={`${navLinkClass(pathname === '/integrations')} site-nav__dropdown-trigger ${isOpen('integrations') ? 'is-open' : ''}`} {...triggerProps('integrations')}><span>Integrations</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{integrationsMenu}</div>
+        <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('integrations') ? 'is-open' : ''}`} {...menuProps('integrations')}><button className={`${navLinkClass(pathname === '/integrations' || pathname.startsWith('/integrations/'))} site-nav__dropdown-trigger ${isOpen('integrations') ? 'is-open' : ''}`} {...triggerProps('integrations')}><span>Integrations</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{integrationsMenu}</div>
         <a href="/help" aria-current={isHelpActive ? 'page' : undefined} className={navLinkClass(isHelpActive)}>Help</a>
-      </nav><div className="site-nav__actions hidden items-center gap-1.5 md:flex"><a href="/login" className="ledger-button h-9 rounded-[var(--ledger-control-radius)] px-3 text-[13px] font-medium text-(--ledger-header-text-muted) hover:bg-(--ledger-header-pill)">Log in</a><a href="/download" className="ledger-button h-9 rounded-[var(--ledger-control-radius)] bg-ledger-accent px-4.5 text-[13px] font-semibold text-white hover:bg-ledger-accent-hover">Download Ledger</a></div>
+      </nav><div className="site-nav__actions hidden items-center gap-1.5 md:flex">{isAuthenticated ? <a href="/app" className="ledger-button h-9 rounded-[var(--ledger-control-radius)] bg-ledger-accent px-4.5 text-[13px] font-semibold text-white hover:bg-ledger-accent-hover">Open app</a> : <><a href="/login" className="ledger-button h-9 rounded-[var(--ledger-control-radius)] px-3 text-[13px] font-medium text-(--ledger-header-text-muted) hover:bg-(--ledger-header-pill)">Log in</a><a href="/download" className="ledger-button h-9 rounded-[var(--ledger-control-radius)] bg-ledger-accent px-4.5 text-[13px] font-semibold text-white hover:bg-ledger-accent-hover">Download Ledger</a></>}</div>
       <button ref={menuButtonRef} type="button" aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={isMenuOpen} className="site-nav__menu-button inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ledger-header-border) bg-(--ledger-header-pill) lg:hidden" onClick={() => setIsMenuOpen((current) => !current)}>{isMenuOpen ? '×' : '☰'}</button>
       </div></div></div>
-    <div className={`site-nav__mobile-sheet lg:hidden ${isMenuOpen ? 'is-open' : ''}`}><nav className="site-nav__mobile-links">{section('product', 'Product', mobileProduct)}{section('platforms', 'Platforms', mobilePlatforms)}{section('integrations', 'Integrations', mobileIntegrations)}<a href="/help" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-direct-link">Help</a>{section('legal', 'Legal', <div className={`site-nav__mobile-section-panel ${mobileSection === 'legal' ? 'is-open' : ''}`}><a href="/privacy" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">Privacy</span></a><a href="/terms" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">Terms</span></a></div>)}</nav><div className="site-nav__mobile-bottom"><div className="site-nav__mobile-meta"><a href="/login" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-meta-link">Log in</a><a href="/download" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-cta">Download Ledger</a></div></div></div><div aria-hidden={!isMenuOpen} className={`site-nav__mobile-backdrop lg:hidden ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(false)} />
+    <div className={`site-nav__mobile-sheet lg:hidden ${isMenuOpen ? 'is-open' : ''}`}><nav className="site-nav__mobile-links">{section('product', 'Product', mobileProduct)}{section('platforms', 'Platforms', mobilePlatforms)}{section('integrations', 'Integrations', mobileIntegrations)}<a href="/help" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-direct-link">Help</a>{section('legal', 'Legal', <div className={`site-nav__mobile-section-panel ${mobileSection === 'legal' ? 'is-open' : ''}`}><a href="/privacy" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">Privacy</span></a><a href="/terms" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-section-link site-nav__mobile-section-link--compact"><span className="site-nav__mobile-section-link-title">Terms</span></a></div>)}</nav><div className="site-nav__mobile-bottom"><div className="site-nav__mobile-meta"><a href={isAuthenticated ? '/app' : '/login'} onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-meta-link">{isAuthenticated ? 'Open app' : 'Log in'}</a>{!isAuthenticated && <a href="/download" onClick={() => setIsMenuOpen(false)} className="site-nav__mobile-cta">Download Ledger</a>}</div></div></div><div aria-hidden={!isMenuOpen} className={`site-nav__mobile-backdrop lg:hidden ${isMenuOpen ? 'is-open' : ''}`} onClick={() => setIsMenuOpen(false)} />
   </header>
 }

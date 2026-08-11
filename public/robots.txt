@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /app/
+Disallow: /auth/
+Disallow: /integrations/mcp/
+Disallow: /invite/
+Sitemap: https://ledgerworkspace.com/sitemap.xml

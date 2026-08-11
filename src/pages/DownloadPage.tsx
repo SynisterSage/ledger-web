@@ -53,7 +53,7 @@ function DownloadRow({
   actionHref?: string
 }) {
   const iconView = {
-    apple: <img src="/assets/icons/Apple_Logo_0.svg" alt="" className="h-4 w-4 object-contain" aria-hidden="true" />,
+    apple: <img src="/assets/icons/Apple_Logo_0.svg" alt="" className="h-4 w-4 object-contain ledger-invert-on-dark" aria-hidden="true" />,
     windows: (
       <img src="/assets/icons/Microsoft_Symbol_0.svg" alt="" className="h-4 w-4 object-contain" aria-hidden="true" />
     ),
@@ -63,7 +63,7 @@ function DownloadRow({
         className="h-4 w-4 bg-current mask-[url('/assets/icons/extension-puzzle-outline.svg')] mask-center mask-no-repeat mask-contain"
       />
     ),
-    ios: <img src="/assets/icons/Apple_Logo_0.svg" alt="" className="h-4 w-4 object-contain" aria-hidden="true" />,
+    ios: <img src="/assets/icons/Apple_Logo_0.svg" alt="" className="h-4 w-4 object-contain ledger-invert-on-dark" aria-hidden="true" />,
     android: <img src="/assets/icons/google-play.svg" alt="" className="h-4 w-4 object-contain" aria-hidden="true" />,
     web: <Globe2 className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />,
   }[icon]
