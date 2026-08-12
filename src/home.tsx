@@ -24,6 +24,7 @@ import { FigmaPluginAuthorizationPage } from './pages/FigmaPluginAuthorizationPa
 import { GithubCallbackPage } from './pages/GithubCallbackPage'
 import { McpAuthorizationPage } from './pages/McpAuthorizationPage'
 import { McpWorkspaceSwitchPage } from './pages/McpWorkspaceSwitchPage'
+import { PricingPage } from './pages/PricingPage'
 
 const legacyRedirects: Record<string, string> = {
   '/desktop-app': '/platforms/desktop',
@@ -90,9 +91,15 @@ function AppRouter() {
           ? 'Ledger Help'
           : pathname === '/download'
             ? 'Download Ledger'
-            : 'Ledger | Connected work for teams'
+            : pathname === '/pricing'
+              ? 'Pricing | Ledger'
+              : 'Ledger | Connected work for teams'
     const description = integration?.detail?.overview
-      || (pathname === '/integrations' ? 'Connect Ledger to the tools and surfaces that keep projects, context, and follow-through together.' : 'Ledger keeps capture, notes, projects, calendar, and connected work in one calm workspace.')
+      || (pathname === '/integrations'
+        ? 'Connect Ledger to the tools and surfaces that keep projects, context, and follow-through together.'
+        : pathname === '/pricing'
+          ? 'Explore Ledger plans for capturing, organizing, and moving work forward across your workspaces.'
+          : 'Ledger keeps capture, notes, projects, calendar, and connected work in one calm workspace.')
     const canonical = `https://ledgerworkspace.com${pathname === '/' ? '/' : pathname}`
     document.title = title
     const setMeta = (selector: string, attribute: 'name' | 'property', content: string) => {
@@ -151,6 +158,8 @@ function AppRouter() {
       return <HomePage />
     case '/download':
       return <DownloadPage />
+    case '/pricing':
+      return <PricingPage />
     case '/features':
       return <ProductScaffoldPage page="features" />
     case '/features/sidebar':

@@ -10,6 +10,7 @@ const footerColumns = [
       { label: 'Calendar', href: '/features/calendar' },
       { label: 'Connected work', href: '/features/connected-work' },
       { label: 'Workspaces', href: '/features/workspaces' },
+      { label: 'Pricing', href: '/pricing' },
     ],
   },
   {
