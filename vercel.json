@@ -58,6 +58,7 @@
     { "source": "/integrations/mcp/switch-workspace", "destination": "/index.html" },
     { "source": "/integrations", "destination": "/index.html" },
     { "source": "/integrations/:path*", "destination": "/index.html" },
+    { "source": "/pricing", "destination": "/index.html" },
     { "source": "/download", "destination": "/html-pages/download.html" },
     { "source": "/features", "destination": "/features/index.html" },
     { "source": "/features/(.*)", "destination": "/features/index.html" },
