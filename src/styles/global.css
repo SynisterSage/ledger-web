@@ -65,16 +65,18 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-sans) !important;
   border-radius: var(--ledger-control-radius, 12px) !important;
-  padding-top: 3px;
-  line-height: 1;
+  padding-top: 0;
+  line-height: 1 !important;
   text-align: center;
   vertical-align: middle;
 }
 
 .ledger-field {
+  font-family: var(--font-sans) !important;
   border-radius: var(--ledger-control-radius, 12px) !important;
-  line-height: 1.25;
+  line-height: 1.25 !important;
 }
 
 .login-field {
@@ -84,8 +86,9 @@ textarea {
   height: 44px;
   appearance: none;
   padding: 0 16px;
+  font-family: var(--font-sans) !important;
   border-radius: var(--ledger-control-radius, 12px) !important;
-  line-height: 44px !important;
+  line-height: 1.25 !important;
   vertical-align: middle;
 }
 
@@ -99,7 +102,12 @@ select.ledger-field {
    pills and icon buttons keep their intentional shapes. */
 input.rounded-full,
 select.rounded-full,
-textarea.rounded-full,
+textarea.rounded-full {
+  border-radius: var(--ledger-control-radius, 12px);
+  padding-top: 0;
+  line-height: 1.25 !important;
+}
+
 form button.rounded-full,
 button.rounded-full.w-full,
 button.rounded-full.flex-1 {
@@ -107,8 +115,8 @@ button.rounded-full.flex-1 {
   align-items: center;
   justify-content: center;
   border-radius: var(--ledger-control-radius, 12px);
-  padding-top: 3px;
-  line-height: 1;
+  font-family: var(--font-sans) !important;
+  line-height: 1 !important;
   text-align: center;
   vertical-align: middle;
 }
@@ -355,7 +363,7 @@ img {
 
 .site-nav__link {
   border-radius: var(--ledger-control-radius, 12px) !important;
-  line-height: 1;
+  line-height: 1.25;
 }
 
 .site-nav__actions .ledger-button {
@@ -364,7 +372,6 @@ img {
 
 .site-nav__label {
   display: block;
-  transform: translateY(2px);
 }
 
 .site-nav__product {
@@ -397,7 +404,7 @@ img {
   font-size: 0.875rem !important;
   font-weight: 500 !important;
   letter-spacing: normal !important;
-  line-height: 1 !important;
+  line-height: 1.25 !important;
   transition: background-color 180ms ease, color 180ms ease;
 }
 
