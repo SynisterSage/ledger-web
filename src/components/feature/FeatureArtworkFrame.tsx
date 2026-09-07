@@ -1,14 +1,17 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import '../../styles/feature-directory.css'
+import '../../styles/feature-media.css'
 
 export type FeatureArtwork = {
   label: string
+  dimensions?: string
   alt: string
   src?: string
   mobileSrc?: string
   aspectRatio?: string
   objectFit?: CSSProperties['objectFit']
   objectPosition?: CSSProperties['objectPosition']
+  visual?: ReactNode
 }
 
 type FeatureArtworkFrameProps = FeatureArtwork & {
@@ -18,12 +21,14 @@ type FeatureArtworkFrameProps = FeatureArtwork & {
 /** Image-ready artwork handoff surface for the feature directory. */
 export function FeatureArtworkFrame({
   label,
+  dimensions,
   alt,
   src,
   mobileSrc,
   aspectRatio = '16 / 9',
   objectFit = 'cover',
   objectPosition = 'center',
+  visual,
   className = '',
 }: FeatureArtworkFrameProps) {
   const style = { '--feature-artwork-aspect-ratio': aspectRatio } as CSSProperties
@@ -35,7 +40,7 @@ export function FeatureArtworkFrame({
       role={src ? undefined : 'img'}
       aria-label={src ? undefined : alt || label}
     >
-      {src ? (
+      {visual ? visual : src ? (
         <picture>
           {mobileSrc ? <source media="(max-width: 700px)" srcSet={mobileSrc} /> : null}
           <img
@@ -46,7 +51,10 @@ export function FeatureArtworkFrame({
           />
         </picture>
       ) : (
-        <span className="feature-artwork-frame__placeholder">{label}</span>
+        <div className="feature-artwork-frame__placeholder">
+          <span>{label}</span>
+          {dimensions ? <span className="feature-artwork-frame__dimensions">{dimensions}</span> : null}
+        </div>
       )}
     </div>
   )

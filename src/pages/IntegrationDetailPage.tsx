@@ -1,5 +1,6 @@
-import { ArrowUpRight, BookOpen, Bot, CalendarDays, CheckSquare, ExternalLink, FolderOpen, GitBranch, Globe2, MessageSquare, Palette, Puzzle, Rss, Settings2 } from 'lucide-react'
-import { getIntegrationBySlug, integrationCategories, integrations, type Integration } from '../data/integrations'
+import { useState } from 'react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Bot, CalendarDays, CheckSquare, ExternalLink, FolderOpen, GitBranch, Globe2, MessageSquare, Palette, Puzzle, Rss, Settings2 } from 'lucide-react'
+import { getIntegrationBySlug, integrationCategories, integrations, type Integration, type IntegrationDetail } from '../data/integrations'
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { SiteFooter } from '../components/sections/SiteFooter'
 import { LockedSplash } from '../components/sections/LockedSplash'
@@ -151,6 +152,46 @@ function BrowserExtensionArtwork() {
   )
 }
 
+function IntegrationArtwork({ artwork }: { artwork: IntegrationDetail['artwork'] }) {
+  return artwork === 'slack-capture' ? <SlackArtwork /> : artwork === 'google-drive-context' ? <GoogleDriveArtwork /> : artwork === 'figma-context' ? <FigmaArtwork /> : artwork === 'apple-calendar-context' ? <AppleCalendarArtwork /> : artwork === 'apple-reminders-context' ? <AppleRemindersArtwork /> : artwork === 'mcp-context' ? <McpArtwork /> : artwork === 'calendar-feed-context' ? <CalendarFeedArtwork /> : artwork === 'browser-extension-context' ? <BrowserExtensionArtwork /> : <GitHubArtwork />
+}
+
+function IntegrationArtworkCarousel({ detail }: { detail: IntegrationDetail }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const captions: Record<IntegrationDetail['artwork'], string> = {
+    'slack-capture': 'A Slack conversation captured into Ledger with its source context attached.',
+    'google-drive-context': 'Google Drive resources connected to a Ledger project.',
+    'figma-context': 'Figma design context connected to a Ledger project.',
+    'apple-calendar-context': 'Apple Calendar dates connected to a Ledger project.',
+    'apple-reminders-context': 'Apple Reminders connected to Ledger next actions.',
+    'mcp-context': 'An MCP client working with authorized Ledger workspace context.',
+    'calendar-feed-context': 'A Ledger workspace calendar feed in an external calendar app.',
+    'browser-extension-context': 'A browser page captured into the right Ledger workspace Inbox.',
+    'github-workflow': 'A project view with GitHub resources connected to the work around them.',
+  }
+  const slides = detail.artworkSlides ?? [{ label: 'Overview', caption: captions[detail.artwork] }]
+  const activeSlide = slides[activeIndex]
+  const move = (direction: -1 | 1) => setActiveIndex((index) => (index + direction + slides.length) % slides.length)
+
+  return (
+    <div aria-label="Integration screenshots" aria-roledescription="carousel">
+      <div aria-live="polite" aria-atomic="true">
+        {activeSlide.image ? <img src={activeSlide.image} alt={activeSlide.alt ?? activeSlide.label} className="block aspect-[16/10] w-full rounded-[var(--ledger-radius-lg)] border border-(--ledger-border-subtle) object-cover" /> : <IntegrationArtwork artwork={detail.artwork} />}
+      </div>
+      <div className="mt-3 flex items-center justify-between gap-4">
+        <div className="min-w-0">
+          <p className="truncate text-[12px] font-medium text-ledger-text-primary">{activeSlide.label}</p>
+          <p className="mt-0.5 text-[12px] text-ledger-text-muted">{activeSlide.caption}</p>
+        </div>
+        {slides.length > 1 && <div className="flex shrink-0 items-center gap-1" aria-label="Carousel controls">
+          <button type="button" onClick={() => move(-1)} aria-label="Previous screenshot" className="flex h-7 w-7 items-center justify-center rounded-full text-ledger-text-muted transition-colors hover:bg-(--ledger-surface-muted) hover:text-ledger-text-primary"><ArrowLeft size={15} /></button>
+          <button type="button" onClick={() => move(1)} aria-label="Next screenshot" className="flex h-7 w-7 items-center justify-center rounded-full text-ledger-text-muted transition-colors hover:bg-(--ledger-surface-muted) hover:text-ledger-text-primary"><ArrowRight size={15} /></button>
+        </div>}
+      </div>
+    </div>
+  )
+}
+
 function IntegrationLogo({ integration }: { integration: Integration }) {
   if (integration.logo === 'github') return <img src="/github.svg" alt="" className="h-7 w-7 object-contain ledger-invert-on-dark" aria-hidden="true" />
   if (integration.logo === 'slack') return <img src="/slack.svg" alt="" className="h-7 w-7 object-contain" aria-hidden="true" />
@@ -218,7 +259,7 @@ export function IntegrationDetailPage({ slug }: { slug: string }) {
       <main className="mx-auto w-full max-w-[1010px] px-6 pb-24 pt-12 sm:px-8 sm:pt-16 lg:pb-32 lg:pt-20">
         <nav className="flex items-center gap-2 text-[13px] text-ledger-text-muted" aria-label="Breadcrumb"><a href="/integrations" className="transition-colors hover:text-ledger-text-primary">Integrations</a><span aria-hidden="true">/</span><span className="text-ledger-text-primary">{integration.name}</span></nav>
         <header className="mt-5 max-w-4xl pb-8"><p className="text-[13px] font-medium text-ledger-text-muted">{integration.name} integration</p><h1 className="mt-3 text-[clamp(2.4rem,5vw,4.6rem)] font-medium leading-[0.98] tracking-[-0.055em] text-ledger-text-primary">{detail.headline}</h1></header>
-        <div className="mt-10 grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_250px] lg:gap-14"><div>{detail.artwork === 'slack-capture' ? <SlackArtwork /> : detail.artwork === 'google-drive-context' ? <GoogleDriveArtwork /> : detail.artwork === 'figma-context' ? <FigmaArtwork /> : detail.artwork === 'apple-calendar-context' ? <AppleCalendarArtwork /> : detail.artwork === 'apple-reminders-context' ? <AppleRemindersArtwork /> : detail.artwork === 'mcp-context' ? <McpArtwork /> : detail.artwork === 'calendar-feed-context' ? <CalendarFeedArtwork /> : detail.artwork === 'browser-extension-context' ? <BrowserExtensionArtwork /> : <GitHubArtwork />}<p className="mt-3 text-[12px] text-ledger-text-muted">{detail.artwork === 'slack-capture' ? 'A Slack conversation captured into Ledger with its source context attached.' : detail.artwork === 'google-drive-context' ? 'A replaceable frame for Google Drive resources connected to a Ledger project.' : detail.artwork === 'figma-context' ? 'A replaceable frame for Figma design context connected to a Ledger project.' : detail.artwork === 'apple-calendar-context' ? 'A replaceable frame for Apple Calendar dates connected to a Ledger project.' : detail.artwork === 'apple-reminders-context' ? 'A replaceable frame for Apple Reminders connected to Ledger next actions.' : detail.artwork === 'mcp-context' ? 'A replaceable frame for an MCP client working with authorized Ledger workspace context.' : detail.artwork === 'calendar-feed-context' ? 'A replaceable frame for a Ledger workspace calendar feed in an external calendar app.' : detail.artwork === 'browser-extension-context' ? 'A browser page captured into the right Ledger workspace Inbox.' : 'A project view with GitHub resources connected to the work around them.'}</p>
+        <div className="mt-10 grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_250px] lg:gap-14"><div><IntegrationArtworkCarousel detail={detail} />
         <article className="mt-20 max-w-[700px]">
           <section><h2 className="text-[24px] font-medium tracking-[-0.035em] text-ledger-text-primary">Overview</h2><p className="mt-4 text-[16px] leading-7 text-ledger-text-muted">{detail.overview}</p></section>
           <div className="mt-16 space-y-12">{detail.sections.map((section) => <section key={section.title}><h2 className="text-[20px] font-medium tracking-[-0.025em] text-ledger-text-primary">{section.title}</h2><p className="mt-3 text-[15px] leading-7 text-ledger-text-muted">{section.body}</p></section>)}</div>

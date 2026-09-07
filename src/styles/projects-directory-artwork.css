@@ -1,0 +1,121 @@
+.projects-directory-artwork {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 18%, color-mix(in srgb, var(--ledger-accent) 7%, transparent), transparent 38%),
+    radial-gradient(circle at 18% -10%, color-mix(in srgb, var(--ledger-text-primary) 10%, transparent), transparent 42%),
+    var(--ledger-background);
+  transition: transform 700ms cubic-bezier(.22, 1, .36, 1), filter 700ms ease;
+  will-change: transform, filter;
+}
+
+/* A quiet hover response gives the system graphic a little air without
+   turning the directory card into an animated panel. */
+.feature-directory-card:hover .projects-directory-artwork,
+.feature-directory-card:focus-visible .projects-directory-artwork {
+  transform: scale(1.012);
+  filter: brightness(1.035) saturate(.92);
+}
+
+.feature-directory-card:hover .projects-directory-artwork__spine-shadow,
+.feature-directory-card:focus-visible .projects-directory-artwork__spine-shadow {
+  opacity: .82;
+  transition: opacity 700ms ease;
+}
+
+.projects-directory-artwork svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.projects-directory-artwork__ground { fill: transparent; }
+
+.projects-directory-artwork__distant path {
+  stroke: color-mix(in srgb, var(--ledger-text-primary) 8%, transparent);
+  stroke-width: 1;
+}
+
+.projects-directory-artwork__streams path {
+  stroke: color-mix(in srgb, var(--ledger-text-secondary) 23%, transparent);
+  stroke-width: 1;
+}
+
+.projects-directory-artwork__spine-shadow {
+  stroke: color-mix(in srgb, var(--ledger-text-secondary) 14%, transparent);
+  stroke-width: 10;
+}
+
+.projects-directory-artwork__spine {
+  stroke: color-mix(in srgb, var(--ledger-text-primary) 61%, transparent);
+  stroke-width: 1.1;
+}
+
+.projects-directory-artwork__ticks path {
+  stroke: color-mix(in srgb, var(--ledger-text-secondary) 32%, transparent);
+  stroke-width: .9;
+}
+
+.projects-directory-artwork__milestones path {
+  stroke: color-mix(in srgb, var(--ledger-text-primary) 47%, transparent);
+  stroke-width: 1;
+}
+
+.projects-directory-artwork__milestones circle {
+  fill: var(--ledger-background);
+  stroke: color-mix(in srgb, var(--ledger-text-primary) 68%, transparent);
+  stroke-width: 1.1;
+}
+
+.projects-directory-artwork__microcopy {
+  fill: color-mix(in srgb, var(--ledger-text-secondary) 61%, transparent);
+  font-family: "SF Mono", "Roboto Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .16em;
+}
+
+.projects-directory-artwork__accent circle {
+  fill: color-mix(in srgb, var(--ledger-accent) 12%, transparent);
+  stroke: color-mix(in srgb, var(--ledger-accent) 82%, transparent);
+  stroke-width: 1.2;
+}
+
+.projects-directory-artwork__accent .projects-directory-artwork__accent-halo {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ledger-accent) 30%, transparent);
+  stroke-width: 1;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--ledger-accent) 20%, transparent));
+  animation: projects-directory-active-breathe 7s ease-in-out infinite;
+}
+
+@keyframes projects-directory-active-breathe {
+  0%, 100% { opacity: .5; transform: scale(.96); transform-origin: 966px 307px; }
+  50% { opacity: .82; transform: scale(1.04); transform-origin: 966px 307px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-directory-artwork__accent-halo { animation: none; }
+}
+
+.projects-directory-artwork__accent path {
+  fill: none;
+  stroke: var(--ledger-accent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+@media (max-width: 700px) {
+  .projects-directory-artwork svg { transform: scale(1.22) translateX(8%); transform-origin: 70% 30%; }
+  .projects-directory-artwork__microcopy { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-directory-artwork { transition: none; }
+  .feature-directory-card:hover .projects-directory-artwork,
+  .feature-directory-card:focus-visible .projects-directory-artwork { transform: none; filter: none; }
+  .feature-directory-card:hover .projects-directory-artwork__spine-shadow,
+  .feature-directory-card:focus-visible .projects-directory-artwork__spine-shadow { transition: none; }
+}

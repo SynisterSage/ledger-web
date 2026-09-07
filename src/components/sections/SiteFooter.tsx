@@ -10,7 +10,6 @@ const footerColumns = [
       { label: 'Calendar', href: '/features/calendar' },
       { label: 'Connected work', href: '/features/connected-work' },
       { label: 'Workspaces', href: '/features/workspaces' },
-      { label: 'Pricing', href: '/pricing' },
     ],
   },
   {
@@ -48,7 +47,7 @@ const footerColumns = [
 
 export function SiteFooter() {
   return (
-    <footer className="overflow-x-clip border-t border-(--ledger-border-subtle) bg-ledger-bg px-6 py-14 sm:px-8 sm:py-16 lg:py-20">
+    <footer className="site-footer overflow-x-clip border-t border-(--ledger-border-subtle) bg-ledger-bg px-6 py-14 sm:px-8 sm:py-16 lg:py-20">
       <div className="site-footer__inner mx-auto w-full">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)] lg:items-start lg:gap-12">
           <div className="max-w-xs">

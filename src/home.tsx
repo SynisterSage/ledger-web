@@ -24,7 +24,7 @@ import { FigmaPluginAuthorizationPage } from './pages/FigmaPluginAuthorizationPa
 import { GithubCallbackPage } from './pages/GithubCallbackPage'
 import { McpAuthorizationPage } from './pages/McpAuthorizationPage'
 import { McpWorkspaceSwitchPage } from './pages/McpWorkspaceSwitchPage'
-import { PricingPage } from './pages/PricingPage'
+import { McpLegacyAuthorizationPage } from './pages/McpLegacyAuthorizationPage'
 
 const legacyRedirects: Record<string, string> = {
   '/desktop-app': '/platforms/desktop',
@@ -77,6 +77,8 @@ function AppRouter() {
   const mcpRequestId = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('request_id') : null
   const mcpSwitchSessionId = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('session_id') : null
   const mcpSwitchCode = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('code') : null
+  const mcpAuthSession = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('mcpAuth') : null
+  const mcpScopeUpgradeSession = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('mcpScopeUpgrade') : null
   const githubResult = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('github') : null
 
   useEffect(() => {
@@ -91,15 +93,11 @@ function AppRouter() {
           ? 'Ledger Help'
           : pathname === '/download'
             ? 'Download Ledger'
-            : pathname === '/pricing'
-              ? 'Pricing | Ledger'
-              : 'Ledger | Connected work for teams'
+            : 'Ledger | Connected work for teams'
     const description = integration?.detail?.overview
       || (pathname === '/integrations'
         ? 'Connect Ledger to the tools and surfaces that keep projects, context, and follow-through together.'
-        : pathname === '/pricing'
-          ? 'Explore Ledger plans for capturing, organizing, and moving work forward across your workspaces.'
-          : 'Ledger keeps capture, notes, projects, calendar, and connected work in one calm workspace.')
+        : 'Ledger keeps capture, notes, projects, calendar, and connected work in one calm workspace.')
     const canonical = `https://ledgerworkspace.com${pathname === '/' ? '/' : pathname}`
     document.title = title
     const setMeta = (selector: string, attribute: 'name' | 'property', content: string) => {
@@ -134,6 +132,14 @@ function AppRouter() {
     return <McpWorkspaceSwitchPage sessionId={mcpSwitchSessionId} code={mcpSwitchCode} />
   }
 
+  if (pathname === '/' && mcpScopeUpgradeSession && mcpSwitchCode) {
+    return <McpLegacyAuthorizationPage sessionId={mcpScopeUpgradeSession} code={mcpSwitchCode} mode="scope-upgrade" />
+  }
+
+  if (pathname === '/' && mcpAuthSession && mcpSwitchCode) {
+    return <McpLegacyAuthorizationPage sessionId={mcpAuthSession} code={mcpSwitchCode} mode="authorization" />
+  }
+
   if (pathname === '/' && githubResult) {
     return <GithubCallbackPage />
   }
@@ -159,7 +165,7 @@ function AppRouter() {
     case '/download':
       return <DownloadPage />
     case '/pricing':
-      return <PricingPage />
+      return <NotFoundPage />
     case '/features':
       return <ProductScaffoldPage page="features" />
     case '/features/sidebar':

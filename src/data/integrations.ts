@@ -17,6 +17,7 @@ export type IntegrationDetail = {
   docsLabel?: string
   primaryAction: { label: string; href: string }
   artwork: 'github-workflow' | 'slack-capture' | 'google-drive-context' | 'figma-context' | 'apple-calendar-context' | 'apple-reminders-context' | 'mcp-context' | 'calendar-feed-context' | 'browser-extension-context'
+  artworkSlides?: Array<{ label: string; caption: string; image?: string; alt?: string }>
   overview: string
   sections: Array<{ title: string; body: string }>
   setup: string
@@ -145,6 +146,14 @@ export const integrations = [
       docsLabel: 'Figma setup guide',
       primaryAction: { label: 'Set up Figma in Ledger', href: '/download' },
       artwork: 'figma-context',
+      artworkSlides: [
+        {
+          label: 'Figma context',
+          caption: 'Preview a Figma reference alongside the Ledger project it informs.',
+          image: '/assets/integrations/integrationsfigma1.webp',
+          alt: 'Figma design reference connected to a Ledger project',
+        },
+      ],
       overview: 'Design work often begins in Figma, but the file is only one part of the project around it. Ledger’s Figma integration keeps design resources close to the notes, decisions, milestones, and work they inform, so a design reference remains understandable when you return to it later.',
       sections: [
         { title: 'Bring design context into the work', body: 'Link Figma designs to the Ledger project they support. A file can stay close to the brief, research, decisions, milestones, and next actions that give the design its purpose instead of becoming an isolated reference shared somewhere else.' },

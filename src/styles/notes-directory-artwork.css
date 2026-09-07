@@ -1,0 +1,45 @@
+.notes-directory-artwork {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--ledger-text-primary) 8%, transparent), transparent 35%),
+    radial-gradient(circle at 45% 31%, color-mix(in srgb, var(--ledger-accent) 5%, transparent), transparent 30%),
+    var(--ledger-background);
+  transition: transform 700ms cubic-bezier(.22, 1, .36, 1), filter 700ms ease;
+  will-change: transform, filter;
+}
+
+.notes-directory-artwork svg { display: block; width: 100%; height: 100%; }
+.notes-directory-artwork__distant path { stroke: color-mix(in srgb, var(--ledger-text-primary) 7%, transparent); stroke-width: 1; }
+.notes-directory-artwork__fragments path { fill: none; stroke-linecap: round; }
+.notes-directory-artwork__fragments--loose path { stroke: color-mix(in srgb, var(--ledger-text-secondary) 30%, transparent); stroke-width: 2; }
+.notes-directory-artwork__fragments--loose .notes-directory-artwork__marks { stroke-width: 1; }
+.notes-directory-artwork__fragments--ordered path { stroke: color-mix(in srgb, var(--ledger-text-primary) 38%, transparent); stroke-width: 1.5; }
+.notes-directory-artwork__connectors path { stroke: color-mix(in srgb, var(--ledger-text-secondary) 28%, transparent); stroke-width: 1; }
+.notes-directory-artwork__nodes circle { fill: var(--ledger-background); stroke: color-mix(in srgb, var(--ledger-text-primary) 56%, transparent); stroke-width: 1.1; }
+.notes-directory-artwork__index path { stroke: color-mix(in srgb, var(--ledger-text-secondary) 40%, transparent); stroke-width: 1; }
+.notes-directory-artwork__labels { fill: color-mix(in srgb, var(--ledger-text-secondary) 57%, transparent); font-family: "SF Mono", "Roboto Mono", monospace; font-size: 10px; font-weight: 500; letter-spacing: .17em; }
+.notes-directory-artwork__active circle:not(.notes-directory-artwork__active-halo) { fill: color-mix(in srgb, var(--ledger-accent) 12%, transparent); stroke: color-mix(in srgb, var(--ledger-accent) 84%, transparent); stroke-width: 1.3; }
+.notes-directory-artwork__active-halo { fill: none; stroke: color-mix(in srgb, var(--ledger-accent) 21%, transparent); stroke-width: 1; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--ledger-accent) 14%, transparent)); animation: notes-directory-active-breathe 7s ease-in-out infinite; }
+.notes-directory-artwork__active > path:last-child { stroke: color-mix(in srgb, var(--ledger-accent) 82%, transparent); stroke-linecap: round; stroke-width: 1.2; }
+
+.feature-directory-card:hover .notes-directory-artwork,
+.feature-directory-card:focus-visible .notes-directory-artwork { transform: scale(1.012); filter: brightness(1.035) saturate(.92); }
+
+@keyframes notes-directory-active-breathe {
+  0%, 100% { opacity: .48; transform: scale(.96); transform-origin: 699px 279px; }
+  50% { opacity: .78; transform: scale(1.04); transform-origin: 699px 279px; }
+}
+
+@media (max-width: 700px) {
+  .notes-directory-artwork svg { transform: scale(1.2) translateX(7%); transform-origin: 70% 30%; }
+  .notes-directory-artwork__labels { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notes-directory-artwork { transition: none; }
+  .notes-directory-artwork__active-halo { animation: none; }
+  .feature-directory-card:hover .notes-directory-artwork,
+  .feature-directory-card:focus-visible .notes-directory-artwork { transform: none; filter: none; }
+}

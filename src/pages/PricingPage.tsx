@@ -22,6 +22,7 @@ const plans = [
   {
     name: 'Basic',
     price: '$5',
+    annualPrice: '$4',
     suffix: 'per user/month',
     detail: 'Everything you need to keep your day moving.',
     features: [
@@ -38,6 +39,7 @@ const plans = [
   {
     name: 'Business',
     price: '$16',
+    annualPrice: '$13',
     suffix: 'per user/month',
     detail: 'For teams moving work forward together.',
     features: [
@@ -71,7 +73,7 @@ export function PricingPage() {
               <div className="min-h-[60px]">
                 <h2 className="text-[18px] font-semibold leading-5 tracking-[-0.025em] text-[#ededeb]">{plan.name}</h2>
                 <div className="mt-2 flex items-baseline gap-1 text-[13px] text-[#a8aaa9]">
-                  <span className="text-[#e6e7e5]">{plan.price}</span>
+                  <span className="text-[#e6e7e5]">{plan.billing && annualBilling ? plan.annualPrice : plan.price}</span>
                   {plan.suffix && <span>{plan.suffix}</span>}
                 </div>
               </div>

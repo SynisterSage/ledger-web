@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { IntegrationCallbackSuccess } from '../components/IntegrationCallbackSuccess'
 
 const OPEN_LEDGER_URL = 'ledger://settings/integrations?github=success'
 
@@ -13,36 +14,25 @@ export function GithubCallbackPage() {
   }
 
   return (
-    <main className="min-h-dvh bg-ledger-bg px-5 py-8 text-ledger-text sm:px-8">
-      <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-md items-center justify-center">
-        <section className="w-full rounded-3xl border border-ledger-border bg-ledger-surface px-6 py-7 text-center shadow-(--ledger-shadow-soft)">
-          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-2xl bg-(--ledger-surface-muted)">
-            <img src="/github-mark.svg" alt="GitHub" className="h-6 w-6 ledger-invert-on-dark" />
-          </div>
-          <p className="mt-5 text-[12px] font-medium text-ledger-text-muted">GitHub integration</p>
-          <h1 className="mt-3 text-[27px] font-semibold leading-tight tracking-tight">
-            {isSuccess ? 'GitHub is connected.' : 'GitHub connection needs attention.'}
-          </h1>
-          <p className="mt-3 text-sm leading-6 text-ledger-text-muted">
-            {isSuccess
-              ? 'Open Ledger to finish refreshing your workspace connection and approved repositories.'
-              : 'Open Ledger to review the GitHub connection and try again safely.'}
-          </p>
-          <button
-            type="button"
-            onClick={openLedger}
-            className="ledger-button mt-6 h-11 w-full bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
-          >
-            {opened ? 'Opening Ledger…' : 'Open Ledger'}
-          </button>
-          <a
-            href="/download"
-            className="ledger-button mt-3 h-11 w-full border border-(--ledger-border-subtle) bg-(--ledger-surface-card) px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-surface-muted"
-          >
-            Download Ledger
-          </a>
-        </section>
-      </div>
-    </main>
+    isSuccess ? (
+      <IntegrationCallbackSuccess
+        sourceName="GitHub"
+        sourceIcon="/github-mark.svg"
+        sourceIconClassName="ledger-invert-on-dark"
+        title="GitHub successfully connected"
+        description="Open Ledger to finish refreshing your workspace connection and approved repositories."
+        action={{ label: 'Open Ledger', onClick: openLedger, opened }}
+      />
+    ) : (
+      <IntegrationCallbackSuccess
+        status="error"
+        sourceName="GitHub"
+        sourceIcon="/github-mark.svg"
+        sourceIconClassName="ledger-invert-on-dark"
+        title="GitHub connection needs attention"
+        description="Open Ledger to review the GitHub connection and try again safely."
+        action={{ label: 'Open Ledger', onClick: openLedger, opened }}
+      />
+    )
   )
 }

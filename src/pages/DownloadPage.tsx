@@ -1,4 +1,4 @@
-import { type PointerEvent, useState } from 'react'
+import { type PointerEvent, useEffect, useState } from 'react'
 import { Globe2 } from 'lucide-react'
 
 import { LockedSplash } from '../components/sections/LockedSplash'
@@ -7,6 +7,31 @@ import { isSiteLocked } from '../lib/siteLock'
 
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { ActionButton } from '../components/ui/ActionButton'
+
+const GITHUB_RELEASES_API = 'https://api.github.com/repos/SynisterSage/ledger/releases?per_page=100'
+const GITHUB_RELEASES_URL = 'https://github.com/SynisterSage/ledger/releases'
+
+type ReleaseAsset = {
+  name: string
+  browser_download_url: string
+}
+
+type GithubRelease = {
+  html_url: string
+  name: string | null
+  tag_name: string
+  prerelease: boolean
+  draft: boolean
+  published_at: string | null
+  created_at: string
+  assets: ReleaseAsset[]
+}
+
+type ReleaseLinks = {
+  release: GithubRelease
+  macOS?: string
+  windows?: string
+}
 
 const desktopDownloads = [
   { label: 'macOS', action: 'Download', icon: 'apple' as const },
@@ -100,6 +125,39 @@ function DownloadRow({
   )
 }
 
+function findReleaseAsset(release: GithubRelease, platform: 'macOS' | 'Windows') {
+  const assets = release.assets.filter((asset) => {
+    const name = asset.name.toLowerCase()
+    if (platform === 'macOS') return name.endsWith('.dmg') && !name.includes('blockmap')
+    return name.endsWith('.exe')
+  })
+
+  return assets.find((asset) => {
+    const name = asset.name.toLowerCase()
+    return platform === 'macOS' ? name.includes('mac') || name.includes('darwin') : name.includes('win') || name.includes('setup')
+  })?.browser_download_url || assets[0]?.browser_download_url
+}
+
+async function fetchLatestRelease(): Promise<ReleaseLinks> {
+  const response = await fetch(GITHUB_RELEASES_API, {
+    headers: { Accept: 'application/vnd.github+json' },
+  })
+  if (!response.ok) throw new Error(`GitHub returned ${response.status}`)
+
+  const releases = (await response.json()) as GithubRelease[]
+  const release = releases
+    .filter((candidate) => !candidate.draft && (candidate.published_at || candidate.created_at))
+    .sort((a, b) => Date.parse(b.published_at || b.created_at) - Date.parse(a.published_at || a.created_at))[0]
+
+  if (!release) throw new Error('No published Ledger release found')
+
+  return {
+    release,
+    macOS: findReleaseAsset(release, 'macOS'),
+    windows: findReleaseAsset(release, 'Windows'),
+  }
+}
+
 function InteractiveLedgerLogo({ pointer }: { pointer: { x: number; y: number } }) {
   const gradientShiftX = pointer.x * 220
   const gradientShiftY = pointer.y * 220
@@ -144,6 +202,24 @@ function InteractiveLedgerLogo({ pointer }: { pointer: { x: number; y: number } 
 export function DownloadPage() {
   const [downloadLabel] = useState<'macOS' | 'Windows'>(() => getPlatformDownloadLabel())
   const [logoPointer, setLogoPointer] = useState({ x: 0, y: 0 })
+  const [releaseLinks, setReleaseLinks] = useState<ReleaseLinks | null>(null)
+  const [releaseError, setReleaseError] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+
+    void fetchLatestRelease()
+      .then((nextRelease) => {
+        if (!cancelled) setReleaseLinks(nextRelease)
+      })
+      .catch(() => {
+        if (!cancelled) setReleaseError(true)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   if (isSiteLocked()) {
     return <LockedSplash />
@@ -195,9 +271,26 @@ export function DownloadPage() {
             </div>
 
             <div className="divide-y divide-(--ledger-border-subtle)">
-              {desktopDownloads.map((item) => (
-                <DownloadRow key={item.label} label={item.label} action={item.action} icon={item.icon} actionHref={item.actionHref} />
-              ))}
+              {desktopDownloads.map((item) => {
+                const actionHref = item.label === 'macOS' ? releaseLinks?.macOS : item.label === 'Windows' ? releaseLinks?.windows : item.actionHref
+                const isDesktopInstaller = item.label === 'macOS' || item.label === 'Windows'
+                const hasInstaller = item.label === 'macOS' ? Boolean(releaseLinks?.macOS) : item.label === 'Windows' ? Boolean(releaseLinks?.windows) : true
+                const action = (releaseError || (releaseLinks && isDesktopInstaller && !hasInstaller))
+                  ? 'View release'
+                  : releaseLinks || !['macOS', 'Windows'].includes(item.label)
+                    ? item.action
+                    : 'Loading…'
+
+                return (
+                  <DownloadRow
+                    key={item.label}
+                    label={item.label}
+                    action={action}
+                    icon={item.icon}
+                    actionHref={actionHref || (isDesktopInstaller && (releaseError || releaseLinks) ? releaseLinks?.release.html_url || GITHUB_RELEASES_URL : undefined)}
+                  />
+                )
+              })}
             </div>
           </div>
 

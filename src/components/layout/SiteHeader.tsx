@@ -1,20 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, CalendarDays, ChevronDown, FolderKanban, Globe2, Layers3, Link2, Monitor, NotebookPen, Puzzle, Smartphone } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, Globe2, Monitor, Puzzle, Smartphone } from 'lucide-react'
 import { integrations } from '../../data/integrations'
 import { productAuth } from '../../lib/auth'
 
 type SiteHeaderProps = { currentPath?: string }
 type MenuName = 'product' | 'platforms' | 'integrations'
-type ProductLink = { href: string; label: string; phrase: string; icon: LucideIcon }
+type ProductLink = { href: string; label: string; phrase: string }
 
 const productLinks: ProductLink[] = [
-  { href: '/features/capture', label: 'Capture', phrase: 'Catch the next thing.', icon: ArrowUpRight },
-  { href: '/features/notes', label: 'Notes', phrase: 'Keep useful context.', icon: NotebookPen },
-  { href: '/features/projects', label: 'Projects', phrase: 'Move work forward.', icon: FolderKanban },
-  { href: '/features/calendar', label: 'Calendar', phrase: 'Give work a time.', icon: CalendarDays },
-  { href: '/features/connected-work', label: 'Connected work', phrase: 'Bring signals together.', icon: Link2 },
-  { href: '/features/workspaces', label: 'Workspaces', phrase: 'Keep work in its place.', icon: Layers3 },
+  { href: '/features/capture', label: 'Capture', phrase: 'Catch the next thing.' },
+  { href: '/features/notes', label: 'Notes', phrase: 'Keep useful context.' },
+  { href: '/features/projects', label: 'Projects', phrase: 'Move work forward.' },
+  { href: '/features/calendar', label: 'Calendar', phrase: 'Give work a time.' },
+  { href: '/features/connected-work', label: 'Connected work', phrase: 'Bring signals together.' },
+  { href: '/features/workspaces', label: 'Workspaces', phrase: 'Keep work in its place.' },
 ]
 
 const platformLinks = [
@@ -25,11 +24,6 @@ const platformLinks = [
 ]
 
 const integrationMenuLinks = integrations.filter((integration) => integration.detail)
-const productVisuals: Record<string, string> = {
-  '/features/capture': '/assets/mockups/feature1.png',
-  '/features/notes': '/assets/mockups/feature2.png',
-  '/features/projects': '/assets/mockups/feature3.1.png',
-}
 const featureOverviewLink = { href: '/features', label: 'All features' }
 const navLinkClass = (active: boolean) => `site-nav__link inline-flex h-9 items-center rounded-[var(--ledger-control-radius)] px-3 text-[13px] font-medium leading-none transition-colors sm:px-3.5 sm:text-sm ${active ? 'bg-(--ledger-header-pill-active) text-(--ledger-header-text)' : 'text-(--ledger-header-text-muted) hover:bg-(--ledger-header-pill) hover:text-(--ledger-header-text)'}`
 
@@ -131,17 +125,16 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
     if (event.key === 'Home' || event.key === 'End') { event.preventDefault(); const items = Array.from(event.currentTarget.closest('[role="menu"]')?.querySelectorAll<HTMLElement>('[role="menuitem"]') || []); items[event.key === 'Home' ? 0 : items.length - 1]?.focus() }
   }
 
-  const productCard = (item: ProductLink) => {
+  const productLink = (item: ProductLink) => {
     const active = pathname === item.href
-    return <a key={item.href} href={item.href} role="menuitem" tabIndex={-1} aria-current={active ? 'page' : undefined} className={`site-nav__product-card ${active ? 'is-active' : ''}`} onKeyDown={itemKeyDown} onClick={closeMenu}>
-      <span className="site-nav__product-card-visual"><img src={productVisuals[item.href]} alt="" aria-hidden="true" /></span>
-      <span className="site-nav__product-card-copy"><span className="site-nav__product-link-label">{item.label}</span><span className="site-nav__product-link-phrase">{item.phrase}</span></span>
+    return <a key={item.href} href={item.href} role="menuitem" tabIndex={-1} aria-current={active ? 'page' : undefined} className={`site-nav__product-link ${active ? 'is-active' : ''}`} onKeyDown={itemKeyDown} onClick={closeMenu}>
+      <span className="site-nav__product-link-copy"><span className="site-nav__product-link-label">{item.label}</span><span className="site-nav__product-link-phrase">{item.phrase}</span></span>
     </a>
   }
 
-  const productMenu = <div id="site-nav-product-menu" className={`site-nav__product-menu ${isOpen('product') ? 'is-open' : ''}`} role="menu" aria-label="Product menu" onPointerLeave={() => menuPointerLeave('product')} onKeyDown={(event) => { if (event.key === 'Tab') closeMenu() }}>
+  const productMenu = <div id="site-nav-product-menu" className={`site-nav__simple-menu ${isOpen('product') ? 'is-open' : ''}`} role="menu" aria-label="Product menu" onPointerLeave={() => menuPointerLeave('product')} onKeyDown={(event) => { if (event.key === 'Tab') closeMenu() }}>
     <div className="site-nav__menu-heading"><span>Product</span><a href={featureOverviewLink.href} role="menuitem" tabIndex={-1} onKeyDown={itemKeyDown} onClick={closeMenu}>All features <ArrowUpRight aria-hidden="true" /></a></div>
-    <div className="site-nav__product-grid">{productLinks.slice(0, 3).map(productCard)}</div>
+    <div className="site-nav__product-grid">{productLinks.map(productLink)}</div>
     <div className="site-nav__menu-bottom"><span>Capture, organize, and keep work moving.</span><a href="/download" role="menuitem" tabIndex={-1} onKeyDown={itemKeyDown} onClick={closeMenu}>Download Ledger <ArrowUpRight aria-hidden="true" /></a></div>
   </div>
 
@@ -165,9 +158,9 @@ export function SiteHeader({ currentPath = '/' }: SiteHeaderProps) {
       <a href="/" className="site-nav__brand inline-flex min-w-max items-center rounded-full leading-none" aria-label="Ledger home"><img src="/assets/logos/logo.svg" alt="" className="h-7 w-auto sm:h-7.25" /></a>
       <div className="site-nav__cluster flex min-w-0 flex-1 items-center gap-3"><nav className="site-nav__links hidden items-center gap-0.5 lg:flex">
         <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('product') ? 'is-open' : ''}`} {...menuProps('product')}><button className={`${navLinkClass(false)} site-nav__dropdown-trigger ${isOpen('product') ? 'is-open' : ''}`} {...triggerProps('product')}><span>Product</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{productMenu}</div>
-        <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('platforms') ? 'is-open' : ''}`} {...menuProps('platforms')}><button className={`${navLinkClass(pathname.startsWith('/platforms'))} site-nav__dropdown-trigger ${isOpen('platforms') ? 'is-open' : ''}`} {...triggerProps('platforms')}><span>Platforms</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{platformsMenu}</div>
-        <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('integrations') ? 'is-open' : ''}`} {...menuProps('integrations')}><button className={`${navLinkClass(pathname === '/integrations' || pathname.startsWith('/integrations/'))} site-nav__dropdown-trigger ${isOpen('integrations') ? 'is-open' : ''}`} {...triggerProps('integrations')}><span>Integrations</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{integrationsMenu}</div>
-        <a href="/help" aria-current={isHelpActive ? 'page' : undefined} className={navLinkClass(isHelpActive)}>Help</a><a href="/pricing" aria-current={pathname === '/pricing' ? 'page' : undefined} className={navLinkClass(pathname === '/pricing')}>Pricing</a>
+        <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('platforms') ? 'is-open' : ''}`} {...menuProps('platforms')}><button className={`${navLinkClass(false)} site-nav__dropdown-trigger ${isOpen('platforms') ? 'is-open' : ''}`} {...triggerProps('platforms')}><span>Platforms</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{platformsMenu}</div>
+        <div className={`site-nav__dropdown-wrap site-nav__product ${isOpen('integrations') ? 'is-open' : ''}`} {...menuProps('integrations')}><button className={`${navLinkClass(false)} site-nav__dropdown-trigger ${isOpen('integrations') ? 'is-open' : ''}`} {...triggerProps('integrations')}><span>Integrations</span><ChevronDown aria-hidden="true" className="site-nav__trigger-chevron" /></button>{integrationsMenu}</div>
+        <a href="/help" aria-current={isHelpActive ? 'page' : undefined} className={navLinkClass(isHelpActive)}>Help</a>
       </nav><div className="site-nav__actions hidden items-center gap-1.5 md:flex">{isAuthenticated ? <a href="/app" className="ledger-button h-9 rounded-[var(--ledger-control-radius)] bg-ledger-accent px-4.5 text-[13px] font-semibold text-white hover:bg-ledger-accent-hover">Open app</a> : <><a href="/login" className="ledger-button h-9 rounded-[var(--ledger-control-radius)] px-3 text-[13px] font-medium text-(--ledger-header-text-muted) hover:bg-(--ledger-header-pill)">Log in</a><a href="/download" className="ledger-button h-9 rounded-[var(--ledger-control-radius)] bg-ledger-accent px-4.5 text-[13px] font-semibold text-white hover:bg-ledger-accent-hover">Download Ledger</a></>}</div>
       <button ref={menuButtonRef} type="button" aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={isMenuOpen} className="site-nav__menu-button inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--ledger-header-border) bg-(--ledger-header-pill) lg:hidden" onClick={() => setIsMenuOpen((current) => !current)}>{isMenuOpen ? '×' : '☰'}</button>
       </div></div></div>

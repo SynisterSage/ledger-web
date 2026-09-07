@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import '../../styles/feature-media.css'
 
 type MediaFrameProps = {
   label: string

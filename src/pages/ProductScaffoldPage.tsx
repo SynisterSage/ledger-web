@@ -2,6 +2,8 @@ import { SiteHeader } from '../components/layout/SiteHeader'
 import { LockedSplash } from '../components/sections/LockedSplash'
 import { SiteFooter } from '../components/sections/SiteFooter'
 import { FeatureCardGrid, FeaturedFeatureCard, StandardFeatureCard } from '../components/feature/FeatureCards'
+import { ProjectsDirectoryArtwork } from '../components/feature/ProjectsDirectoryArtwork'
+import { NotesDirectoryArtwork } from '../components/feature/NotesDirectoryArtwork'
 import { isSiteLocked } from '../lib/siteLock'
 
 export type ProductPageKey =
@@ -118,7 +120,7 @@ function FeatureSimplePage({ content }: { content: FeaturePageContent }) {
               title="Projects"
               description="Planning, tasks, milestones, and timeline in one place."
               className="md:col-span-2"
-              artwork={{ label: 'Projects directory artwork', alt: 'Projects feature artwork', aspectRatio: '16 / 7' }}
+              artwork={{ label: 'Projects directory artwork', dimensions: '1600 × 700', alt: 'Abstract project roadmap with milestones and a structured timeline', aspectRatio: '16 / 6.35', visual: <ProjectsDirectoryArtwork /> }}
             />
             <FeaturedFeatureCard
               href="/features/notes"
@@ -126,21 +128,21 @@ function FeatureSimplePage({ content }: { content: FeaturePageContent }) {
               title="Notes"
               description="Write, mind map, transcribe, and keep today’s note."
               className="md:col-span-2"
-              artwork={{ label: 'Notes directory artwork', alt: 'Notes feature artwork', aspectRatio: '16 / 7' }}
+              artwork={{ label: 'Notes directory artwork', dimensions: '1600 × 700', alt: 'Abstract field of note fragments resolving into connected knowledge', aspectRatio: '16 / 6.35', visual: <NotesDirectoryArtwork /> }}
             />
             <StandardFeatureCard
               href="/features/calendar"
               label="Plan & organize"
               title="Calendar"
               description="Events, reminders, deadlines, and calendar sync."
-              artwork={{ label: 'Calendar directory artwork', alt: 'Calendar feature artwork', aspectRatio: '16 / 9' }}
+              artwork={{ label: 'Calendar directory artwork', dimensions: '1400 × 1000', alt: 'Ledger Calendar showing project tasks, reminders, and scheduled work across the month', src: '/assets/featuredirectory/features1.webp', aspectRatio: '16 / 9' }}
             />
             <StandardFeatureCard
               href="/features/capture"
               label="Think & capture"
               title="Capture"
               description="Intake, quick capture, and browser capture."
-              artwork={{ label: 'Capture directory artwork', alt: 'Capture feature artwork', aspectRatio: '16 / 9' }}
+              artwork={{ label: 'Capture directory artwork', dimensions: '1400 × 1000', alt: 'Capture feature artwork', aspectRatio: '16 / 9' }}
             />
             <FeaturedFeatureCard
               href="/integrations"
@@ -148,20 +150,20 @@ function FeatureSimplePage({ content }: { content: FeaturePageContent }) {
               title="Connected work"
               description="Slack, GitHub, Figma, Drive, and the integrations around your work."
               className="md:col-span-2"
-              artwork={{ label: 'Connected work directory artwork', alt: 'Connected work feature artwork', aspectRatio: '16 / 7' }}
+              artwork={{ label: 'Connected work directory artwork', dimensions: '1600 × 700', alt: 'Connected work feature artwork', aspectRatio: '16 / 6.35' }}
             />
             <StandardFeatureCard
               href="/features/workspaces"
               label="Shared work"
               title="Teams / Workspaces"
               description="Shared work, collaboration, and teamspaces."
-              artwork={{ label: 'Teams and workspaces directory artwork', alt: 'Teams and workspaces feature artwork', aspectRatio: '16 / 9' }}
+              artwork={{ label: 'Teams and workspaces directory artwork', dimensions: '1400 × 1000', alt: 'Teams and workspaces feature artwork', aspectRatio: '16 / 9' }}
             />
             <StandardFeatureCard
               label="Across your workspace"
               title="Search"
               description="Global and contextual search across the work."
-              artwork={{ label: 'Search directory artwork', alt: 'Search feature artwork', aspectRatio: '16 / 9' }}
+              artwork={{ label: 'Search directory artwork', dimensions: '1400 × 1000', alt: 'Search feature artwork', aspectRatio: '16 / 9' }}
             />
             <FeaturedFeatureCard
               href="/platforms/mobile"
@@ -169,7 +171,7 @@ function FeatureSimplePage({ content }: { content: FeaturePageContent }) {
               title="Mobile"
               description="Keep Ledger and the work that matters with you away from desktop."
               className="md:col-span-2"
-              artwork={{ label: 'Mobile directory artwork', alt: 'Mobile app feature artwork', aspectRatio: '16 / 7' }}
+              artwork={{ label: 'Mobile directory artwork', dimensions: '1600 × 700', alt: 'Mobile app feature artwork', aspectRatio: '16 / 6.35' }}
             />
           </FeatureCardGrid>
         </section>
@@ -469,7 +471,7 @@ export function ProductScaffoldPage({ page }: { page: SiteScaffoldPageKey }) {
   }
 
   return (
-    <div className="min-h-dvh bg-ledger-surface text-ledger-text">
+    <div className={`min-h-dvh text-ledger-text ${content.path === '/features' ? 'bg-(--ledger-background)' : 'bg-ledger-surface'}`}>
       <SiteHeader currentPath={content.path} />
       <FeatureSimplePage content={content} />
       <SiteFooter />

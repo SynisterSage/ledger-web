@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "test:web-auth-phase14": "node --test scripts/tests/web-auth-phase14.test.mjs",
     "test:web-invite-phase15": "node --test scripts/tests/web-invite-phase15.test.mjs",
+    "test:web-callback-phase17": "node --test scripts/tests/web-callback-phase17.test.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

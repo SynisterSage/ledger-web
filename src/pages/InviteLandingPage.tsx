@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { IntegrationCallbackSuccess } from '../components/IntegrationCallbackSuccess'
 
 type InvitePayload = {
   status?: string
@@ -184,6 +185,14 @@ export function InviteLandingPage() {
     window.location.assign(`ledger://invite/${encodeURIComponent(token)}`)
   }
 
+  if (state === 'joined') {
+    return <IntegrationCallbackSuccess variant="completion" sourceName="Workspace invitation" sourceIcon="/assets/logos/logo.svg" title={`${workspaceName} joined`} description="You’re in. Continue in Ledger to open the workspace." action={{ label: 'Continue in browser', onClick: continueInBrowser }} />
+  }
+
+  if (state === 'error') {
+    return <IntegrationCallbackSuccess status="error" variant="completion" sourceName="Workspace invitation" sourceIcon="/assets/logos/logo.svg" title="Invitation unavailable" description={errorMessage || 'This invite is invalid or expired. Ask the workspace owner to send a fresh invite link.'} action={{ label: 'Download Ledger', onClick: () => window.location.assign(DOWNLOAD_URL) }} />
+  }
+
   return (
     <main className="min-h-dhv bg-ledger-bg px-5 py-8 text-ledger-text sm:px-8">
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-xl items-center justify-center">
@@ -200,60 +209,6 @@ export function InviteLandingPage() {
                 <div className="h-11 w-full rounded-2xl bg-ledger-border/20" />
               </div>
             </>
-          )}
-
-          {state === 'error' && (
-            <>
-              <p className="text-[12px] font-medium text-ledger-text-muted">
-                Invite unavailable
-              </p>
-              <h1 className="mt-4 text-[30px] font-semibold leading-tight tracking-tight text-ledger-text">
-                {errorMessage ?? 'This invite is invalid or expired.'}
-              </h1>
-              <p className="mt-3 text-sm leading-6 text-ledger-text-muted">
-                Ask the workspace owner to send you a fresh invite link.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={DOWNLOAD_URL}
-                  className="ledger-button h-11 flex-1 bg-ledger-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
-                >
-                  Download Ledger
-                </a>
-                <a
-                  href={DOWNLOAD_URL}
-                  className="ledger-button h-11 flex-1 border border-ledger-border bg-ledger-surface px-4 text-sm font-semibold text-ledger-text transition-colors hover:bg-ledger-bg"
-                >
-                  Continue in browser
-                </a>
-              </div>
-            </>
-          )}
-
-          {state === 'joined' && (
-            <div className="flex flex-col items-center text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-[18px] border border-ledger-border bg-ledger-bg">
-                <LedgerMark className="h-8 w-8" />
-              </div>
-              <p className="mt-6 text-[12px] font-medium text-ledger-text-muted">
-                Joined
-              </p>
-              <h1 className="mt-3 text-[32px] font-semibold leading-tight tracking-tight text-ledger-text">
-                {workspaceName}
-              </h1>
-              <p className="mt-3 text-sm leading-6 text-ledger-text-muted">You&apos;re in. Continue in Ledger to open the workspace.</p>
-              <a
-                href={LEDGER_APP_URL}
-                onClick={(event) => {
-                  event.preventDefault()
-                  continueInBrowser()
-                }}
-                className="ledger-button mt-8 h-11 bg-ledger-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-ledger-accent-hover"
-              >
-                Continue in browser
-              </a>
-              <button type="button" onClick={openDesktopLedger} className="mt-3 block w-full text-center text-xs text-ledger-text-muted underline underline-offset-3">Open desktop app</button>
-            </div>
           )}
 
           {(state === 'ready' || state === 'opening') && invite && (
