@@ -67,6 +67,11 @@ const termsSections = [
           You are responsible for your content and for ensuring that you have the rights needed to store or share it
           through Ledger.
         </p>
+        <p>
+          Some features store files, temporary sessions, downloaded models, audio, recordings, or other processing
+          data locally on your device. Local data may not sync across devices and may be removed according to your
+          settings or actions. You are responsible for keeping copies of content you need.
+        </p>
       </>
     ),
   },
@@ -105,8 +110,31 @@ const termsSections = [
     ),
   },
   {
+    id: 'ai-and-recording-features',
+    title: '7. AI, OCR, transcription, and recording features',
+    content: (
+      <>
+        <p>
+          Ledger may offer optional AI, OCR, transcription, meeting, and recording features. Results may be
+          incomplete, inaccurate, delayed, or unavailable. You are responsible for reviewing results and for deciding
+          whether they are suitable for your use.
+        </p>
+        <p>
+          Some features may process content locally on your device. If you connect your own API key or select a
+          third-party AI provider, you authorize Ledger to send the content needed for your request to that provider.
+          Your use of that provider is also subject to its terms and privacy policy.
+        </p>
+        <p>
+          You must obtain any notice or consent required before recording, transcribing, or processing another
+          person’s voice, conversation, or other personal information. You must not use Ledger to make recordings or
+          process personal information unlawfully.
+        </p>
+      </>
+    ),
+  },
+  {
     id: 'notifications',
-    title: '7. Notifications and reminders',
+    title: '8. Notifications and reminders',
     content: (
       <>
         <p>
@@ -125,7 +153,7 @@ const termsSections = [
   },
   {
     id: 'availability',
-    title: '8. Availability and changes',
+    title: '9. Availability and changes',
     content: (
       <>
         <p>We may modify, update, suspend, or discontinue Ledger or any feature at any time.</p>
@@ -135,7 +163,7 @@ const termsSections = [
   },
   {
     id: 'beta-features',
-    title: '9. Beta or experimental features',
+    title: '10. Beta or experimental features',
     content: (
       <>
         <p>
@@ -148,7 +176,7 @@ const termsSections = [
   },
   {
     id: 'fees',
-    title: '10. Fees and subscriptions',
+    title: '11. Fees and subscriptions',
     content: (
       <>
         <p>Some Ledger features may be free, and others may require payment.</p>
@@ -165,7 +193,7 @@ const termsSections = [
   },
   {
     id: 'intellectual-property',
-    title: '11. Intellectual property',
+    title: '12. Intellectual property',
     content: (
       <>
         <p>
@@ -182,7 +210,7 @@ const termsSections = [
   },
   {
     id: 'feedback',
-    title: '12. Feedback',
+    title: '13. Feedback',
     content: (
       <p>
         If you send us feedback, ideas, suggestions, or feature requests, you allow us to use them without restriction
@@ -192,7 +220,7 @@ const termsSections = [
   },
   {
     id: 'termination',
-    title: '13. Termination',
+    title: '14. Termination',
     content: (
       <>
         <p>You may stop using Ledger at any time.</p>
@@ -212,7 +240,7 @@ const termsSections = [
   },
   {
     id: 'disclaimer',
-    title: '14. Disclaimer',
+    title: '15. Disclaimer',
     content: (
       <>
         <p>Ledger is provided “as is” and “as available.”</p>
@@ -229,7 +257,7 @@ const termsSections = [
   },
   {
     id: 'limitation-of-liability',
-    title: '15. Limitation of liability',
+    title: '16. Limitation of liability',
     content: (
       <>
         <p>
@@ -248,7 +276,7 @@ const termsSections = [
   },
   {
     id: 'indemnification',
-    title: '16. Indemnification',
+    title: '17. Indemnification',
     content: (
       <>
         <p>
@@ -266,7 +294,7 @@ const termsSections = [
   },
   {
     id: 'governing-law',
-    title: '17. Governing law',
+    title: '18. Governing law',
     content: (
       <>
         <p>
@@ -282,7 +310,7 @@ const termsSections = [
   },
   {
     id: 'changes',
-    title: '18. Changes to these Terms',
+    title: '19. Changes to these Terms',
     content: (
       <>
         <p>We may update these Terms from time to time.</p>
@@ -295,7 +323,7 @@ const termsSections = [
   },
   {
     id: 'contact',
-    title: '19. Contact',
+    title: '20. Contact',
     content: (
       <>
         <p>If you have questions about these Terms, contact us:</p>
@@ -320,7 +348,7 @@ export function TermsPage() {
     <LegalPage
       title="Terms of Service"
       intro="These Terms of Service (“Terms”) govern your access to and use of Ledger Workspace (“Ledger,” “we,” “our,” or “us”), including our desktop app, mobile app, website, browser extension, and related services."
-      updatedAt="June 18, 2026"
+      updatedAt="September 11, 2026"
       sections={termsSections}
     />
   )

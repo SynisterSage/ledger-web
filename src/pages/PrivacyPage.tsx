@@ -42,6 +42,19 @@ const privacySections = [
           Ledger may store content you choose to send into Ledger.
         </p>
 
+        <h3 className="text-[18px] font-semibold tracking-[-0.03em] text-ledger-text">Local device data</h3>
+        <p>
+          Some Ledger features store information on the device where you use them rather than in your Ledger workspace.
+          This may include files you add to Files &amp; links, temporary Ask Ledger attachments or sessions, downloaded
+          local models, locally captured audio, recordings, and processing artifacts. Device-local data is not
+          automatically available on your other devices or included in workspace synchronization.
+        </p>
+        <p>
+          You control available local retention settings in Ledger. Depending on the feature and your selected setting,
+          local copies may be removed automatically or when you use the applicable delete or remove control. Removing
+          a local copy does not necessarily remove the original file or a separate workspace record or external link.
+        </p>
+
         <h3 className="text-[18px] font-semibold tracking-[-0.03em] text-ledger-text">Device and session information</h3>
         <p>To help operate and secure Ledger, we may collect:</p>
         <ul className="list-disc space-y-2 pl-5">
@@ -117,8 +130,54 @@ const privacySections = [
     ),
   },
   {
+    id: 'ai-and-ocr',
+    title: '5. AI, OCR, and transcription',
+    content: (
+      <>
+        <p>
+          Ledger may provide optional AI, image-to-text, and speech-to-text features. Some processing can happen on
+          your device using downloaded or platform-provided models and OCR services, such as local language models,
+          Apple Vision, PaddleOCR, or Whisper-based transcription. When processing stays on your device, the relevant
+          input is not sent to Ledger for that processing, although the resulting note, transcript, or other content
+          may be saved to your workspace if you choose to do so.
+        </p>
+        <p>
+          Ledger may also allow you to connect your own API key for a third-party AI provider. If you select that
+          provider, the content needed for your request, which may include workspace context, attachments, images, or
+          transcripts, is sent directly to that provider through Ledger. The provider may process that content under its
+          own terms and privacy policy. Review the provider’s terms, privacy policy, and retention controls before
+          connecting a key. Ledger does not control a provider’s processing or retention practices.
+        </p>
+        <p>
+          AI, OCR, and transcription results may be incomplete or inaccurate. Review generated text before relying on
+          it or saving it to a workspace.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: 'meeting-recordings',
+    title: '6. Meetings and recordings',
+    content: (
+      <>
+        <p>
+          If you use meeting features, Ledger may access your microphone or system audio after you grant the required
+          device permission and start the feature. Ledger may create local audio recordings, audio chunks, transcript
+          segments, meeting notes, and summaries. The exact data retained depends on your settings and the actions you
+          take after recording.
+        </p>
+        <p>
+          Do not record, transcribe, or share another person’s conversation unless you have obtained any consent or
+          provided any notice required by applicable law and the circumstances of the meeting. You are responsible for
+          choosing the audio sources, reviewing the recording indicator, and deleting recordings or transcripts you no
+          longer need.
+        </p>
+      </>
+    ),
+  },
+  {
     id: 'sharing',
-    title: '5. How we share information',
+    title: '7. How we share information',
     content: (
       <>
         <p>We do not sell your personal information.</p>
@@ -153,7 +212,7 @@ const privacySections = [
   },
   {
     id: 'retention',
-    title: '6. Data retention',
+    title: '8. Data retention',
     content: (
       <>
         <p>
@@ -166,7 +225,7 @@ const privacySections = [
   },
   {
     id: 'security',
-    title: '7. Security',
+    title: '9. Security',
     content: (
       <>
         <p>We use reasonable administrative, technical, and organizational safeguards to protect information.</p>
@@ -179,7 +238,7 @@ const privacySections = [
   },
   {
     id: 'your-choices',
-    title: '8. Your choices',
+    title: '10. Your choices',
     content: (
       <>
         <p>Depending on your location and applicable law, you may have rights to:</p>
@@ -199,7 +258,7 @@ const privacySections = [
   },
   {
     id: 'account-deletion',
-    title: '9. Account deletion',
+    title: '11. Account deletion',
     content: (
       <>
         <p>
@@ -216,7 +275,7 @@ const privacySections = [
   },
   {
     id: 'children',
-    title: "10. Children's privacy",
+    title: "12. Children's privacy",
     content: (
       <>
         <p>
@@ -232,7 +291,7 @@ const privacySections = [
   },
   {
     id: 'international',
-    title: '11. International users',
+    title: '13. International users',
     content: (
       <p>
         Ledger may process information in the United States or other countries where our service providers operate. By
@@ -242,7 +301,7 @@ const privacySections = [
   },
   {
     id: 'changes',
-    title: '12. Changes to this Privacy Policy',
+    title: '14. Changes to this Privacy Policy',
     content: (
       <>
         <p>
@@ -255,7 +314,7 @@ const privacySections = [
   },
   {
     id: 'contact',
-    title: '13. Contact us',
+    title: '15. Contact us',
     content: (
       <>
         <p>If you have questions about this Privacy Policy or your information, contact us:</p>
@@ -280,7 +339,7 @@ export function PrivacyPage() {
     <LegalPage
       title="Privacy Policy"
       intro="Ledger Workspace (“Ledger,” “we,” “our,” or “us”) provides workspace, task, reminder, note, calendar, project, capture, and notification tools across desktop and mobile applications."
-      updatedAt="June 18, 2026"
+      updatedAt="September 11, 2026"
       sections={privacySections}
     />
   )
